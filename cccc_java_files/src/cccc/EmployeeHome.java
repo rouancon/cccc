@@ -4,11 +4,15 @@
  * and open the template in the editor.
  */
 package cccc;
+import java.sql.*;
+import java.util.Scanner;
+
 
 /**
  *
  * @author connorarnold
  */
+
 public class EmployeeHome extends javax.swing.JPanel {
 
     /**
@@ -16,6 +20,11 @@ public class EmployeeHome extends javax.swing.JPanel {
      */
     public EmployeeHome() {
         initComponents();
+    }
+    Connection openconnection;
+    public EmployeeHome(ResultSet rs, Connection connection) {
+        initComponents();
+        openconnection = connection;
     }
 
     /**
