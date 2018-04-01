@@ -136,6 +136,9 @@ public class LoginPage extends javax.swing.JFrame {
                 error_message.setText("Employee");
                 eid = ers.getInt("e_id");
                 ResultSet employeeInfo = getEmployeeInfo(eid);
+                EmployeeHome eHome = new EmployeeHome(employeeInfo,openconnection);
+                this.setGlassPane(eHome);
+                eHome.setVisible(true);
             }
             else
             {
