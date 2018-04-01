@@ -135,6 +135,7 @@ public class LoginPage extends javax.swing.JFrame {
             {
                 error_message.setText("Employee");
                 eid = ers.getInt("e_id");
+                ResultSet employeeInfo = getEmployeeInfo(eid);
             }
             else
             {
@@ -179,6 +180,35 @@ public class LoginPage extends javax.swing.JFrame {
                 new LoginPage().setVisible(true);
             }
         });
+    }
+    
+    public ResultSet getEmployeeInfo(int eId)
+    {
+        try{
+            String query = "Call get_e_data(" + eId + ")";
+            CallableStatement estmt = openconnection.prepareCall(query);
+            
+            ResultSet rs = estmt.executeQuery();
+            ResultSetMetaData metadata = rs.getMetaData();
+            int columnCount = metadata.getColumnCount();    
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.println(metadata.getColumnName(i) + ", ");      
+            }
+            System.out.println();
+            while (rs.next()) {
+                String row = "";
+                for (int i = 1; i <= columnCount; i++) {
+                    row += rs.getString(i) + ", ";          
+                }
+                System.out.println();
+                System.out.println(row);
+
+            }
+            return rs;
+        }
+        catch(Exception e){
+           throw new IllegalStateException("error",e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

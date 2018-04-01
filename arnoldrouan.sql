@@ -200,5 +200,14 @@ INSERT INTO `appointment` VALUES (1,2,4,'2018-04-08',0,'client has dog'),(2,2,6,
  RETURN (id);
  END $$ 
  DELIMITER ;
+  
+  DROP PROCEDURE IF EXISTS  get_e_data;
+DELIMITER $$
+CREATE PROCEDURE get_e_data(id INT)
+BEGIN
+ SELECT *
+ FROM employee
+ WHERE id=e_id;
+END $$ 
+ DELIMITER ;
  
- Select customer_login_check('glaba0','JNzTg2Pu') as c_id;
