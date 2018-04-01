@@ -1,0 +1,20 @@
+p_id,p_name,p_price
+1,basic cable,20
+2,standard cable,50
+3,premium cable,100
+4,basic internet,40
+5,standard internet,70
+6,premium internet,100
+7,basic phone,20
+8,standard phone,40
+9,premium phone,80
+10,basic bundle,60
+11,standard bundle,170
+12,premium bundle,240
+13,"""The Browser"" Bundle",160
+14,"""The Binger"" Bundle",150
+15,"""The Caller"" Bundle",170
+16,Entertainment Bundle,180
+17,Standard Internet and Cable,100
+18,Stnadard Phone and Internet,90
+19,Standard Phone and Cable,70

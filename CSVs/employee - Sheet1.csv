@@ -1,0 +1,13 @@
+e_id,e_name,e_branch_region_id,e_salary,e_role,e_username,e_password,e_start_date,e_termination_date,e_phone,e_email,e_street_address,e_city,e_state,e_zip
+1,Alano Dri,1,45000,Sales,adri0,42E4gG,1/1/2018,,312 349 4534,adri0@cccc.com,8357 Jana Crossing,Boston,MA,02120
+2,Mimi Jellis,1,55000,Tech,mjellis1,a6HLXInyZN,12/5/2017,,739 871 0611,mjellis1@cccc.com,1 Lunder Circle,Boston,MA,02115
+3,Mayor Balam,1,60000,Accounting,mbalam2,uijTeSsiJWE,10/10/2017,,505 367 5946,mbalam2@cccc.com,11843 Dennis Circle,Boston,MA,02120
+4,Lela Klaaasen,1,70000,Manager,lklaaasen3,FwH7XaPK,10/1/2017,,477 236 2099,lklaaasen3@cccc.com,57292 Mallory Terrace,Boston,MA,02116
+5,Stearne Labbett,2,52000,Sales,slabbett4,hgWRgMZXBQh,1/1/2018,,230 556 2826,slabbett4@cccc.com,07010 Anhalt Crossing,San Francisco,CA,94110
+6,Janene Monteith,2,62000,Tech,jmonteith5,9yF76Ymc,12/5/2017,,117 978 2185,jmonteith5@cccc.com,792 Rusk Junction,San Francisco,CA,94110
+7,Minta Toope,2,65000,Accounting,mtoope6,MsL1wE,10/10/2017,,221 506 2128,mtoope6@cccc.com,7 Swallow Road,San Francisco,CA,94103
+8,Ariadne Dessant,2,75000,Manager,adessant7,a9mItLK,10/1/2017,,662 369 8755,adessant7@cccc.com,37273 Canary Pass,San Francisco,CA,94102
+9,Brynn Lawly,3,45000,Sales,blawly8,B2rIvpLi90R,1/1/2018,,330 350 7281,blawly8@cccc.com,59 Dixon Drive,New York,NY,10001
+10,Iolande Rickasse,3,55000,Tech,irickasse9,RuBFrTViy,12/5/2017,,113 366 6905,irickasse9@cccc.com,6908 Clemons Street,New York,NY,10005
+11,Callida Nicely,3,60000,Accounting,cnicelya,pq5x1muJG,10/10/2017,3/5/2018,253 194 3544,cnicelya@cccc.com,037 Village Plaza,New York,NY,10009
+12,Charlot Rogister,3,70000,Manager,crogisterb,MLFBRzeJ,10/1/2017,,807 219 1320,crogisterb@cccc.com,9428 Calypso Way,New York,NY,10022

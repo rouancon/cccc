@@ -1,0 +1,10 @@
+s_id,s_name,s_type,s_description,s_price,s_available
+1,basic cable,cable,Include local channels as well as 10 national networks,20,1
+2,standard cable,cable,Enjoy over 80 different networks,50,1
+3,premium cable,cable,Enjoy over 500 premium networks on top of all local and national channels,100,1
+4,basic internet,internet,Includes basic service with 25 Mbps Upload/Download,40,1
+5,standard internet,internet,See impressive speed with 50 Mbps upload and download,70,1
+6,premium internet,internet,Blazing fast speeds with an upload and download rate of 200 mbps,100,1
+7,basic phone,phone,Unlimited local calls with the option for a fixed rate out of state calls,20,1
+8,standard phone,phone,Includes local and national calling with a fixed rate international option,40,1
+9,premium phone,phone,Unlimited international calling,80,1

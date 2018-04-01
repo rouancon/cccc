@@ -1,0 +1,206 @@
+c_id,c_name,pid,r_id,c_cc_name,c_cc_number,c_cc_expiration_month,c_cc_expiration_year,c_cc_cvv,c_billing_street,c_billing_city,c_billing_state,c_billing_zip,c_username,c_password,c_customer_since,c_package_start,c_package_end,c_phone,c_email,c_street_address,c_city,c_state,c_zip,c_newsletter
+1,Gabe Laban,2,3,Gabe Laban,6859495792240930,11,19,623,2084 Novick Parkway,Albany,NY,12242,glaban0,JNzTg2Pu,3/12/18 23:57,3/12/18 23:57,3/26/19,5185583188,glaban0@virginia.edu,2084 Novick Parkway,Albany,NY,12242,1
+2,Whitney Dmytryk,8,3,Whitney Dmytryk,1466621685238020,4,26,685,7 Burning Wood Terrace,Schenectady,NY,12305,wdmytryk1,gtsGVS1,3/7/18 11:03,3/7/18 11:03,3/27/19,5182788063,wdmytryk1@g.co,7 Burning Wood Terrace,Schenectady,NY,12305,1
+3,Delila Fidler,17,3,Delila Fidler,4000206709181740,7,25,968,10874 Spohn Crossing,Rochester,NY,14652,dfidler2,oy4kiaNY48,3/19/18 6:24,3/19/18 6:24,3/28/19,5851958787,dfidler2@fc2.com,10874 Spohn Crossing,Rochester,NY,14652,1
+4,Shawn Gerdes,8,2,Shawn Gerdes,5514357893403820,3,23,396,84471 Surrey Parkway,Sacramento,CA,94273,sgerdes3,IVWEdCSiW,3/10/18 13:46,3/10/18 13:46,3/29/19,9162638396,sgerdes3@webs.com,84471 Surrey Parkway,Sacramento,CA,94273,1
+5,Prinz Trevithick,3,1,Prinz Trevithick,9851708938410940,12,28,482,1 Center Hill,Worcester,MA,1610,ptrevithick4,HppsQbEdf,3/10/18 14:17,3/10/18 14:17,3/30/19,5089337390,ptrevithick4@bloglines.com,1 Center Hill,Worcester,MA,1610,0
+6,Shawn Leaf,5,2,Shawn Leaf,2885167256835580,12,24,395,0783 Sycamore Alley,Bakersfield,CA,93399,sleaf5,93IMQqQmDcr,3/8/18 23:35,3/8/18 23:35,3/31/19,6618392762,sleaf5@google.com.hk,0783 Sycamore Alley,Bakersfield,CA,93399,1
+7,Rosie Gribbell,3,2,Rosie Gribbell,1272321286448770,12,25,468,0 Golf Course Court,Sacramento,CA,94237,rgribbell6,wUwM4RCZQjkq,3/8/18 7:15,3/8/18 7:15,4/1/19,9167329756,rgribbell6@statcounter.com,0 Golf Course Court,Sacramento,CA,94237,1
+8,Jany Biggin,17,3,Jany Biggin,1925851286684960,5,18,101,5292 Fremont Road,New York City,NY,10150,jbiggin7,klVeL8B,3/22/18 14:53,3/22/18 14:53,4/2/19,2124898000,jbiggin7@ca.gov,5292 Fremont Road,New York City,NY,10150,1
+9,Wendie Dumphry,16,3,Wendie Dumphry,6703059250842810,4,28,666,5 Reinke Lane,Albany,NY,12255,wdumphry8,LKG3AY,3/8/18 20:02,3/8/18 20:02,4/3/19,5184693030,wdumphry8@slideshare.net,5 Reinke Lane,Albany,NY,12255,0
+10,Roslyn Chmiel,19,2,Roslyn Chmiel,1304978293956530,8,22,719,90590 Victoria Circle,Torrance,CA,90510,rchmiel9,h8Wryd56i,3/7/18 17:51,3/7/18 17:51,4/4/19,8187786455,rchmiel9@1688.com,90590 Victoria Circle,Torrance,CA,90510,0
+11,Stevana Juanes,5,2,Stevana Juanes,2004586470167160,3,27,719,8115 Bunting Place,Carlsbad,CA,92013,sjuanesa,XMqkMaKt,3/14/18 6:36,3/14/18 6:36,4/5/19,7606602154,sjuanesa@wikimedia.org,8115 Bunting Place,Carlsbad,CA,92013,1
+12,Nissy Stidworthy,17,2,Nissy Stidworthy,8193187236142590,11,25,894,658 Memorial Pass,Long Beach,CA,90810,nstidworthyb,41wvxfm,3/17/18 2:57,3/17/18 2:57,4/6/19,3103769683,nstidworthyb@dailymotion.com,658 Memorial Pass,Long Beach,CA,90810,0
+13,Mayne Bance,3,2,Mayne Bance,5447749340081870,7,25,380,63 Gale Avenue,Fresno,CA,93750,mbancec,uQSQLaB,3/17/18 15:51,3/17/18 15:51,4/7/19,5599970024,mbancec@ow.ly,63 Gale Avenue,Fresno,CA,93750,0
+14,Pooh Francomb,6,2,Pooh Francomb,9800844555183350,5,27,619,585 Farmco Drive,Palmdale,CA,93591,pfrancombd,UcLEmdSGm,3/19/18 14:25,3/19/18 14:25,4/8/19,6611198593,pfrancombd@is.gd,585 Farmco Drive,Palmdale,CA,93591,1
+15,Moyra Riehm,18,1,Moyra Riehm,4050974932698260,10,18,198,8 Moland Junction,Worcester,MA,1610,mriehme,M8ICDxcyT,3/15/18 22:27,3/15/18 22:27,4/9/19,5088494284,mriehme@goodreads.com,8 Moland Junction,Worcester,MA,1610,1
+16,Elsey Nelthropp,19,2,Elsey Nelthropp,5752299834739990,9,26,172,06 Red Cloud Pass,Santa Ana,CA,92705,enelthroppf,61VPpqA10U,3/7/18 8:37,3/7/18 8:37,4/10/19,2133354969,enelthroppf@jalbum.net,06 Red Cloud Pass,Santa Ana,CA,92705,0
+17,Ned O'Nowlan,1,2,Ned O'Nowlan,3666340247623180,11,21,269,370 Stoughton Center,San Diego,CA,92110,nonowlang,mE3L0f9G036K,3/16/18 5:14,3/16/18 5:14,4/11/19,9496006738,nonowlang@sourceforge.net,370 Stoughton Center,San Diego,CA,92110,1
+18,Marney Gudde,5,2,Marney Gudde,5126132690097380,7,25,674,6787 Buena Vista Way,Palmdale,CA,93591,mguddeh,HRNmzTo13,3/20/18 2:35,3/20/18 2:35,4/12/19,6611114962,mguddeh@spotify.com,6787 Buena Vista Way,Palmdale,CA,93591,0
+19,Aland De Minico,13,2,Aland De Minico,9383535835311700,8,23,119,1 Miller Point,Bakersfield,CA,93311,adei,lFpzXEOh66we,3/5/18 12:33,3/5/18 12:33,4/13/19,8057047841,adei@adobe.com,1 Miller Point,Bakersfield,CA,93311,0
+20,Heinrick Marlen,12,3,Heinrick Marlen,4904475495998870,7,27,864,00401 Granby Drive,Rochester,NY,14604,hmarlenj,FDo6Qw297oVc,3/12/18 9:01,3/12/18 9:01,4/14/19,5859548077,hmarlenj@deviantart.com,00401 Granby Drive,Rochester,NY,14604,1
+21,Trista Harlow,3,2,Trista Harlow,2921310231497670,12,27,117,26322 Mayer Circle,Oakland,CA,94611,tharlowk,lG7lF0qjL6rp,3/12/18 15:50,3/12/18 15:50,4/15/19,5108213030,tharlowk@jugem.jp,26322 Mayer Circle,Oakland,CA,94611,0
+22,Jeralee Wannes,1,3,Jeralee Wannes,2485159389752910,3,28,101,141 Pawling Place,New York City,NY,10105,jwannesl,3KuNmj,3/13/18 21:55,3/13/18 21:55,4/16/19,2126088943,jwannesl@yahoo.co.jp,141 Pawling Place,New York City,NY,10105,0
+23,Renata Horley,17,2,Renata Horley,7536348040170620,3,22,883,6138 Cambridge Street,Sacramento,CA,95852,rhorleym,yVFeI5,3/7/18 6:45,3/7/18 6:45,4/17/19,9161961465,rhorleym@istockphoto.com,6138 Cambridge Street,Sacramento,CA,95852,0
+24,Lisha McGlaughn,3,1,Lisha McGlaughn,9875780713892190,6,19,754,7 Manitowish Alley,Boston,MA,2109,lmcglaughnn,GY5UMui,3/24/18 3:26,3/24/18 3:26,4/18/19,6171355010,lmcglaughnn@who.int,7 Manitowish Alley,Boston,MA,2109,1
+25,Zelma Emlin,2,2,Zelma Emlin,9666299175414690,4,20,886,22047 Karstens Road,Long Beach,CA,90810,zemlino,FsdrFVT,3/17/18 14:37,3/17/18 14:37,4/19/19,3109832575,zemlino@china.com.cn,22047 Karstens Road,Long Beach,CA,90810,1
+26,Inesita Scanderet,6,3,Inesita Scanderet,6198209467542130,11,23,622,53 Commercial Pass,New York City,NY,10131,iscanderetp,CUA8tt30UKJ,3/14/18 22:20,3/14/18 22:20,4/20/19,2126264866,iscanderetp@weebly.com,53 Commercial Pass,New York City,NY,10131,0
+27,Edeline Schenkel,8,2,Edeline Schenkel,8139985551593670,7,24,873,5 Delaware Crossing,Fresno,CA,93794,eschenkelq,wvN4BZzFO,3/11/18 2:48,3/11/18 2:48,4/21/19,5594125124,eschenkelq@acquirethisname.com,5 Delaware Crossing,Fresno,CA,93794,1
+28,Alford Bencher,3,1,Alford Bencher,8800971138994900,4,28,638,92 Anniversary Terrace,Waltham,MA,2453,abencherr,CN1HiqmsV,3/5/18 10:32,3/5/18 10:32,4/22/19,9788283908,abencherr@devhub.com,92 Anniversary Terrace,Waltham,MA,2453,1
+29,Sandi Hurles,8,2,Sandi Hurles,3186137930119350,5,20,385,92 Blaine Way,Fresno,CA,93750,shurless,RX3k9BOUsd,3/2/18 17:41,3/2/18 17:41,4/23/19,5595186814,shurless@ox.ac.uk,92 Blaine Way,Fresno,CA,93750,0
+30,Jewell Rubinsky,1,3,Jewell Rubinsky,8698951774181520,12,23,422,8350 Blue Bill Park Lane,Bronx,NY,10459,jrubinskyt,OxxvaFgCJU,3/5/18 17:28,3/5/18 17:28,4/24/19,9174246370,jrubinskyt@cafepress.com,8350 Blue Bill Park Lane,Bronx,NY,10459,1
+31,Ollie Caunter,16,2,Ollie Caunter,2979757088544780,8,22,873,1943 Texas Hill,San Francisco,CA,94137,ocaunteru,H1FX6oO,3/3/18 21:02,3/3/18 21:02,4/25/19,4151171269,ocaunteru@w3.org,1943 Texas Hill,San Francisco,CA,94137,1
+32,Jessalin Jocelyn,7,3,Jessalin Jocelyn,6843305102870700,3,22,245,362 Eggendart Road,Rochester,NY,14609,jjocelynv,ccNn2lDB,3/13/18 18:55,3/13/18 18:55,4/26/19,5854478025,jjocelynv@ftc.gov,362 Eggendart Road,Rochester,NY,14609,1
+33,Eddy Dorrington,5,2,Eddy Dorrington,5507170750396900,1,21,683,448 Hanson Hill,Oceanside,CA,92056,edorringtonw,iASsvqG,3/25/18 15:12,3/25/18 15:12,4/27/19,7607474923,edorringtonw@de.vu,448 Hanson Hill,Oceanside,CA,92056,1
+34,Katherina Duester,4,2,Katherina Duester,4534443235711100,10,19,808,102 Schiller Junction,Long Beach,CA,90840,kduesterx,VXJ9ANJU,3/9/18 14:09,3/9/18 14:09,4/28/19,5629035042,kduesterx@ebay.co.uk,102 Schiller Junction,Long Beach,CA,90840,1
+35,Luise Beaudry,5,2,Luise Beaudry,4451235516976850,8,22,958,140 Kingsford Pass,South Lake Tahoe,CA,96154,lbeaudryy,tNNGobz,3/18/18 7:18,3/18/18 7:18,4/29/19,5309894086,lbeaudryy@wisc.edu,140 Kingsford Pass,South Lake Tahoe,CA,96154,1
+36,Somerset Camps,13,2,Somerset Camps,5525156726872380,4,18,847,8135 Shopko Alley,Los Angeles,CA,90076,scampsz,Mw9CArmyP6,3/3/18 18:26,3/3/18 18:26,4/30/19,3236696155,scampsz@engadget.com,8135 Shopko Alley,Los Angeles,CA,90076,1
+37,Leigha Deerr,9,2,Leigha Deerr,8691212021953850,3,27,994,16485 Dixon Road,Oakland,CA,94605,ldeerr10,8xe05EyOtx,3/4/18 13:41,3/4/18 13:41,5/1/19,5108228420,ldeerr10@51.la,16485 Dixon Road,Oakland,CA,94605,1
+38,Wendye Routledge,3,3,Wendye Routledge,3391066999348290,3,21,786,14 Clarendon Lane,New York City,NY,10004,wroutledge11,6eIS5a,3/24/18 3:09,3/24/18 3:09,5/2/19,6469044949,wroutledge11@ca.gov,14 Clarendon Lane,New York City,NY,10004,0
+39,Dita De Metz,4,2,Dita De Metz,6416766773915190,7,28,711,4 Macpherson Place,Oakland,CA,94622,dde12,J6zNax7lC,3/4/18 23:53,3/4/18 23:53,5/3/19,5104821830,dde12@msn.com,4 Macpherson Place,Oakland,CA,94622,0
+40,Dewey Blower,3,2,Dewey Blower,7908186147025570,3,22,161,63 Longview Court,San Diego,CA,92127,dblower13,5cZMkv,3/7/18 18:50,3/7/18 18:50,5/4/19,7609709898,dblower13@apache.org,63 Longview Court,San Diego,CA,92127,1
+41,Karlan Campey,3,1,Karlan Campey,3331519974629470,9,26,163,29073 Kingsford Point,Springfield,MA,1129,kcampey14,OGhUuRda,3/8/18 3:59,3/8/18 3:59,5/5/19,4138372534,kcampey14@shinystat.com,29073 Kingsford Point,Springfield,MA,1129,1
+42,Leandra Spiers,8,1,Leandra Spiers,2178552580439060,5,18,793,0 Johnson Park,New Bedford,MA,2745,lspiers15,b75cN9cV,3/17/18 0:52,3/17/18 0:52,5/6/19,5087244634,lspiers15@nbcnews.com,0 Johnson Park,New Bedford,MA,2745,1
+43,Hermon Whitely,8,2,Hermon Whitely,4934469612926060,7,25,732,76 Jenna Park,San Francisco,CA,94116,hwhitely16,MTdgCkoE37Gp,3/25/18 17:59,3/25/18 17:59,5/7/19,4154443529,hwhitely16@google.cn,76 Jenna Park,San Francisco,CA,94116,0
+44,Kira McGilvray,4,2,Kira McGilvray,4336695360487930,1,28,404,1034 Westerfield Center,Los Angeles,CA,90030,kmcgilvray17,QIavr8VxpkM,3/15/18 4:28,3/15/18 4:28,5/8/19,2135832339,kmcgilvray17@printfriendly.com,1034 Westerfield Center,Los Angeles,CA,90030,0
+45,Alva McKane,8,2,Alva McKane,4703735782067660,8,25,344,63 Reindahl Road,Irvine,CA,92710,amckane18,kb7vbiL2h57X,3/18/18 23:08,3/18/18 23:08,5/9/19,7144522077,amckane18@prlog.org,63 Reindahl Road,Irvine,CA,92710,0
+46,Reinwald Novak,4,3,Reinwald Novak,3394807610511810,4,26,398,5 Anhalt Avenue,New York City,NY,10270,rnovak19,WvZfjRn,3/2/18 19:17,3/2/18 19:17,5/10/19,7189557188,rnovak19@washingtonpost.com,5 Anhalt Avenue,New York City,NY,10270,1
+47,Dale Treacher,8,2,Dale Treacher,2048042838111590,5,27,418,148 Meadow Ridge Place,Sacramento,CA,94245,dtreacher1a,AqMaN9,3/1/18 23:40,3/1/18 23:40,5/11/19,9161634566,dtreacher1a@mashable.com,148 Meadow Ridge Place,Sacramento,CA,94245,0
+48,Quinn Abramovici,18,2,Quinn Abramovici,5633077427245540,9,19,780,83 Springview Terrace,San Bernardino,CA,92415,qabramovici1b,oKVXzjl,3/6/18 22:58,3/6/18 22:58,5/12/19,7608554153,qabramovici1b@cbc.ca,83 Springview Terrace,San Bernardino,CA,92415,0
+49,Dunn Stickings,11,1,Dunn Stickings,4771934859822820,12,18,359,3486 Spaight Court,Boston,MA,2119,dstickings1c,ZRgiSubSWv,3/1/18 15:35,3/1/18 15:35,5/13/19,9782480189,dstickings1c@cyberchimps.com,3486 Spaight Court,Boston,MA,2119,1
+50,Jennie Moyles,13,3,Jennie Moyles,3841947390423610,1,18,250,8 Monica Street,Hicksville,NY,11854,jmoyles1d,iFqZLK2CFh,3/18/18 14:58,3/18/18 14:58,5/14/19,5161156697,jmoyles1d@furl.net,8 Monica Street,Hicksville,NY,11854,1
+51,Ainsley Hookes,15,3,Ainsley Hookes,6197052167892630,3,21,350,5478 Dawn Center,Albany,NY,12227,ahookes1e,NW4GuhOUrAn,3/14/18 18:19,3/14/18 18:19,5/15/19,5187033135,ahookes1e@addthis.com,5478 Dawn Center,Albany,NY,12227,1
+52,Scotti McGrey,13,2,Scotti McGrey,1240068436003030,2,21,533,2309 Clove Center,Los Angeles,CA,90065,smcgrey1f,Mu3voB7L7Z,3/24/18 11:16,3/24/18 11:16,5/16/19,8189809560,smcgrey1f@skype.com,2309 Clove Center,Los Angeles,CA,90065,0
+53,Hanson Meakes,14,2,Hanson Meakes,2442082456897680,7,25,627,5 Nelson Terrace,Stockton,CA,95298,hmeakes1g,qFilRz,3/20/18 18:49,3/20/18 18:49,5/17/19,2092400493,hmeakes1g@addthis.com,5 Nelson Terrace,Stockton,CA,95298,0
+54,Demott Papierz,3,3,Demott Papierz,2337856033572200,1,22,362,0851 Meadow Vale Court,Yonkers,NY,10705,dpapierz1h,iKnQrMC,3/7/18 10:11,3/7/18 10:11,5/18/19,9146007764,dpapierz1h@amazon.com,0851 Meadow Vale Court,Yonkers,NY,10705,1
+55,Eleanora Varey,13,2,Eleanora Varey,7249268482706140,6,25,157,7840 3rd Avenue,San Luis Obispo,CA,93407,evarey1i,vIsWElstxom,3/9/18 8:06,3/9/18 8:06,5/19/19,8052980363,evarey1i@ucsd.edu,7840 3rd Avenue,San Luis Obispo,CA,93407,0
+56,Aubert Edgcombe,1,2,Aubert Edgcombe,1349085319316620,8,21,577,2 Graceland Lane,Sacramento,CA,95838,aedgcombe1j,iXaIS2LXF,3/15/18 1:28,3/15/18 1:28,5/20/19,9169399448,aedgcombe1j@apple.com,2 Graceland Lane,Sacramento,CA,95838,1
+57,Glad Lavielle,5,2,Glad Lavielle,1136260522208330,12,21,733,36477 Crownhardt Terrace,San Diego,CA,92176,glavielle1k,qnpwJNToM5F,3/11/18 22:05,3/11/18 22:05,5/21/19,6196157386,glavielle1k@google.com.br,36477 Crownhardt Terrace,San Diego,CA,92176,0
+58,Meredithe Braga,1,2,Meredithe Braga,4470715770736160,9,20,845,7321 Steensland Point,San Francisco,CA,94110,mbraga1l,80EDTE4c,3/15/18 6:59,3/15/18 6:59,5/22/19,4158304166,mbraga1l@taobao.com,7321 Steensland Point,San Francisco,CA,94110,0
+59,Tami Rabley,16,2,Tami Rabley,5460133976901090,12,28,379,25 Fair Oaks Alley,Los Angeles,CA,90020,trabley1m,h2QAaNxgSj,3/20/18 15:39,3/20/18 15:39,5/23/19,5627387937,trabley1m@mashable.com,25 Fair Oaks Alley,Los Angeles,CA,90020,1
+60,Kym Presman,18,3,Kym Presman,1448126963790310,9,18,359,9 Bunker Hill Center,Jamaica,NY,11499,kpresman1n,HlbAvozDim,3/6/18 21:33,3/6/18 21:33,5/24/19,2127014008,kpresman1n@google.com.hk,9 Bunker Hill Center,Jamaica,NY,11499,1
+61,Stanfield Harragin,14,2,Stanfield Harragin,6940660769629570,3,21,482,9105 Waubesa Way,Northridge,CA,91328,sharragin1o,2hqqcLYGor6N,3/8/18 4:55,3/8/18 4:55,5/25/19,8181954520,sharragin1o@google.de,9105 Waubesa Way,Northridge,CA,91328,0
+62,Ward Bertelmot,12,3,Ward Bertelmot,9393480024179590,1,21,328,4287 Cardinal Place,Albany,NY,12237,wbertelmot1p,wT5Hqh4g,3/18/18 7:27,3/18/18 7:27,5/26/19,5182037878,wbertelmot1p@liveinternet.ru,4287 Cardinal Place,Albany,NY,12237,0
+63,Clary Goodliffe,16,2,Clary Goodliffe,5927428697163800,3,26,471,9 Carey Court,San Francisco,CA,94164,cgoodliffe1q,KRUbAen,3/10/18 9:19,3/10/18 9:19,5/27/19,4157653788,cgoodliffe1q@eepurl.com,9 Carey Court,San Francisco,CA,94164,0
+64,Lenci Bumford,14,2,Lenci Bumford,3668453610473850,6,21,851,0767 Mendota Avenue,Inglewood,CA,90310,lbumford1r,6pXCVWW6n67d,3/23/18 22:52,3/23/18 22:52,5/28/19,3102471794,lbumford1r@ucoz.ru,0767 Mendota Avenue,Inglewood,CA,90310,1
+65,Pascal Tarbet,9,2,Pascal Tarbet,6539746583147880,10,18,524,123 Susan Park,San Luis Obispo,CA,93407,ptarbet1s,HYUXG9,3/14/18 6:00,3/14/18 6:00,5/29/19,8056555742,ptarbet1s@businesswire.com,123 Susan Park,San Luis Obispo,CA,93407,1
+66,Demetre Giacopello,17,3,Demetre Giacopello,7497723087228260,5,23,288,3 Hazelcrest Junction,Albany,NY,12242,dgiacopello1t,qPjoQghprwY,3/14/18 5:37,3/14/18 5:37,5/30/19,5185249252,dgiacopello1t@netvibes.com,3 Hazelcrest Junction,Albany,NY,12242,1
+67,Read Permain,8,1,Read Permain,4539180244164490,11,22,527,816 Duke Point,Newton,MA,2162,rpermain1u,LLZGpo78Vh2,3/18/18 12:00,3/18/18 12:00,5/31/19,5085502462,rpermain1u@illinois.edu,816 Duke Point,Newton,MA,2162,1
+68,Nadya Orknay,11,2,Nadya Orknay,2303548459760290,5,24,985,76 Anniversary Way,Sacramento,CA,94245,norknay1v,hZ2slD9P3,2/27/18 23:36,2/27/18 23:36,6/1/19,9169120875,norknay1v@hp.com,76 Anniversary Way,Sacramento,CA,94245,1
+69,Abdel Sarch,6,2,Abdel Sarch,8762522570270890,6,18,654,48733 Thompson Pass,Sacramento,CA,94250,asarch1w,oKVbhV9h,3/21/18 10:08,3/21/18 10:08,6/2/19,9162206988,asarch1w@statcounter.com,48733 Thompson Pass,Sacramento,CA,94250,0
+70,Clair Burdell,15,3,Clair Burdell,3058205113563100,1,23,569,1897 Northridge Junction,Bronx,NY,10469,cburdell1x,zIQKS6ngZ6ik,3/26/18 15:22,3/26/18 15:22,6/3/19,9175804604,cburdell1x@bluehost.com,1897 Northridge Junction,Bronx,NY,10469,0
+71,Alena Radband,5,2,Alena Radband,2990613066668810,7,26,120,69 Mallory Park,San Diego,CA,92160,aradband1y,5Wu0vGHBZUX,3/17/18 4:34,3/17/18 4:34,6/4/19,6193849419,aradband1y@photobucket.com,69 Mallory Park,San Diego,CA,92160,1
+72,Emeline Allbut,6,3,Emeline Allbut,3621000876157270,11,27,646,302 Grayhawk Hill,Jamaica,NY,11407,eallbut1z,cyAjqGeQi,3/6/18 23:45,3/6/18 23:45,6/5/19,5163523361,eallbut1z@washington.edu,302 Grayhawk Hill,Jamaica,NY,11407,0
+73,Glyn Schusterl,9,2,Glyn Schusterl,7148092246556570,7,21,931,37928 Pleasure Junction,Inglewood,CA,90305,gschusterl20,yVGRgz,3/10/18 6:14,3/10/18 6:14,6/6/19,3232926920,gschusterl20@earthlink.net,37928 Pleasure Junction,Inglewood,CA,90305,0
+74,Hadleigh Scamwell,2,2,Hadleigh Scamwell,1757251794684040,10,22,356,68 Charing Cross Way,Los Angeles,CA,90076,hscamwell21,LQNXymc,3/18/18 4:53,3/18/18 4:53,6/7/19,3235890261,hscamwell21@hp.com,68 Charing Cross Way,Los Angeles,CA,90076,0
+75,Jori Triplow,9,2,Jori Triplow,9324750576158550,10,23,899,86664 South Avenue,Los Angeles,CA,90060,jtriplow22,5COHQ1O,3/26/18 5:06,3/26/18 5:06,6/8/19,3233098724,jtriplow22@google.com,86664 South Avenue,Los Angeles,CA,90060,0
+76,Gabriello Pike,13,3,Gabriello Pike,3315689172885610,10,28,826,360 Browning Street,Brooklyn,NY,11220,gpike23,42JpPdU4D7Z,3/4/18 2:06,3/4/18 2:06,6/9/19,7188386801,gpike23@feedburner.com,360 Browning Street,Brooklyn,NY,11220,0
+77,Rolf Collet,16,2,Rolf Collet,7630918663166080,10,24,388,1761 Talmadge Way,San Bernardino,CA,92405,rcollet24,HPUhM8ijgF,3/23/18 22:55,3/23/18 22:55,6/10/19,9093186557,rcollet24@free.fr,1761 Talmadge Way,San Bernardino,CA,92405,0
+78,Frederic Kausche,9,3,Frederic Kausche,2013442663679520,2,18,122,801 Division Park,New York City,NY,10090,fkausche25,L1RuKu6o,3/3/18 23:48,3/3/18 23:48,6/11/19,2123074028,fkausche25@biglobe.ne.jp,801 Division Park,New York City,NY,10090,1
+79,Thibaud Grzegorzewski,14,2,Thibaud Grzegorzewski,2316637035332930,11,21,924,566 Graceland Park,Pasadena,CA,91109,tgrzegorzewski26,hdhkNIjxjU,3/6/18 17:52,3/6/18 17:52,6/12/19,8182133321,tgrzegorzewski26@paypal.com,566 Graceland Park,Pasadena,CA,91109,0
+80,Jessalyn Girodias,5,3,Jessalyn Girodias,9544834280095920,11,26,647,28887 Crest Line Way,Brooklyn,NY,11205,jgirodias27,MqZFK2hTCFeA,3/16/18 1:37,3/16/18 1:37,6/13/19,7185739798,jgirodias27@scientificamerican.com,28887 Crest Line Way,Brooklyn,NY,11205,0
+81,Aaron Ridgeway,3,2,Aaron Ridgeway,1297542573799530,11,24,517,154 Katie Drive,San Francisco,CA,94142,aridgeway28,S7voJEnYmWR,3/12/18 19:12,3/12/18 19:12,6/14/19,4159176482,aridgeway28@timesonline.co.uk,154 Katie Drive,San Francisco,CA,94142,1
+82,Bernadene Lampe,11,2,Bernadene Lampe,9963246004392710,12,22,853,5125 Lunder Park,Van Nuys,CA,91406,blampe29,m5cFPnezXuUc,3/6/18 22:56,3/6/18 22:56,6/15/19,3231806377,blampe29@goo.gl,5125 Lunder Park,Van Nuys,CA,91406,0
+83,Wiatt Conyer,3,2,Wiatt Conyer,2813075708235860,7,28,789,18187 Walton Lane,Los Angeles,CA,90030,wconyer2a,8aHYouk1pV4,3/15/18 15:27,3/15/18 15:27,6/16/19,2134389874,wconyer2a@yale.edu,18187 Walton Lane,Los Angeles,CA,90030,0
+84,Kimmy Byass,7,3,Kimmy Byass,5410205655204190,1,24,959,3 Cambridge Avenue,New York City,NY,10249,kbyass2b,qo9YykBru5cr,3/1/18 21:16,3/1/18 21:16,6/17/19,2121508260,kbyass2b@whitehouse.gov,3 Cambridge Avenue,New York City,NY,10249,0
+85,Florentia Hudspeth,4,2,Florentia Hudspeth,5715549736722030,7,22,211,454 East Circle,Long Beach,CA,90831,fhudspeth2c,hGIkICtgE,3/20/18 6:47,3/20/18 6:47,6/18/19,5621977072,fhudspeth2c@ucla.edu,454 East Circle,Long Beach,CA,90831,1
+86,Erwin Mussolini,7,2,Erwin Mussolini,8795365658813180,5,19,457,07 Randy Way,Long Beach,CA,90805,emussolini2d,cakMFKT0sT,3/6/18 6:39,3/6/18 6:39,6/19/19,5625269658,emussolini2d@nbcnews.com,07 Randy Way,Long Beach,CA,90805,1
+87,Hillard Keeffe,9,3,Hillard Keeffe,4776391288423910,5,20,854,436 Hallows Road,Elmira,NY,14905,hkeeffe2e,cujVvbyOTQQ,2/27/18 10:04,2/27/18 10:04,6/20/19,6078463210,hkeeffe2e@ask.com,436 Hallows Road,Elmira,NY,14905,0
+88,Tomi Garham,18,2,Tomi Garham,8626399593979020,3,27,653,0182 Granby Park,Corona,CA,92883,tgarham2f,RDSYQBtqvXQt,3/12/18 1:43,3/12/18 1:43,6/21/19,6265348910,tgarham2f@fotki.com,0182 Granby Park,Corona,CA,92883,1
+89,Milty Emmanueli,17,3,Milty Emmanueli,6817124708386650,6,22,643,2358 Grayhawk Center,Staten Island,NY,10305,memmanueli2g,Zk1k2dpJ,3/10/18 18:03,3/10/18 18:03,6/22/19,7182496555,memmanueli2g@tinypic.com,2358 Grayhawk Center,Staten Island,NY,10305,1
+90,Irita Toffalo,13,3,Irita Toffalo,3436832229882100,8,27,802,2 Sachtjen Road,New York City,NY,10039,itoffalo2h,ueaoJ2AQ,3/9/18 0:10,3/9/18 0:10,6/23/19,6462156541,itoffalo2h@furl.net,2 Sachtjen Road,New York City,NY,10039,1
+91,Lana Quinnette,18,2,Lana Quinnette,2977757350878550,3,27,435,91990 Lakewood Gardens Place,San Diego,CA,92160,lquinnette2i,PPhP5C,3/10/18 3:51,3/10/18 3:51,6/24/19,6199018022,lquinnette2i@arizona.edu,91990 Lakewood Gardens Place,San Diego,CA,92160,1
+92,Alis Millin,6,2,Alis Millin,2351518628910580,9,26,218,46 Brown Lane,Corona,CA,92878,amillin2j,7gctBuXQC8sO,3/14/18 8:08,3/14/18 8:08,6/25/19,9516239611,amillin2j@hubpages.com,46 Brown Lane,Corona,CA,92878,1
+93,Noellyn Borris,5,2,Noellyn Borris,3680397541747060,1,18,395,99 Mosinee Junction,Orange,CA,92668,nborris2k,iVczZGmyhigk,3/12/18 4:10,3/12/18 4:10,6/26/19,7602089770,nborris2k@usa.gov,99 Mosinee Junction,Orange,CA,92668,0
+94,Venus De Bruijn,15,3,Venus De Bruijn,8401624070262730,2,25,272,7500 Cardinal Drive,Jamaica,NY,11480,vde2l,OnNJYqjHHhof,3/20/18 9:39,3/20/18 9:39,6/27/19,7181086688,vde2l@hp.com,7500 Cardinal Drive,Jamaica,NY,11480,0
+95,Kial Gosland,2,2,Kial Gosland,8867097454793610,3,21,232,0 Harbort Trail,Redwood City,CA,94064,kgosland2m,crUIgHy,3/20/18 7:16,3/20/18 7:16,6/28/19,6501756916,kgosland2m@1688.com,0 Harbort Trail,Redwood City,CA,94064,0
+96,Lauri Capponer,18,3,Lauri Capponer,4999579807264080,2,27,373,97 North Junction,Brooklyn,NY,11236,lcapponer2n,DFFf1OnmI2n,3/2/18 3:26,3/2/18 3:26,6/29/19,7181949156,lcapponer2n@slate.com,97 North Junction,Brooklyn,NY,11236,1
+97,Benoite Arger,12,3,Benoite Arger,9205479449483410,5,20,887,8492 Mallory Road,New York City,NY,10039,barger2o,xipDk5lEQJ,3/9/18 13:43,3/9/18 13:43,6/30/19,9176235213,barger2o@businessweek.com,8492 Mallory Road,New York City,NY,10039,1
+98,Elke Coalburn,13,2,Elke Coalburn,2366859868216260,6,21,334,813 Garrison Street,Sacramento,CA,94230,ecoalburn2p,yJiJIB,2/28/18 15:51,2/28/18 15:51,7/1/19,9167245302,ecoalburn2p@biblegateway.com,813 Garrison Street,Sacramento,CA,94230,0
+99,Aron Jarratt,13,3,Aron Jarratt,4007007794196650,3,19,226,41 Meadow Ridge Center,New York City,NY,10014,ajarratt2q,3hI6pK,3/12/18 12:45,3/12/18 12:45,7/2/19,3475226687,ajarratt2q@bandcamp.com,41 Meadow Ridge Center,New York City,NY,10014,1
+100,Farah Brevetor,4,3,Farah Brevetor,6626270221594860,1,20,286,38644 Vidon Drive,Bronx,NY,10469,fbrevetor2r,Mq1KHNOu,3/26/18 3:29,3/26/18 3:29,7/3/19,7186851850,fbrevetor2r@washington.edu,38644 Vidon Drive,Bronx,NY,10469,1
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
+,,,,,,,,,,,,,,,,,,1,,,,,,
