@@ -79,15 +79,18 @@ public class CustomerHome extends javax.swing.JPanel {
         jSeparator7 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        cPkgName = new javax.swing.JLabel();
+        cADate = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        cPkgPrice = new javax.swing.JLabel();
+        cATech = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        cDate = new javax.swing.JLabel();
+        cAPrice = new javax.swing.JLabel();
         cPkgExpDate = new javax.swing.JLabel();
         cPkgExpDate2 = new javax.swing.JLabel();
         cSvc2 = new javax.swing.JLabel();
         cSvc3 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        cANotes = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         cBilling = new javax.swing.JPanel();
         cDate1 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -388,19 +391,19 @@ public class CustomerHome extends javax.swing.JPanel {
         jLabel14.setText("Upcoming Appointments");
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel15.setText("Current Package:");
+        jLabel15.setText("Appointment Day/Time:");
 
-        cPkgName.setText("Package Name");
+        cADate.setText("AptDate");
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel16.setText("Package Price:");
+        jLabel16.setText("Tech Name:");
 
-        cPkgPrice.setText("$Price");
+        cATech.setText("TechName");
 
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel17.setText("Expiration Date:");
+        jLabel17.setText("Expected Price:");
 
-        cDate.setText("Date");
+        cAPrice.setText("$-");
 
         cPkgExpDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cPkgExpDate.setText("Expiration Date:");
@@ -410,6 +413,16 @@ public class CustomerHome extends javax.swing.JPanel {
         cSvc2.setText("SVC2");
 
         cSvc3.setText("SVC3");
+
+        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel25.setText("Notes:");
+
+        cANotes.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cANotes.setText("Insert Notes in this Text box");
+        cANotes.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel26.setText("Contact us to upgrade or change your services today!");
 
         javax.swing.GroupLayout myServicesLayout = new javax.swing.GroupLayout(myServices);
         myServices.setLayout(myServicesLayout);
@@ -440,7 +453,7 @@ public class CustomerHome extends javax.swing.JPanel {
                             .addGroup(myServicesLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(cSvc1)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addGroup(myServicesLayout.createSequentialGroup()
@@ -473,20 +486,32 @@ public class CustomerHome extends javax.swing.JPanel {
                                                 .addComponent(jLabel17)
                                                 .addGap(24, 24, 24)))
                                         .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cDate)
-                                            .addComponent(cPkgPrice)
-                                            .addComponent(cPkgName))))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                            .addGroup(myServicesLayout.createSequentialGroup()
+                                                .addComponent(cADate)
+                                                .addGap(190, 190, 190)
+                                                .addComponent(jLabel25))
+                                            .addGroup(myServicesLayout.createSequentialGroup()
+                                                .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cAPrice)
+                                                    .addComponent(cATech))
+                                                .addGap(204, 204, 204)
+                                                .addComponent(cANotes, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 22, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, myServicesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cBillingTitle)
                 .addGap(252, 252, 252))
             .addGroup(myServicesLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cSvc3)
-                    .addComponent(cSvc2))
+                    .addGroup(myServicesLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cSvc3)
+                            .addComponent(cSvc2)))
+                    .addGroup(myServicesLayout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         myServicesLayout.setVerticalGroup(
@@ -529,20 +554,28 @@ public class CustomerHome extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(cPkgName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(cPkgPrice))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(cDate))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(myServicesLayout.createSequentialGroup()
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(cADate)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(cATech))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(cAPrice)))
+                    .addGroup(myServicesLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(cANotes, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jLabel26)
+                .addGap(23, 23, 23))
         );
 
         cMenu.addTab("MyServices", myServices);
@@ -833,6 +866,10 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel CardName5;
     private javax.swing.JButton Logout;
     private javax.swing.JLabel RepName;
+    private javax.swing.JLabel cADate;
+    private javax.swing.JLabel cANotes;
+    private javax.swing.JLabel cAPrice;
+    private javax.swing.JLabel cATech;
     private javax.swing.JLabel cBillCity1;
     private javax.swing.JLabel cBillState1;
     private javax.swing.JLabel cBillStreet1;
@@ -843,7 +880,6 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel cBillingTitle1;
     private javax.swing.JLabel cBillingTitle2;
     private javax.swing.JButton cChangePwd;
-    private javax.swing.JLabel cDate;
     private javax.swing.JLabel cDate1;
     private javax.swing.JButton cEditBilling1;
     private javax.swing.JButton cEditInfo;
@@ -862,10 +898,8 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel cPhone;
     private javax.swing.JLabel cPkgExpDate;
     private javax.swing.JLabel cPkgExpDate2;
-    private javax.swing.JLabel cPkgName;
     private javax.swing.JLabel cPkgName1;
     private javax.swing.JLabel cPkgName2;
-    private javax.swing.JLabel cPkgPrice;
     private javax.swing.JLabel cPkgPrice1;
     private javax.swing.JLabel cProfile;
     private javax.swing.JLabel cRegion;
@@ -903,6 +937,8 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
