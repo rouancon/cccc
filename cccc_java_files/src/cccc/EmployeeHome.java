@@ -21,10 +21,36 @@ public class EmployeeHome extends javax.swing.JPanel {
     public EmployeeHome() {
         initComponents();
     }
+    String id;
     Connection openconnection;
     public EmployeeHome(ResultSet rs, Connection connection) {
         initComponents();
+        try{
+        id = rs.getString("e_id");
+        eName.setText(rs.getString("e_name"));
+        int rId = rs.getInt("r_id");
+        System.out.println(rId);
         openconnection = connection;
+        String eQuery = "Select r_id_to_name(?) as r_name";
+        CallableStatement eStmt = openconnection.prepareCall(eQuery);
+        eStmt.setInt(1, rId);
+        ResultSet eRs = eStmt.executeQuery();
+        eRs.first();
+        eBranch.setText(eRs.getString("r_name"));
+        ePosition.setText(rs.getString("e_role"));
+        eSalary.setText(rs.getString("e_salary"));
+        ePhone.setText(rs.getString("e_phone"));
+        eEmail.setText(rs.getString("e_email"));
+        String address = rs.getString("e_street_address") + "\n" + 
+                rs.getString("e_city") + ", " + rs.getString("e_state") + " " +
+                rs.getString("e_zip");
+        
+        eAddress.setText(address);
+        }
+        catch(Exception e)
+        {
+           throw new IllegalStateException("error",e); 
+        }
     }
 
     /**
@@ -46,7 +72,15 @@ public class EmployeeHome extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        eName = new javax.swing.JLabel();
+        eBranch = new javax.swing.JLabel();
+        ePosition = new javax.swing.JLabel();
+        eSalary = new javax.swing.JLabel();
+        eStartDate = new javax.swing.JLabel();
+        ePhone = new javax.swing.JLabel();
+        eEmail = new javax.swing.JLabel();
+        eAddress = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Name");
 
@@ -64,7 +98,28 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         jLabel8.setText("Address");
 
-        jLabel9.setText("jLabel9");
+        eName.setText("eName");
+
+        eBranch.setText("eBranch");
+
+        ePosition.setText("ePosition");
+
+        eSalary.setText("eSalary");
+
+        eStartDate.setText("eStartDate");
+
+        ePhone.setText("ePhone");
+
+        eEmail.setText("eEmail");
+
+        eAddress.setText("eAddress");
+
+        jButton1.setLabel("Update Info");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -73,19 +128,30 @@ public class EmployeeHome extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel5)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel9)))
-                .addContainerGap(205, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(eAddress)
+                    .addComponent(eEmail)
+                    .addComponent(ePhone)
+                    .addComponent(eStartDate)
+                    .addComponent(eName)
+                    .addComponent(eBranch)
+                    .addComponent(ePosition)
+                    .addComponent(eSalary))
+                .addContainerGap(185, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(157, 157, 157))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,22 +159,38 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGap(64, 64, 64)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel9))
+                    .addComponent(eName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(eBranch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(ePosition))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(eSalary))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(eStartDate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ePhone))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(eEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(eAddress))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Home", jPanel1);
@@ -132,8 +214,33 @@ public class EmployeeHome extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try{
+            EditEmp emp = new EditEmp(openconnection);
+            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            this.add(emp);
+            emp.setVisible(true);
+            this.revalidate();
+            this.repaint();
+            emp.setVisible(true);
+        }
+        catch(Exception e){
+           throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel eAddress;
+    private javax.swing.JLabel eBranch;
+    private javax.swing.JLabel eEmail;
+    private javax.swing.JLabel eName;
+    private javax.swing.JLabel ePhone;
+    private javax.swing.JLabel ePosition;
+    private javax.swing.JLabel eSalary;
+    private javax.swing.JLabel eStartDate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -142,7 +249,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables

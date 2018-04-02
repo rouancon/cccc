@@ -211,3 +211,17 @@ BEGIN
 END $$ 
  DELIMITER ;
  
+    DROP FUNCTION IF EXISTS  r_id_to_name;
+ DELIMITER $$
+ CREATE FUNCTION r_id_to_name(id int)
+	RETURNS varchar(255)
+ BEGIN
+ DECLARE b_name varchar(255);
+ SELECT r_name
+ INTO b_name
+ FROM region
+ WHERE id=r_id;
+ RETURN (b_name);
+ END $$ 
+ DELIMITER ;
+ 
