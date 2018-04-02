@@ -137,7 +137,11 @@ public class LoginPage extends javax.swing.JFrame {
                 eid = ers.getInt("e_id");
                 ResultSet employeeInfo = getEmployeeInfo(eid);
                 EmployeeHome eHome = new EmployeeHome(employeeInfo,openconnection);
-                this.setGlassPane(eHome);
+                //this.setGlassPane(eHome);
+                //this.getContentPane().add(eHome);
+                //this.pack();
+                //this.setVisible(true);
+                this.setContentPane(eHome);
                 eHome.setVisible(true);
             }
             else

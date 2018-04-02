@@ -23,6 +23,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     }
     String id;
     Connection openconnection;
+    ResultSet ers;
     public EmployeeHome(ResultSet rs, Connection connection) {
         initComponents();
         try{
@@ -46,6 +47,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 rs.getString("e_zip");
         
         eAddress.setText(address);
+        ers = rs;
         }
         catch(Exception e)
         {
@@ -217,13 +219,13 @@ public class EmployeeHome extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-            EditEmp emp = new EditEmp(openconnection);
-            javax.swing.JFrame topFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-            this.add(emp);
+            EditEmp emp = new EditEmp(openconnection,this,ers);
+            javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            f.setContentPane(emp);
             emp.setVisible(true);
-            this.revalidate();
-            this.repaint();
-            emp.setVisible(true);
+            f.repaint();
+            f.revalidate();
+            
         }
         catch(Exception e){
            throw new IllegalStateException("error",e);
@@ -240,7 +242,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel ePosition;
     private javax.swing.JLabel eSalary;
     private javax.swing.JLabel eStartDate;
-    private javax.swing.JButton jButton1;
+    private static transient javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
