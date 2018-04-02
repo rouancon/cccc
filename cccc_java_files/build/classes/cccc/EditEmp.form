@@ -164,8 +164,6 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="EditEmp_e_username"/>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="130"/>
-        <AuxValue name="JavaCodeGenerator_allCodePost" type="java.lang.String" value="e_username.setText(username);"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField3">

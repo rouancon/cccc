@@ -22,14 +22,16 @@ public class EditEmp extends javax.swing.JPanel {
     EmployeeHome home;
     ResultSet rs;
     String username;
+    javax.swing.JFrame f;
     public EditEmp(Connection connection, EmployeeHome ehome, ResultSet ers) {
+        f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
         initComponents();
         home = ehome;
         rs = ers;
         try{
-        rs.first();
-        username = rs.getString("e_username");
-        System.out.println(username);
+            rs.first();
+            username = rs.getString("e_username");
+            e_username.setText(username);
         }
         catch(Exception e)
         {
@@ -186,8 +188,6 @@ public class EditEmp extends javax.swing.JPanel {
                     .addComponent(jButton2))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-
-        e_username.setText(username);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -211,7 +211,7 @@ public class EditEmp extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private transient javax.swing.JTextField e_username;
+    private javax.swing.JTextField e_username;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
