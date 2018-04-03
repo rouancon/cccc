@@ -21,60 +21,59 @@ public class EmployeeHome extends javax.swing.JPanel {
     public EmployeeHome() {
         initComponents();
     }
-    String id;
-    Connection openconnection;
-    ResultSet ers;
-    public EmployeeHome(ResultSet rs, Connection connection) {
+    String UserId;
+    Connection OpenConnection;
+    ResultSet UserResultSet;
+    public EmployeeHome(ResultSet PassedResultSet, Connection PassedConnection) {
         initComponents();
         try
         {
-            id = rs.getString("e_id");
-            eName.setText(rs.getString("e_name"));
-            int rId = rs.getInt("r_id");
-            System.out.println(rId);
-            openconnection = connection;
-            String eQuery = "Select r_id_to_name(?) as r_name";
-            CallableStatement eStmt = openconnection.prepareCall(eQuery);
-            eStmt.setInt(1, rId);
-            ResultSet eRs = eStmt.executeQuery();
-            eRs.first();
-            eBranch.setText(eRs.getString("r_name"));
-            ePosition.setText(rs.getString("e_role"));
-            eSalary.setText(rs.getString("e_salary"));
-            eStartDate.setText(rs.getString("e_start_date"));
-            ePhone.setText(rs.getString("e_phone"));
-            eEmail.setText(rs.getString("e_email"));
-            String Zip = rs.getString("e_zip");
+            UserId = PassedResultSet.getString("e_id");
+            eName.setText(PassedResultSet.getString("e_name"));
+            int UserRId = PassedResultSet.getInt("r_id");
+            System.out.println(UserRId);
+            OpenConnection = PassedConnection;
+            String RegionNameQuery = "Select r_id_to_name(?) as r_name";
+            CallableStatement RegionNameStatement = OpenConnection.prepareCall(RegionNameQuery);
+            RegionNameStatement.setInt(1, UserRId);
+            ResultSet RegionNameResult = RegionNameStatement.executeQuery();
+            RegionNameResult.first();
+            eBranch.setText(RegionNameResult.getString("r_name"));
+            UserRole.setText(PassedResultSet.getString("e_role"));
+            eSalary.setText(PassedResultSet.getString("e_salary"));
+            eStartDate.setText(PassedResultSet.getString("e_start_date"));
+            ePhone.setText(PassedResultSet.getString("e_phone"));
+            eEmail.setText(PassedResultSet.getString("e_email"));
+            String Zip = PassedResultSet.getString("e_zip");
             if (Zip.length() == 4)
             {
                 Zip = "0" + Zip;
             }
-            String address = rs.getString("e_street_address") + "\n" + 
-                    rs.getString("e_city") + ", " + rs.getString("e_state") + " " +
+            String address = PassedResultSet.getString("e_street_address") + "\n" + 
+                    PassedResultSet.getString("e_city") + ", " + PassedResultSet.getString("e_state") + " " +
                     Zip;
 
-            eAddress.setText(address);
-            ers = rs;
+            UserAddress.setText(address);
+            UserResultSet = PassedResultSet;
 
             //Set up the employees tab
-            if (!ePosition.getText().equals("Manager"))
+            if (!UserRole.getText().equals("Manager"))
             {
                 Tab2.remove(EmployeesTab);
             }
             else
             {
-                List<String> EmpList = new ArrayList<String>();
-                String REQuery = "Select e_name from employee where r_id = ?";
-                CallableStatement RE = openconnection.prepareCall(REQuery);
-                RE.setInt(1, rId);
-                ResultSet RERS = RE.executeQuery();
-                String EmpName;
+                List<String> EmployeeRegionList = new ArrayList<String>();
+                String EmployeeRegionQuery = "Select e_name from employee where r_id = ?";
+                CallableStatement RegionListStatement = OpenConnection.prepareCall(EmployeeRegionQuery);
+                RegionListStatement.setInt(1, UserRId);
+                ResultSet RERS = RegionListStatement.executeQuery();
+                String RegionEmployeeName;
                 while (RERS.next()){
-                    System.out.println(EmployeesTab.getSelectedValuesList());
-                    EmpName = RERS.getString("e_name");
-                    EmpList.add(EmpName);
+                    RegionEmployeeName = RERS.getString("e_name");
+                    EmployeeRegionList.add(RegionEmployeeName);
                 }
-                String[] RegionEmployees = EmpList.toArray(new String[EmpList.size()]);
+                String[] RegionEmployees = EmployeeRegionList.toArray(new String[EmployeeRegionList.size()]);
                 EmployeesTab.setListData(RegionEmployees);         
             }
         
@@ -110,12 +109,12 @@ public class EmployeeHome extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         eName = new javax.swing.JLabel();
         eBranch = new javax.swing.JLabel();
-        ePosition = new javax.swing.JLabel();
+        UserRole = new javax.swing.JLabel();
         eSalary = new javax.swing.JLabel();
         eStartDate = new javax.swing.JLabel();
         ePhone = new javax.swing.JLabel();
         eEmail = new javax.swing.JLabel();
-        eAddress = new javax.swing.JLabel();
+        UserAddress = new javax.swing.JLabel();
         UpdateInfoButton = new javax.swing.JButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -149,7 +148,7 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         eBranch.setText("eBranch");
 
-        ePosition.setText("ePosition");
+        UserRole.setText("ePosition");
 
         eSalary.setText("eSalary");
 
@@ -159,7 +158,7 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         eEmail.setText("eEmail");
 
-        eAddress.setText("eAddress");
+        UserAddress.setText("eAddress");
 
         UpdateInfoButton.setBackground(new java.awt.Color(51, 51, 255));
         UpdateInfoButton.setLabel("Update Info");
@@ -189,7 +188,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                             .addComponent(jLabel8))
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(eAddress)
+                            .addComponent(UserAddress)
                             .addComponent(eEmail)
                             .addComponent(ePhone)
                             .addComponent(eStartDate)
@@ -198,7 +197,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                             .addComponent(eSalary)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ePosition))))
+                                .addComponent(UserRole))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(UpdateInfoButton)
                         .addGap(7, 7, 7)))
@@ -220,7 +219,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(ePosition))
+                    .addComponent(UserRole))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -240,7 +239,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(eAddress))
+                    .addComponent(UserAddress))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(UpdateInfoButton)
                 .addContainerGap(64, Short.MAX_VALUE))
@@ -284,12 +283,12 @@ public class EmployeeHome extends javax.swing.JPanel {
     private void UpdateInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoButtonActionPerformed
         // TODO add your handling code here:
         try{
-            EditEmp emp = new EditEmp(openconnection,this,ers);
-            javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-            f.setContentPane(emp);
-            emp.setVisible(true);
-            f.repaint();
-            f.revalidate();
+            EditEmp EditSelf = new EditEmp(OpenConnection,this,UserResultSet);
+            javax.swing.JFrame Frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            Frame.setContentPane(EditSelf);
+            EditSelf.setVisible(true);
+            Frame.repaint();
+            Frame.revalidate();
 
         }
         catch(Exception e){
@@ -303,17 +302,17 @@ public class EmployeeHome extends javax.swing.JPanel {
             javax.swing.JList list = (javax.swing.JList)evt.getSource();
             if (evt.getClickCount() == 2) 
             {
-                String Mquery = "Select * from employee where e_name = ?";
-                CallableStatement Mestmt = openconnection.prepareCall(Mquery);
+                String FindEmployeeQuery = "Select * from employee where e_name = ?";
+                CallableStatement FindEmployeeStmt = OpenConnection.prepareCall(FindEmployeeQuery);
                 String SelectedEmployee = EmployeesTab.getSelectedValuesList().get(0);
-                Mestmt.setString(1,SelectedEmployee);
-                ResultSet Mers = Mestmt.executeQuery();
-                ManagerEditEmp Memp = new ManagerEditEmp(openconnection,this,Mers);
-                javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
-                f.setContentPane(Memp);
-                Memp.setVisible(true);
-                f.repaint();
-                f.revalidate();
+                FindEmployeeStmt.setString(1,SelectedEmployee);
+                ResultSet FoundEmployee = FindEmployeeStmt.executeQuery();
+                ManagerEditEmp ManagerEditObject = new ManagerEditEmp(OpenConnection,this,FoundEmployee,Integer.parseInt(UserId));
+                javax.swing.JFrame Frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                Frame.setContentPane(ManagerEditObject);
+                ManagerEditObject.setVisible(true);
+                Frame.repaint();
+                Frame.revalidate();
             }
         }
         catch(Exception e){
@@ -325,13 +324,13 @@ public class EmployeeHome extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> EmployeesTab;
     private javax.swing.JTabbedPane Tab2;
-    private javax.swing.JButton UpdateInfoButton;
-    private javax.swing.JLabel eAddress;
+    private static transient javax.swing.JButton UpdateInfoButton;
+    private javax.swing.JLabel UserAddress;
+    private javax.swing.JLabel UserRole;
     private javax.swing.JLabel eBranch;
     private javax.swing.JLabel eEmail;
     private javax.swing.JLabel eName;
     private javax.swing.JLabel ePhone;
-    private javax.swing.JLabel ePosition;
     private javax.swing.JLabel eSalary;
     private javax.swing.JLabel eStartDate;
     private javax.swing.JLabel jLabel1;

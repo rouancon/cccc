@@ -1,3 +1,5 @@
+-- TODO update client regionID if branch changes
+
 -- create the database
 DROP DATABASE IF EXISTS arnoldrouan;
 CREATE DATABASE arnoldrouan;
@@ -250,4 +252,26 @@ END $$
     WHERE e_id = id;
  END$$
  DELIMITER ;
+ 
+   DROP PROCEDURE IF EXISTS update_employee_manager;
+ DELIMITER $$
+ CREATE PROCEDURE update_employee_manager
+ (IN id int,
+ IN new_branch int, 
+ IN new_position varchar(255), 
+ IN new_salary int,
+ IN new_username varchar(255),
+ IN new_password varchar(255))
+ BEGIN 
+    UPDATE employee
+    SET r_id = new_branch,
+    e_salary = new_salary,
+    e_role = new_position,
+    e_username = new_username,
+    e_password = new_password
+    WHERE e_id = id;
+ END$$
+ DELIMITER ;
+ 
+ 
  

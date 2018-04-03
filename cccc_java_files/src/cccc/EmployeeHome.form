@@ -99,7 +99,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="eAddress" min="-2" max="-2" attributes="0"/>
+                                  <Component id="UserAddress" min="-2" max="-2" attributes="0"/>
                                   <Component id="eEmail" min="-2" max="-2" attributes="0"/>
                                   <Component id="ePhone" min="-2" max="-2" attributes="0"/>
                                   <Component id="eStartDate" min="-2" max="-2" attributes="0"/>
@@ -108,7 +108,7 @@
                                   <Component id="eSalary" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Component id="jTabbedPane2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ePosition" min="-2" max="-2" attributes="0"/>
+                                      <Component id="UserRole" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -139,7 +139,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ePosition" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="UserRole" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -164,7 +164,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="eAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="UserAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="UpdateInfoButton" min="-2" max="-2" attributes="0"/>
@@ -224,7 +224,7 @@
                 <Property name="text" type="java.lang.String" value="eBranch"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="ePosition">
+            <Component class="javax.swing.JLabel" name="UserRole">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ePosition"/>
               </Properties>
@@ -249,7 +249,7 @@
                 <Property name="text" type="java.lang.String" value="eEmail"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="eAddress">
+            <Component class="javax.swing.JLabel" name="UserAddress">
               <Properties>
                 <Property name="text" type="java.lang.String" value="eAddress"/>
               </Properties>
