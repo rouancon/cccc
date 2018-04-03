@@ -82,7 +82,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         ePhone = new javax.swing.JLabel();
         eEmail = new javax.swing.JLabel();
         eAddress = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        UpdateInfoButton = new javax.swing.JButton();
 
         jLabel1.setText("Name");
 
@@ -116,10 +116,10 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         eAddress.setText("eAddress");
 
-        jButton1.setLabel("Update Info");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        UpdateInfoButton.setLabel("Update Info");
+        UpdateInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                UpdateInfoButtonActionPerformed(evt);
             }
         });
 
@@ -152,7 +152,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addContainerGap(185, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(UpdateInfoButton)
                 .addGap(157, 157, 157))
         );
         jPanel1Layout.setVerticalGroup(
@@ -191,7 +191,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(eAddress))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(UpdateInfoButton)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -216,7 +216,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void UpdateInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoButtonActionPerformed
         // TODO add your handling code here:
         try{
             EditEmp emp = new EditEmp(openconnection,this,ers);
@@ -230,10 +230,11 @@ public class EmployeeHome extends javax.swing.JPanel {
         catch(Exception e){
            throw new IllegalStateException("error",e);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_UpdateInfoButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static transient javax.swing.JButton UpdateInfoButton;
     private javax.swing.JLabel eAddress;
     private javax.swing.JLabel eBranch;
     private javax.swing.JLabel eEmail;
@@ -242,7 +243,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel ePosition;
     private javax.swing.JLabel eSalary;
     private javax.swing.JLabel eStartDate;
-    private static transient javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
