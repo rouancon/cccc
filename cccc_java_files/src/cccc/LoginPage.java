@@ -43,9 +43,14 @@ public class LoginPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        user_username.setText("mjellis1");
+        user_username.setText("carnold");
 
-        user_password.setText("a6HLXInyZN");
+        user_password.setText("mypass");
+        user_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_passwordActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Username: ");
 
@@ -66,7 +71,7 @@ public class LoginPage extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,6 +158,10 @@ public class LoginPage extends javax.swing.JFrame {
            throw new IllegalStateException("error",e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void user_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_passwordActionPerformed
 
     /**
      * @param args the command line arguments

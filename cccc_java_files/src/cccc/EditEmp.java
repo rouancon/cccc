@@ -38,6 +38,10 @@ public class EditEmp extends javax.swing.JPanel {
             City = rs.getString("e_city");
             State = rs.getString("e_state");
             Zip = rs.getString("e_zip");
+            if (Zip.length() == 4)
+            {
+                Zip = "0" + Zip;
+            }
             String Phone[] = rs.getString("e_phone").split(" ");
             Phone1 = Phone[0];
             Phone2 = Phone[1];
@@ -291,6 +295,7 @@ public class EditEmp extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Send the update to mysql
         try{
+            String UpdateQuery = "Call update_employee_basic(?,?,?,?,?,?,?,?,?)";
             Username = e_username.getText();
             Password = e_password.getText();
             Email = e_email.getText();
@@ -302,12 +307,22 @@ public class EditEmp extends javax.swing.JPanel {
                throw new RuntimeException("State must be 2 characters"); 
             }
             Zip = e_zip.getText();
+            int ZipInt = Integer.parseInt(Zip);
             Phone1 = e_phone_1.getText();
             Phone2 = e_phone_2.getText();
             Phone3 = e_phone_3.getText();
             String Phone = Phone1 + " " + Phone2 + " " + Phone3;
-            
-            //Need to update the info here
+            CallableStatement Ustmt = OpenConnection.prepareCall(UpdateQuery);
+            Ustmt.setInt(1, Eid);
+            Ustmt.setString(2, Username);
+            Ustmt.setString(3, Password);
+            Ustmt.setString(4, Email);
+            Ustmt.setString(5, StreetAddress);
+            Ustmt.setString(6, City);
+            Ustmt.setString(7, State);
+            Ustmt.setInt(8, ZipInt);
+            Ustmt.setString(9, Phone);
+            Ustmt.executeUpdate();
             
             ResultSet employeeInfo = getEmployeeInfo(Eid);
             EmployeeHome EHome = new EmployeeHome(employeeInfo,OpenConnection);

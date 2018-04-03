@@ -5,7 +5,7 @@
  */
 package cccc;
 import java.sql.*;
-import java.util.Scanner;
+import java.util.*;
 
 
 /**
@@ -26,28 +26,58 @@ public class EmployeeHome extends javax.swing.JPanel {
     ResultSet ers;
     public EmployeeHome(ResultSet rs, Connection connection) {
         initComponents();
-        try{
-        id = rs.getString("e_id");
-        eName.setText(rs.getString("e_name"));
-        int rId = rs.getInt("r_id");
-        System.out.println(rId);
-        openconnection = connection;
-        String eQuery = "Select r_id_to_name(?) as r_name";
-        CallableStatement eStmt = openconnection.prepareCall(eQuery);
-        eStmt.setInt(1, rId);
-        ResultSet eRs = eStmt.executeQuery();
-        eRs.first();
-        eBranch.setText(eRs.getString("r_name"));
-        ePosition.setText(rs.getString("e_role"));
-        eSalary.setText(rs.getString("e_salary"));
-        ePhone.setText(rs.getString("e_phone"));
-        eEmail.setText(rs.getString("e_email"));
-        String address = rs.getString("e_street_address") + "\n" + 
-                rs.getString("e_city") + ", " + rs.getString("e_state") + " " +
-                rs.getString("e_zip");
+        try
+        {
+            id = rs.getString("e_id");
+            eName.setText(rs.getString("e_name"));
+            int rId = rs.getInt("r_id");
+            System.out.println(rId);
+            openconnection = connection;
+            String eQuery = "Select r_id_to_name(?) as r_name";
+            CallableStatement eStmt = openconnection.prepareCall(eQuery);
+            eStmt.setInt(1, rId);
+            ResultSet eRs = eStmt.executeQuery();
+            eRs.first();
+            eBranch.setText(eRs.getString("r_name"));
+            ePosition.setText(rs.getString("e_role"));
+            eSalary.setText(rs.getString("e_salary"));
+            eStartDate.setText(rs.getString("e_start_date"));
+            ePhone.setText(rs.getString("e_phone"));
+            eEmail.setText(rs.getString("e_email"));
+            String Zip = rs.getString("e_zip");
+            if (Zip.length() == 4)
+            {
+                Zip = "0" + Zip;
+            }
+            String address = rs.getString("e_street_address") + "\n" + 
+                    rs.getString("e_city") + ", " + rs.getString("e_state") + " " +
+                    Zip;
+
+            eAddress.setText(address);
+            ers = rs;
+
+            //Set up the employees tab
+            if (!ePosition.getText().equals("Manager"))
+            {
+                Tab2.remove(EmployeesTab);
+            }
+            else
+            {
+                List<String> EmpList = new ArrayList<String>();
+                String REQuery = "Select e_name from employee where r_id = ?";
+                CallableStatement RE = openconnection.prepareCall(REQuery);
+                RE.setInt(1, rId);
+                ResultSet RERS = RE.executeQuery();
+                String EmpName;
+                while (RERS.next()){
+                    System.out.println(EmployeesTab.getSelectedValuesList());
+                    EmpName = RERS.getString("e_name");
+                    EmpList.add(EmpName);
+                }
+                String[] RegionEmployees = EmpList.toArray(new String[EmpList.size()]);
+                EmployeesTab.setListData(RegionEmployees);         
+            }
         
-        eAddress.setText(address);
-        ers = rs;
         }
         catch(Exception e)
         {
@@ -64,7 +94,11 @@ public class EmployeeHome extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        Tab2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -83,6 +117,17 @@ public class EmployeeHome extends javax.swing.JPanel {
         eEmail = new javax.swing.JLabel();
         eAddress = new javax.swing.JLabel();
         UpdateInfoButton = new javax.swing.JButton();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EmployeesTab = new javax.swing.JList<>();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("File");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar1.add(jMenu3);
 
         jLabel1.setText("Name");
 
@@ -116,6 +161,7 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         eAddress.setText("eAddress");
 
+        UpdateInfoButton.setBackground(new java.awt.Color(51, 51, 255));
         UpdateInfoButton.setLabel("Update Info");
         UpdateInfoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,36 +175,41 @@ public class EmployeeHome extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(90, 90, 90)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(eAddress)
-                    .addComponent(eEmail)
-                    .addComponent(ePhone)
-                    .addComponent(eStartDate)
-                    .addComponent(eName)
-                    .addComponent(eBranch)
-                    .addComponent(ePosition)
-                    .addComponent(eSalary))
-                .addContainerGap(185, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UpdateInfoButton)
-                .addGap(157, 157, 157))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(eAddress)
+                            .addComponent(eEmail)
+                            .addComponent(ePhone)
+                            .addComponent(eStartDate)
+                            .addComponent(eName)
+                            .addComponent(eBranch)
+                            .addComponent(eSalary)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ePosition))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(UpdateInfoButton)
+                        .addGap(7, 7, 7)))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addContainerGap()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(eName))
@@ -190,12 +241,26 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(eAddress))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(UpdateInfoButton)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Home", jPanel1);
+        Tab2.addTab("Home", jPanel1);
+
+        EmployeesTab.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        EmployeesTab.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EmployeeNameClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(EmployeesTab);
+
+        Tab2.addTab("Employees", jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -203,14 +268,14 @@ public class EmployeeHome extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
-                .addContainerGap())
+                .addComponent(Tab2))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 119, Short.MAX_VALUE)
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(Tab2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -225,16 +290,42 @@ public class EmployeeHome extends javax.swing.JPanel {
             emp.setVisible(true);
             f.repaint();
             f.revalidate();
-            
+
         }
         catch(Exception e){
-           throw new IllegalStateException("error",e);
+            throw new IllegalStateException("error",e);
         }
     }//GEN-LAST:event_UpdateInfoButtonActionPerformed
 
+    private void EmployeeNameClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EmployeeNameClicked
+        // TODO add your handling code here:
+        try{
+            javax.swing.JList list = (javax.swing.JList)evt.getSource();
+            if (evt.getClickCount() == 2) 
+            {
+                String Mquery = "Select * from employee where e_name = ?";
+                CallableStatement Mestmt = openconnection.prepareCall(Mquery);
+                String SelectedEmployee = EmployeesTab.getSelectedValuesList().get(0);
+                Mestmt.setString(1,SelectedEmployee);
+                ResultSet Mers = Mestmt.executeQuery();
+                ManagerEditEmp Memp = new ManagerEditEmp(openconnection,this,Mers);
+                javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                f.setContentPane(Memp);
+                Memp.setVisible(true);
+                f.repaint();
+                f.revalidate();
+            }
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_EmployeeNameClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private static transient javax.swing.JButton UpdateInfoButton;
+    private javax.swing.JList<String> EmployeesTab;
+    private javax.swing.JTabbedPane Tab2;
+    private javax.swing.JButton UpdateInfoButton;
     private javax.swing.JLabel eAddress;
     private javax.swing.JLabel eBranch;
     private javax.swing.JLabel eEmail;
@@ -251,7 +342,12 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
     // End of variables declaration//GEN-END:variables
 }
