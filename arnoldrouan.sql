@@ -172,6 +172,8 @@ INSERT INTO `employee` VALUES (1,'Alano Dri',1,45000,'Sales','adri0','42E4gG','2
 -- insert appointment data
 INSERT INTO `appointment` VALUES (1,2,4,'2018-04-08',0,'client has dog'),(2,2,6,'2018-05-02',0,'none'),(3,2,7,'2018-05-03',79,'none'),(4,2,10,'2018-04-28',79,'none'),(5,2,11,'2018-04-26',0,'new install'),(6,2,12,'2018-04-15',79,'none'),(7,1,5,'2018-04-08',0,'none'),(8,1,15,'2018-05-02',0,'new install'),(9,1,24,'2018-05-03',59,'bring extra wire'),(10,1,41,'2018-04-28',59,'none'),(11,1,42,'2018-04-26',0,'none'),(12,1,49,'2018-04-15',59,'none'),(13,3,1,'2018-04-08',0,'new install'),(14,3,2,'2018-05-02',0,'none'),(15,3,3,'2018-05-03',69,'none'),(16,3,8,'2018-04-28',69,'internet issues'),(17,3,9,'2018-04-26',0,'none'),(18,3,30,'2018-04-15',69,'none');
 
+
+-- LOGIN FUNCTIONS
 -- Get employee data
  DROP FUNCTION IF EXISTS  employee_login_check;
  DELIMITER $$
@@ -200,7 +202,9 @@ INSERT INTO `appointment` VALUES (1,2,4,'2018-04-08',0,'client has dog'),(2,2,6,
  RETURN (id);
  END $$ 
  DELIMITER ;
-  
+
+
+-- EMPLOYEE VIEW FUNCTIONS
   DROP PROCEDURE IF EXISTS  get_e_data;
 DELIMITER $$
 CREATE PROCEDURE get_e_data(id INT)
@@ -210,4 +214,51 @@ BEGIN
  WHERE id=e_id;
 END $$ 
  DELIMITER ;
+ 
+ 
+-- CHANGE PASSWORD FUNCTIONS
+DROP PROCEDURE IF EXISTS  get_c_pwd;
+DELIMITER $$
+CREATE PROCEDURE get_c_pwd(id INT)
+BEGIN
+ SELECT c_password
+ FROM customer
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+ 
+DROP PROCEDURE IF EXISTS  get_e_pwd;
+DELIMITER $$
+CREATE PROCEDURE get_e_pwd(id INT)
+BEGIN
+ SELECT e_password
+ FROM employee
+ WHERE id=e_id;
+END $$ 
+ DELIMITER ;
+ 
+ 
+-- CUSTOMER VIEW FUNCTIONS
+-- get edit customer fields
+DROP PROCEDURE IF EXISTS  get_edit_cust;
+DELIMITER $$
+CREATE PROCEDURE get_edit_cust(id INT)
+BEGIN
+ SELECT c_name, c_username, c_phone, c_email, c_billing_street, c_billing_city, c_billing_state, c_billing_zip, c_newsletter
+ FROM customer
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+ 
+ -- get edit customer billing fields
+DROP PROCEDURE IF EXISTS  get_edit_custBilling;
+DELIMITER $$
+CREATE PROCEDURE get_edit_custBilling(id INT)
+BEGIN
+ SELECT c_cc_name, c_cc_number, c_cc_expiration_month, c_cc_expiration_year, c_cc_cvv, c_billing_street, c_billing_city, c_billing_state, c_billing_zip
+ FROM customer
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+ 
  

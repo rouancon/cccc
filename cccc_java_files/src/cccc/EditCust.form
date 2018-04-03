@@ -34,13 +34,13 @@
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="custCCExp1" min="-2" pref="202" max="-2" attributes="0"/>
+                              <Component id="custEmail" min="-2" pref="202" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cNewsletter" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="custName" alignment="0" pref="250" max="32767" attributes="0"/>
-                              <Component id="custCCNum" alignment="0" max="32767" attributes="0"/>
+                              <Component id="custUsername" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -62,7 +62,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                              <Component id="custCCExp" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Component id="custPhone" min="-2" pref="151" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -84,15 +84,19 @@
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator9" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="errorMsg" min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jSeparator9" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -113,18 +117,18 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cardTitle1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="custCCNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custUsername" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CardName3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="custCCExp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custPhone" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CardName2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="custCCExp1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jCheckBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cNewsletter" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
@@ -148,10 +152,11 @@
                   <Component id="cBillZip1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="custBZip" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="errorMsg" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -186,21 +191,21 @@
         <Property name="text" type="java.lang.String" value="Username:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="custCCNum">
+    <Component class="javax.swing.JTextField" name="custUsername">
     </Component>
     <Component class="javax.swing.JLabel" name="CardName3">
       <Properties>
         <Property name="text" type="java.lang.String" value="Phone:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="custCCExp">
+    <Component class="javax.swing.JTextField" name="custPhone">
     </Component>
     <Component class="javax.swing.JLabel" name="CardName2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="custCCExp1">
+    <Component class="javax.swing.JTextField" name="custEmail">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel22">
       <Properties>
@@ -243,15 +248,28 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cSaveActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="cCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cCancelActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+    <Component class="javax.swing.JCheckBox" name="cNewsletter">
       <Properties>
         <Property name="text" type="java.lang.String" value="Receive Newsletter"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="errorMsg">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

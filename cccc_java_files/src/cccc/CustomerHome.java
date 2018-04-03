@@ -6,6 +6,15 @@
 
 package cccc;
 
+import java.awt.Frame;
+import java.awt.Window;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import javax.swing.JDialog;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author rouancon
@@ -15,6 +24,75 @@ public class CustomerHome extends javax.swing.JPanel {
     /** Creates new form CustomerHome */
     public CustomerHome() {
         initComponents();
+    }
+    
+    //variable declarations
+    Frame parentFrame;
+    Connection openConnection;
+    int actNum;
+    String custName;
+    String regionName;
+    String repName;
+    String billName;
+    String ccNum;
+    Date ccExp;
+    int ccCvv;
+    String billStreet;
+    String billCity;
+    String billState;
+    int billZip;
+    String username;
+    String password;
+    Date customerSince;
+    Date pkgStart;
+    Date pkgEnd;
+    String phone;
+    String email;
+    boolean newsletter;
+    String street;
+    String city;
+    String state;
+    int zip;
+    String pkgName;
+    int pkgPrice;
+    String service1type = null;
+    String service2type = null;
+    String service3type = null;
+    String service1 = null;
+    String service2 = null;
+    String service3 = null;
+    boolean isApt = false;
+    Date aptTime;
+    String aptTechName;
+    int aptPrice;
+    String aptNotes;
+    
+    //creates populated CustomerHome view
+    public CustomerHome(Connection connection, int cId) {
+        initComponents(); //initialize fields
+        openConnection = connection; //pass in active connection
+        
+        //get the frame the JPanel is contained in
+        Window parentWindow = SwingUtilities.windowForComponent(this);
+        parentFrame = (Frame)parentWindow;
+        
+        getCustData(cId); //load values from DB
+    }
+    
+    //takes a customer ID and populates fields with stored values
+    private void getCustData(int cId) {
+        //pull customer data using passed in cid
+        try{
+            String query = "CALL get_cust_info(?);";
+            CallableStatement stmt = openConnection.prepareCall(query);
+            stmt.setInt(1, cId);
+            ResultSet rs = stmt.executeQuery();
+            
+            rs.
+            
+        }catch(Exception e){
+           throw new IllegalStateException("error",e);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -106,7 +184,7 @@ public class CustomerHome extends javax.swing.JPanel {
         cBillStreet1 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jSeparator9 = new javax.swing.JSeparator();
-        cEditBilling1 = new javax.swing.JButton();
+        cEditBilling = new javax.swing.JButton();
         CardName2 = new javax.swing.JLabel();
         cardTitle1 = new javax.swing.JLabel();
         CardName3 = new javax.swing.JLabel();
@@ -144,7 +222,7 @@ public class CustomerHome extends javax.swing.JPanel {
         cProfile.setText("Your Profile");
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText("Account Number:");
+        jLabel1.setText("Account Name:");
 
         cName.setText("OwnerName");
 
@@ -176,6 +254,11 @@ public class CustomerHome extends javax.swing.JPanel {
         cUsername.setText("OwnerName");
 
         cChangePwd.setText("Change Password");
+        cChangePwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cChangePwdActionPerformed(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Contact Information");
@@ -201,6 +284,11 @@ public class CustomerHome extends javax.swing.JPanel {
         cPhone.setText("1234567890");
 
         cEditInfo.setText("Edit Your Info");
+        cEditInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cEditInfoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout cHomeLayout = new javax.swing.GroupLayout(cHome);
         cHome.setLayout(cHomeLayout);
@@ -257,19 +345,15 @@ public class CustomerHome extends javax.swing.JPanel {
                                         .addComponent(cPhone)
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(cHomeLayout.createSequentialGroup()
-                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(cHomeLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cName))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cHomeLayout.createSequentialGroup()
-                                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel11))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cSinceDate)
-                                            .addComponent(cName1))))
+                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cName)
+                                    .addComponent(cSinceDate)
+                                    .addComponent(cName1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -596,7 +680,7 @@ public class CustomerHome extends javax.swing.JPanel {
         jLabel20.setText("Current Package:");
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel21.setText("Billing Status");
+        jLabel21.setText("Upcoming Billing Status");
 
         cBillZip1.setText("ZipCode");
 
@@ -609,7 +693,12 @@ public class CustomerHome extends javax.swing.JPanel {
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel22.setText("Billing Address:");
 
-        cEditBilling1.setText("Edit Billing Info");
+        cEditBilling.setText("Edit Billing Info");
+        cEditBilling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cEditBillingActionPerformed(evt);
+            }
+        });
 
         CardName2.setText("***********2736");
 
@@ -658,7 +747,7 @@ public class CustomerHome extends javax.swing.JPanel {
                                     .addComponent(CardName3)))
                             .addGroup(cBillingLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
-                                .addComponent(cEditBilling1)))
+                                .addComponent(cEditBilling)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addGroup(cBillingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
@@ -728,7 +817,7 @@ public class CustomerHome extends javax.swing.JPanel {
                             .addComponent(cardTitle1)
                             .addComponent(CardName2))
                         .addGap(14, 14, 14)
-                        .addComponent(cEditBilling1)))
+                        .addComponent(cEditBilling)))
                 .addGap(44, 44, 44)
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -836,6 +925,11 @@ public class CustomerHome extends javax.swing.JPanel {
         cMenu.addTab("Contact Us", contactUs);
 
         Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -859,6 +953,32 @@ public class CustomerHome extends javax.swing.JPanel {
         cMenu.getAccessibleContext().setAccessibleName("Home");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // return back to a new instance of login screen
+        try{
+            openConnection.close();
+            Cccc app = new Cccc();
+            app.run();
+        }catch(Exception e){
+           throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_LogoutActionPerformed
+
+    private void cChangePwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cChangePwdActionPerformed
+        // open a new instance of ChangePassword
+        ChangePassword newPwd = new ChangePassword(parentFrame, true, openConnection, 'c', actNum);
+    }//GEN-LAST:event_cChangePwdActionPerformed
+
+    private void cEditInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEditInfoActionPerformed
+        // open a new instance of EditCust
+        EditCust editInfo = new EditCust(parentFrame, true, openConnection, actNum);
+    }//GEN-LAST:event_cEditInfoActionPerformed
+
+    private void cEditBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEditBillingActionPerformed
+        // open a new instance of edit billing
+        EditBilling editBill = new EditBilling(parentFrame, true, openConnection, actNum);
+    }//GEN-LAST:event_cEditBillingActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CardName2;
@@ -881,7 +1001,7 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel cBillingTitle2;
     private javax.swing.JButton cChangePwd;
     private javax.swing.JLabel cDate1;
-    private javax.swing.JButton cEditBilling1;
+    private javax.swing.JButton cEditBilling;
     private javax.swing.JButton cEditInfo;
     private javax.swing.JLabel cEmail;
     private javax.swing.JLabel cEmail1;

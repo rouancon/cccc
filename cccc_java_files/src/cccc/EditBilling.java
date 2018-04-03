@@ -5,6 +5,10 @@
  */
 package cccc;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 /**
  *
  * @author rouancon
@@ -17,6 +21,80 @@ public class EditBilling extends javax.swing.JDialog {
     public EditBilling(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    //variable declarations
+    Connection openConnection;
+    int id;
+    String name;
+    String ccNum;
+    int expM;
+    int expY;
+    int cvv;
+    String street;
+    String city;
+    String state;
+    int zip;
+    
+    public EditBilling(java.awt.Frame parent, boolean modal, Connection connection, int id) {
+        super(parent, modal);
+        initComponents();
+        this.id = id;
+        openConnection = connection;
+        
+        //get the current values from the DB
+        try{
+            String query = "CALL get_edit_custBilling(id);";
+            CallableStatement stmt = openConnection.prepareCall(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            name = rs.getString("c_cc_name");
+            ccNum = rs.getString("c_cc_number");
+            ccNum = ccNum.substring(ccNum.length() - 4); //only card last 4 digits
+            street = rs.getString("c_billing_street");
+            city = rs.getString("c_billing_city");
+            state = rs.getString("c_billing_state");
+            zip = rs.getInt("c_billing_zip");
+            
+        }catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+        
+        //set the fields with info from DB
+        this.custName.setText(name);
+        this.custCCNum.setText(ccNum);
+        this.custBStreet.setText(street);
+        this.custBCity.setText(city);
+        this.custBState.setText(state);
+        this.custBZip.setText(Integer.toString(zip));
+    }
+    
+    private boolean checkNoneNull(){
+        if(
+            this.custName.getText() == null ||
+            this.custCCNum.getText() == null ||
+            this.custCCExpM.getText() == null ||
+            this.custCCCVV.getText() == null ||
+            this.custCCExpY.getText() == null ||
+            this.custBStreet.getText() == null ||
+            this.custBCity.getText()== null ||
+            this.custBState.getText() == null ||
+            this.custBZip.getText() == null
+        ){
+            errorMsg.setText("All Fields Required");
+            return false;
+        } else if(
+            this.custCCNum.getText().indexOf('*') >= 0 ||
+            this.custCCExpM.getText().indexOf('*') >= 0 ||
+            this.custCCCVV.getText().indexOf('*') >= 0 ||
+            this.custCCExpY.getText().indexOf('*') >= 0
+        ){
+            errorMsg.setText("Invalid Card Entry");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -42,13 +120,17 @@ public class EditBilling extends javax.swing.JDialog {
         cBillZip1 = new javax.swing.JLabel();
         custName = new javax.swing.JTextField();
         custCCNum = new javax.swing.JTextField();
-        custCCExp = new javax.swing.JTextField();
-        custCCExp1 = new javax.swing.JTextField();
+        custCCExpM = new javax.swing.JTextField();
+        custCCCVV = new javax.swing.JTextField();
         cSave = new javax.swing.JButton();
         custBStreet = new javax.swing.JTextField();
         custBCity = new javax.swing.JTextField();
         custBState = new javax.swing.JTextField();
         custBZip = new javax.swing.JTextField();
+        errorMsg = new javax.swing.JLabel();
+        custCCExpY = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,6 +148,11 @@ public class EditBilling extends javax.swing.JDialog {
         CardName2.setText("CVV:");
 
         cCancel.setText("Cancel");
+        cCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cCancelActionPerformed(evt);
+            }
+        });
 
         jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -81,7 +168,24 @@ public class EditBilling extends javax.swing.JDialog {
 
         custName.setText("ContainsCustName");
 
+        custCCExpM.setText("**");
+
+        custCCCVV.setText("****");
+
         cSave.setText("Save");
+        cSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSaveActionPerformed(evt);
+            }
+        });
+
+        errorMsg.setForeground(new java.awt.Color(255, 0, 0));
+
+        custCCExpY.setText("**");
+
+        jLabel1.setText("/");
+
+        jLabel2.setText("Format: MM / YY");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +211,7 @@ public class EditBilling extends javax.swing.JDialog {
                                         .addGap(20, 20, 20)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(custCCExp1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(custCCCVV, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE))
                                             .addComponent(custCCNum)
                                             .addComponent(custName)))
@@ -136,11 +240,19 @@ public class EditBilling extends javax.swing.JDialog {
                                                         .addGap(0, 0, Short.MAX_VALUE))))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(8, 8, 8)
-                                                .addComponent(custCCExp, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(custCCExpM, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel2)
                                                 .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addGap(234, 234, 234))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(errorMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(cSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cCancel)))
@@ -168,7 +280,7 @@ public class EditBilling extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CardName2)
-                            .addComponent(custCCExp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(custCCCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addComponent(jLabel22)
                         .addGap(9, 9, 9)
@@ -187,19 +299,63 @@ public class EditBilling extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cBillZip1)
                             .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cCancel)
-                            .addComponent(cSave))
+                            .addComponent(cSave)
+                            .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
-                        .addComponent(custCCExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(custCCExpM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCancelActionPerformed
+        // Cancel Pressed
+        dispose();
+    }//GEN-LAST:event_cCancelActionPerformed
+
+    private void cSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSaveActionPerformed
+        // save button pressed
+        if(checkNoneNull()) {
+            try {
+                name = this.custName.getText();
+                ccNum = this.custCCNum.getText();
+                expM = Integer.parseInt(this.custCCExpM.getText());
+                expY = Integer.parseInt(this.custCCExpY.getText());
+                cvv = Integer.parseInt(this.custCCCVV.getText());
+                street = this.custBStreet.getText();
+                city = this.custBCity.getText();
+                state = this.custBState.getText();
+                zip = Integer.parseInt(this.custBZip.getText());
+                
+                String query = "UPDATE customer SET c_cc_name=?, c_cc_number=?, c_cc_expiration_month=?, c_cc_expiration_year=?, c_cc_cvv=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=? WHERE c_id=?;";
+                CallableStatement stmt = openConnection.prepareCall(query);
+                stmt.setString(1, name);
+                stmt.setString(2, ccNum);
+                stmt.setInt(3, expM);
+                stmt.setInt(4, expY);
+                stmt.setInt(5, cvv);
+                stmt.setString(6, street);
+                stmt.setString(7, city);
+                stmt.setString(8, state);
+                stmt.setInt(9, zip);
+                stmt.setInt(10, id);
+                stmt.executeQuery();
+                dispose();
+            } catch(Exception e) {
+               throw new IllegalStateException("error",e);
+            }
+        }
+    }//GEN-LAST:event_cSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,10 +414,14 @@ public class EditBilling extends javax.swing.JDialog {
     private javax.swing.JTextField custBState;
     private javax.swing.JTextField custBStreet;
     private javax.swing.JTextField custBZip;
-    private javax.swing.JTextField custCCExp;
-    private javax.swing.JTextField custCCExp1;
+    private javax.swing.JTextField custCCCVV;
+    private javax.swing.JTextField custCCExpM;
+    private javax.swing.JTextField custCCExpY;
     private javax.swing.JTextField custCCNum;
     private javax.swing.JTextField custName;
+    private javax.swing.JLabel errorMsg;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JSeparator jSeparator9;

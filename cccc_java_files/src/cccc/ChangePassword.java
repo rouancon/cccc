@@ -5,6 +5,10 @@
  */
 package cccc;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 /**
  *
  * @author rouancon
@@ -17,6 +21,19 @@ public class ChangePassword extends javax.swing.JDialog {
     public ChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    //variable declarations
+    Connection openConnection;
+    int id;
+    char userType;
+    
+    public ChangePassword(java.awt.Frame parent, boolean modal, Connection connection, char userType, int id) {
+        super(parent, modal);
+        initComponents();
+        this.id = id;
+        openConnection = connection;
+        this.userType = userType;
     }
 
     /**
@@ -38,6 +55,7 @@ public class ChangePassword extends javax.swing.JDialog {
         cnfNewPwd = new javax.swing.JTextField();
         pSave = new javax.swing.JButton();
         pCancel = new javax.swing.JButton();
+        errorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,22 +71,35 @@ public class ChangePassword extends javax.swing.JDialog {
         CardName3.setText("Confirm New Password:");
 
         pSave.setText("Save");
+        pSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pSaveActionPerformed(evt);
+            }
+        });
 
         pCancel.setText("Cancel");
+        pCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pCancelActionPerformed(evt);
+            }
+        });
+
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(pSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pCancel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CardName3)
                             .addComponent(cardTitle1)
@@ -108,10 +139,12 @@ public class ChangePassword extends javax.swing.JDialog {
                     .addComponent(CardName3)
                     .addComponent(cnfNewPwd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pSave)
-                    .addComponent(pCancel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pSave)
+                        .addComponent(pCancel)))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(44, 44, 44)
@@ -121,6 +154,74 @@ public class ChangePassword extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pCancelActionPerformed
+        // Cancel button pushed, close dialogue with no changes
+        dispose();
+    }//GEN-LAST:event_pCancelActionPerformed
+
+    private void pSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pSaveActionPerformed
+        // save button pushed, grab the data in the fields, verify old pw matches, then update pw
+        String userOldPass = this.currPwd.getText();
+        String userNewPass = this.newPwd.getText();
+        String userNewCnfPass = this.cnfNewPwd.getText();
+        
+        if(userType == 'c') {
+            //access the customer DB
+            try {
+                String query = "CALL get_c_pwd(?);";
+                CallableStatement stmt = openConnection.prepareCall(query);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                String oldPass = rs.getString("password");
+                if (oldPass == userOldPass) {
+                    if (userNewPass == userNewCnfPass) {
+                        query = "UPDATE customer SET c_password=? WHERE c_id=?";
+                        stmt = openConnection.prepareCall(query);
+                        stmt.setString(1, userNewPass);
+                        stmt.setInt(2, id);
+                        stmt.executeQuery();
+                        dispose();
+                    } else {
+                        errorMessage.setText("New Passwords Don't Match");
+                    }
+                } else {
+                    errorMessage.setText("Current Password not Correct");
+                }
+
+            } catch(Exception e) {
+               throw new IllegalStateException("error",e);
+            }
+        } else{
+            //access the employee DB
+            try {
+                String query = "CALL get_e_pwd(?);";
+                CallableStatement stmt = openConnection.prepareCall(query);
+                stmt.setInt(1, id);
+                ResultSet rs = stmt.executeQuery();
+
+                String oldPass = rs.getString("password");
+                if (oldPass == userOldPass) {
+                    if (userNewPass == userNewCnfPass) {
+                        query = "UPDATE employee SET e_password=? WHERE c_id=?;";
+                        stmt = openConnection.prepareCall(query);
+                        stmt.setString(1, userNewPass);
+                        stmt.setInt(2, id);
+                        stmt.executeQuery();
+                        dispose();
+                    } else {
+                        errorMessage.setText("New Passwords Don't Match");
+                    }
+                } else {
+                    errorMessage.setText("Current Password not Correct");
+                }
+
+            } catch(Exception e) {
+               throw new IllegalStateException("error",e);
+            }
+        }
+    }//GEN-LAST:event_pSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +271,7 @@ public class ChangePassword extends javax.swing.JDialog {
     private javax.swing.JLabel cardTitle1;
     private javax.swing.JTextField cnfNewPwd;
     private javax.swing.JTextField currPwd;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTextField newPwd;

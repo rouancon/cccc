@@ -5,6 +5,10 @@
  */
 package cccc;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+
 /**
  *
  * @author rouancon
@@ -17,6 +21,75 @@ public class EditCust extends javax.swing.JDialog {
     public EditCust(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    //variable declarations
+    Connection openConnection;
+    int id;
+    String name;
+    String username;
+    String phone;
+    String email;
+    String street;
+    String city;
+    String state;
+    int zip;
+    boolean newsletter;
+    
+    public EditCust(java.awt.Frame parent, boolean modal, Connection connection, int id) {
+        super(parent, modal);
+        initComponents();
+        this.id = id;
+        openConnection = connection;
+        
+        //get the current values from the DB
+        try{
+            String query = "CALL get_edit_cust(id);";
+            CallableStatement stmt = openConnection.prepareCall(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            name = rs.getString("c_name");
+            username = rs.getString("c_username");
+            phone = rs.getString("c_phone");
+            email = rs.getString("c_email");
+            street = rs.getString("c_billing_street");
+            city = rs.getString("c_billing_city");
+            state = rs.getString("c_billing_state");
+            zip = rs.getInt("c_billing_zip");
+            newsletter = rs.getBoolean("c_newsletter");
+            
+        }catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+        
+        //set the fields with info from DB
+        this.custName.setText(name);
+        this.custUsername.setText(username);
+        this.custPhone.setText(phone);
+        this.custEmail.setText(email);
+        this.custBStreet.setText(street);
+        this.custBCity.setText(city);
+        this.custBState.setText(state);
+        this.custBZip.setText(Integer.toString(zip));
+        this.cNewsletter.setSelected(newsletter);
+    }
+    
+    private boolean checkNoneNull(){
+        if(
+            this.custName.getText() == null ||
+            this.custUsername.getText() == null ||
+            this.custPhone.getText() == null ||
+            this.custEmail.getText() == null ||
+            this.custBStreet.getText() == null ||
+            this.custBCity.getText()== null ||
+            this.custBState.getText() == null ||
+            this.custBZip.getText() == null
+        ){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -33,11 +106,11 @@ public class EditCust extends javax.swing.JDialog {
         jLabel23 = new javax.swing.JLabel();
         custName = new javax.swing.JTextField();
         cardTitle1 = new javax.swing.JLabel();
-        custCCNum = new javax.swing.JTextField();
+        custUsername = new javax.swing.JTextField();
         CardName3 = new javax.swing.JLabel();
-        custCCExp = new javax.swing.JTextField();
+        custPhone = new javax.swing.JTextField();
         CardName2 = new javax.swing.JLabel();
-        custCCExp1 = new javax.swing.JTextField();
+        custEmail = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         cBillStreet1 = new javax.swing.JLabel();
         custBStreet = new javax.swing.JTextField();
@@ -49,7 +122,8 @@ public class EditCust extends javax.swing.JDialog {
         custBZip = new javax.swing.JTextField();
         cSave = new javax.swing.JButton();
         cCancel = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cNewsletter = new javax.swing.JCheckBox();
+        errorMsg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,10 +155,22 @@ public class EditCust extends javax.swing.JDialog {
         cBillZip1.setText("Zip:");
 
         cSave.setText("Save");
+        cSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cSaveActionPerformed(evt);
+            }
+        });
 
         cCancel.setText("Cancel");
+        cCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cCancelActionPerformed(evt);
+            }
+        });
 
-        jCheckBox1.setText("Receive Newsletter");
+        cNewsletter.setText("Receive Newsletter");
+
+        errorMsg.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,12 +186,12 @@ public class EditCust extends javax.swing.JDialog {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(custCCExp1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(custEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jCheckBox1))
+                                .addComponent(cNewsletter))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(custName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                .addComponent(custCCNum, javax.swing.GroupLayout.Alignment.LEADING))))
+                                .addComponent(custUsername, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CardName3)
@@ -121,7 +207,7 @@ public class EditCust extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(43, 43, 43)
-                                .addComponent(custCCExp, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(custPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,14 +221,17 @@ public class EditCust extends javax.swing.JDialog {
                 .addComponent(cBillingTitle1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator9))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(errorMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(cSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cCancel))
-                    .addComponent(jSeparator9))
+                        .addComponent(cCancel)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,16 +248,16 @@ public class EditCust extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardTitle1)
-                    .addComponent(custCCNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CardName3)
-                    .addComponent(custCCExp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CardName2)
-                    .addComponent(custCCExp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(custEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cNewsletter))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel22)
                 .addGap(9, 9, 9)
@@ -187,15 +276,57 @@ public class EditCust extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cBillZip1)
                     .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cCancel)
-                    .addComponent(cSave))
+                    .addComponent(cSave)
+                    .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cCancelActionPerformed
+        // Cancel Pressed
+        dispose();
+    }//GEN-LAST:event_cCancelActionPerformed
+
+    private void cSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cSaveActionPerformed
+        // Save pressed
+        if(checkNoneNull()) {
+            try {
+                name = this.custName.getText();
+                username = custUsername.getText();
+                phone = this.custPhone.getText();
+                email = this.custEmail.getText();
+                street = this.custBStreet.getText();
+                city = this.custBCity.getText();
+                state = this.custBState.getText();
+                zip = Integer.parseInt(this.custBZip.getText());
+                newsletter = this.cNewsletter.isSelected();
+                
+                String query = "UPDATE customer SET c_name=?, c_username=?, c_phone=?, c_email=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=?, c_newsletter=? WHERE c_id=?;";
+                CallableStatement stmt = openConnection.prepareCall(query);
+                stmt.setString(1, name);
+                stmt.setString(2, username);
+                stmt.setString(3, phone);
+                stmt.setString(4, email);
+                stmt.setString(5, street);
+                stmt.setString(6, city);
+                stmt.setString(7, state);
+                stmt.setInt(8, zip);
+                stmt.setBoolean(9, newsletter);
+                stmt.setInt(10, id);
+                stmt.executeQuery();
+                dispose();
+            } catch(Exception e) {
+               throw new IllegalStateException("error",e);
+            }
+        }else{
+            errorMsg.setText("All Fields Required");
+        }
+    }//GEN-LAST:event_cSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,17 +379,18 @@ public class EditCust extends javax.swing.JDialog {
     private javax.swing.JLabel cBillZip1;
     private javax.swing.JLabel cBillingTitle1;
     private javax.swing.JButton cCancel;
+    private javax.swing.JCheckBox cNewsletter;
     private javax.swing.JButton cSave;
     private javax.swing.JLabel cardTitle1;
     private javax.swing.JTextField custBCity;
     private javax.swing.JTextField custBState;
     private javax.swing.JTextField custBStreet;
     private javax.swing.JTextField custBZip;
-    private javax.swing.JTextField custCCExp;
-    private javax.swing.JTextField custCCExp1;
-    private javax.swing.JTextField custCCNum;
+    private javax.swing.JTextField custEmail;
     private javax.swing.JTextField custName;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JTextField custPhone;
+    private javax.swing.JTextField custUsername;
+    private javax.swing.JLabel errorMsg;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JSeparator jSeparator9;
