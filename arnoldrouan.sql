@@ -186,6 +186,8 @@ INSERT INTO `employee` VALUES
 INSERT INTO `appointment` VALUES 
 (1,2,4,'2018-04-08',0,'client has dog'),(2,2,6,'2018-05-02',0,'none'),(3,2,7,'2018-05-03',79,'none'),(4,2,10,'2018-04-28',79,'none'),(5,2,11,'2018-04-26',0,'new install'),(6,2,12,'2018-04-15',79,'none'),(7,1,5,'2018-04-08',0,'none'),(8,1,15,'2018-05-02',0,'new install'),(9,1,24,'2018-05-03',59,'bring extra wire'),(10,13,41,'2018-04-28',59,'none'),(11,13,42,'2018-04-26',0,'none'),(12,13,49,'2018-04-15',59,'none'),(13,3,1,'2018-04-08',0,'new install'),(14,3,2,'2018-05-02',0,'none'),(15,3,3,'2018-05-03',69,'none'),(16,3,8,'2018-04-28',69,'internet issues'),(17,3,9,'2018-04-26',0,'none'),(18,3,30,'2018-04-15',69,'none');
 
+
+-- LOGIN FUNCTIONS
 -- Get employee data
  DROP FUNCTION IF EXISTS  employee_login_check;
  DELIMITER $$
@@ -214,7 +216,9 @@ INSERT INTO `appointment` VALUES
  RETURN (id);
  END $$ 
  DELIMITER ;
-  
+
+
+-- EMPLOYEE VIEW FUNCTIONS
   DROP PROCEDURE IF EXISTS  get_e_data;
 DELIMITER $$
 CREATE PROCEDURE get_e_data(id INT)
@@ -223,9 +227,81 @@ BEGIN
  FROM employee
  WHERE id=e_id;
 END $$ 
+ DELIMITER ; 
+ 
+-- CHANGE PASSWORD FUNCTIONS
+DROP PROCEDURE IF EXISTS  get_c_pwd;
+DELIMITER $$
+CREATE PROCEDURE get_c_pwd(id INT)
+BEGIN
+ SELECT c_password
+ FROM customer
+ WHERE id=c_id;
+END $$ 
  DELIMITER ;
  
-    DROP FUNCTION IF EXISTS  r_id_to_name;
+DROP PROCEDURE IF EXISTS  get_e_pwd;
+DELIMITER $$
+CREATE PROCEDURE get_e_pwd(id INT)
+BEGIN
+ SELECT e_password
+ FROM employee
+ WHERE id=e_id;
+END $$ 
+ DELIMITER ;
+ 
+ 
+-- CUSTOMER VIEW FUNCTIONS
+-- get edit customer fields
+DROP PROCEDURE IF EXISTS  get_cust_info;
+DELIMITER $$
+CREATE PROCEDURE get_cust_info(id INT)
+BEGIN
+ SELECT *
+ FROM customer
+ JOIN region ON customer.r_id = region.r_id
+ JOIN package ON customer.p_id = package.p_id
+ JOIN package_service ON customer.p_id = package_service.p_id
+ JOIN service ON package_service.s_id = service.s_id
+ WHERE id=customer.c_id;
+END $$ 
+ DELIMITER ;
+ 
+-- get edit customer appts, if any
+DROP PROCEDURE IF EXISTS  get_cust_apt;
+DELIMITER $$
+CREATE PROCEDURE get_cust_apt(id INT)
+BEGIN
+ SELECT *
+ FROM appointment
+ JOIN employee ON appointment.e_id=employee.e_id
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+
+-- get edit customer fields
+DROP PROCEDURE IF EXISTS  get_edit_cust;
+DELIMITER $$
+CREATE PROCEDURE get_edit_cust(id INT)
+BEGIN
+ SELECT c_name, c_username, c_phone, c_email, c_billing_street, c_billing_city, c_billing_state, c_billing_zip, c_newsletter
+ FROM customer
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+ 
+ -- get edit customer billing fields
+DROP PROCEDURE IF EXISTS  get_edit_custBilling;
+DELIMITER $$
+CREATE PROCEDURE get_edit_custBilling(id INT)
+BEGIN
+ SELECT c_cc_name, c_cc_number, c_cc_expiration_month, c_cc_expiration_year, c_cc_cvv, c_billing_street, c_billing_city, c_billing_state, c_billing_zip
+ FROM customer
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+ 
+ DROP FUNCTION IF EXISTS  r_id_to_name;
  DELIMITER $$
  CREATE FUNCTION r_id_to_name(id int)
 	RETURNS varchar(255)
@@ -265,7 +341,7 @@ END $$
  END$$
  DELIMITER ;
  
-   DROP PROCEDURE IF EXISTS update_employee_manager;
+ DROP PROCEDURE IF EXISTS update_employee_manager;
  DELIMITER $$
  CREATE PROCEDURE update_employee_manager
  (IN id int,
@@ -285,7 +361,7 @@ END $$
  END$$
  DELIMITER ;
  
- DROP TRIGGER IF EXISTS employee_insert_date;
+DROP TRIGGER IF EXISTS employee_insert_date;
 DELIMITER $$
 CREATE TRIGGER employee_insert_date BEFORE INSERT ON employee
 FOR EACH ROW
@@ -294,7 +370,7 @@ BEGIN
 END $$ ;
 DELIMITER ;
 
-    DROP PROCEDURE IF EXISTS  regional_packages;
+ DROP PROCEDURE IF EXISTS  regional_packages;
  DELIMITER $$
  CREATE PROCEDURE regional_packages(IN id int)
  BEGIN
@@ -318,16 +394,16 @@ ORDER BY a_time ASC;
  END $$ 
  DELIMITER ;
  
-  DROP PROCEDURE IF EXISTS  regional_appointments_name;
+ DROP PROCEDURE IF EXISTS  regional_appointments_name;
  DELIMITER $$
  CREATE PROCEDURE regional_appointments_name(IN id int, IN employee_name varchar(255))
  BEGIN
  SELECT a_time, c_name, c_street_address, c_city, c_state, c_zip, e_name 
-FROM appointment 
+ FROM appointment 
  NATURAL JOIN customer c 
  NATURAL JOIN employee e 
  WHERE e.r_id = id and e_name = employee_name
-ORDER BY a_time ASC;
+ ORDER BY a_time ASC;
  END $$ 
  DELIMITER ;
  
@@ -338,7 +414,7 @@ ORDER BY a_time ASC;
  SELECT c_name
  FROM customer 
  WHERE r_id = id
-ORDER BY c_name ASC;
+ ORDER BY c_name ASC;
  END $$ 
  DELIMITER ;
- 
+

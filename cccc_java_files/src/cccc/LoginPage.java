@@ -5,7 +5,6 @@
  */
 package cccc;
 import java.sql.*;
-import java.util.Scanner;
 
 /**
  *
@@ -136,6 +135,12 @@ public class LoginPage extends javax.swing.JFrame {
                 // crs = cstmt.executeQuery();
                 cid = crs.getInt("c_id");
                 System.out.println(cid);
+                CustomerHome newLogin = new CustomerHome(openconnection, cid, this);
+                this.add(newLogin);
+                this.setContentPane(newLogin);
+                newLogin.setVisible(true);
+                LoginPage.this.revalidate();
+                LoginPage.this.repaint();
             }
             else if (ers.next() && ers.getInt("e_id")!= 0)
             {
