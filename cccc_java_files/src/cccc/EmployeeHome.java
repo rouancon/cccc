@@ -6,7 +6,7 @@
 package cccc;
 import java.sql.*;
 import java.util.*;
-
+import java.awt.Frame;
 
 /**
  *
@@ -26,8 +26,10 @@ public class EmployeeHome extends javax.swing.JPanel {
     ResultSet UserResultSet;
     Integer userRId;
     String employeeName;
-    public EmployeeHome(ResultSet passedResultSet, Connection passedConnection) {
+    Frame parentFrame;
+    public EmployeeHome(ResultSet passedResultSet, Connection passedConnection, Frame passedFrame) {
         initComponents();
+        parentFrame = passedFrame;
         try
         {
             userId = passedResultSet.getString("e_id");
@@ -242,6 +244,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         customerVisibleList = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -623,18 +626,31 @@ public class EmployeeHome extends javax.swing.JPanel {
 
         personalAppointmentTab.addTab("Customers", customerTab);
 
+        Logout.setText("Logout");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(personalAppointmentTab, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(personalAppointmentTab, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Logout)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(Logout)
+                .addGap(18, 18, 18)
                 .addComponent(personalAppointmentTab, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -645,7 +661,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private void AddEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEmployeeButtonActionPerformed
         // TODO add your handling code here:
         try{
-            AddEmployee addEmployeeObj = new AddEmployee(openConnection,this,Integer.parseInt(userId),userRId);
+            AddEmployee addEmployeeObj = new AddEmployee(openConnection,this,Integer.parseInt(userId),userRId,parentFrame);
             javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             frame.setContentPane(addEmployeeObj);
             addEmployeeObj.setVisible(true);
@@ -668,7 +684,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 String selectedEmployee = employeeVisibleList.getSelectedValuesList().get(0);
                 findEmployeeStmt.setString(1,selectedEmployee);
                 ResultSet foundEmployee = findEmployeeStmt.executeQuery();
-                ManagerEditEmp managerEditObject = new ManagerEditEmp(openConnection,this,foundEmployee,Integer.parseInt(userId));
+                ManagerEditEmp managerEditObject = new ManagerEditEmp(openConnection,this,foundEmployee,Integer.parseInt(userId),parentFrame);
                 javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
                 frame.setContentPane(managerEditObject);
                 managerEditObject.setVisible(true);
@@ -684,7 +700,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private void UpdateInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateInfoButtonActionPerformed
         // TODO add your handling code here:
         try{
-            EditEmp editSelf = new EditEmp(openConnection,this,UserResultSet);
+            EditEmp editSelf = new EditEmp(openConnection,this,UserResultSet,parentFrame);
             javax.swing.JFrame Frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             Frame.setContentPane(editSelf);
             editSelf.setVisible(true);
@@ -701,9 +717,22 @@ public class EmployeeHome extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // return back to a new instance of login screen
+        try{
+            openConnection.close();
+            Cccc app = new Cccc();
+            parentFrame.dispose();
+            app.run();
+        }catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_LogoutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
+    private javax.swing.JButton Logout;
     private static transient javax.swing.JButton UpdateInfoButton;
     private javax.swing.JLabel UserAddress;
     private javax.swing.JLabel UserRole;

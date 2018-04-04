@@ -6,7 +6,7 @@
 package cccc;
 import java.sql.*;
 import java.util.*;
-
+import java.awt.Frame;
 /**
  *
  * @author connorarnold
@@ -23,8 +23,10 @@ public class AddEmployee extends javax.swing.JPanel {
     EmployeeHome home;
     Integer regionId;
     Integer uId;
-    public AddEmployee(Connection connection, EmployeeHome eHome, Integer userId, Integer rId) {
+    Frame parentFrame;
+    public AddEmployee(Connection connection, EmployeeHome eHome, Integer userId, Integer rId, Frame passedFrame) {
         initComponents();
+        parentFrame = passedFrame;
         home = eHome;
         openConnection = connection;
         regionId = rId;
@@ -353,7 +355,7 @@ public class AddEmployee extends javax.swing.JPanel {
             createEmployeeStatement.execute();
             
             ResultSet employeeInfo = getEmployeeInfo(uId);
-            EmployeeHome userHome = new EmployeeHome(employeeInfo,openConnection);
+            EmployeeHome userHome = new EmployeeHome(employeeInfo,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             f.setContentPane(userHome);
