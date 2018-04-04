@@ -42,9 +42,9 @@ public class LoginPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        user_username.setText("glaban0");
+        user_username.setText("carnold");
 
-        user_password.setText("JNzTg2Pu");
+        user_password.setText("mypass");
         user_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 user_passwordActionPerformed(evt);
@@ -112,25 +112,26 @@ public class LoginPage extends javax.swing.JFrame {
         try{
             String username = this.user_username.getText();
             String password = this.user_password.getText();
+            
             String e_query = "Select employee_login_check(?, ?) as e_id;";
-            String c_query = "Select customer_login_check(?, ?) as c_id;";
             CallableStatement estmt = openconnection.prepareCall(e_query);
-            CallableStatement cstmt = openconnection.prepareCall(c_query);
             estmt.setString(1, username);
             estmt.setString(2, password);
+            ResultSet ers = estmt.executeQuery();
+            int eid;
+            
+            String c_query = "Select customer_login_check(?, ?) as c_id;";
+            CallableStatement cstmt = openconnection.prepareCall(c_query);
             cstmt.setString(1, username);
             cstmt.setString(2, password);
-            error_message.setText("Butoon executed");
-            ResultSet ers = estmt.executeQuery();
             ResultSet crs = cstmt.executeQuery();
-            int eid, cid;
+            int cid;
 
             //Check if employee exists
             // sgerdes3
             // IVWEdCSiW
             if (crs.next() && crs.getInt("c_id") != 0)
             {
-                error_message.setText("Customer");
                 // crs = cstmt.executeQuery();
                 cid = crs.getInt("c_id");
                 System.out.println(cid);
@@ -143,11 +144,14 @@ public class LoginPage extends javax.swing.JFrame {
             }
             else if (ers.next() && ers.getInt("e_id")!= 0)
             {
-                error_message.setText("Employee");
                 eid = ers.getInt("e_id");
                 ResultSet employeeInfo = getEmployeeInfo(eid);
                 EmployeeHome eHome = new EmployeeHome(employeeInfo,openconnection);
-                this.setGlassPane(eHome);
+                //this.setGlassPane(eHome);
+                //this.getContentPane().add(eHome);
+                //this.pack();
+                //this.setVisible(true);
+                this.setContentPane(eHome);
                 eHome.setVisible(true);
             }
             else
@@ -221,6 +225,7 @@ public class LoginPage extends javax.swing.JFrame {
                 System.out.println(row);
 
             }
+            rs.first();
             return rs;
         }
         catch(Exception e){
