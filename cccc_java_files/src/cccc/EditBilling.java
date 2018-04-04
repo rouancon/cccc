@@ -44,15 +44,13 @@ public class EditBilling extends javax.swing.JDialog {
         
         //get the current values from the DB
         try{
-            String query = "CALL get_edit_custBilling(id);";
+            String query = "CALL get_edit_custBilling(?);";
             CallableStatement stmt = openConnection.prepareCall(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
+            rs.next();
             name = rs.getString("c_cc_name");
-            ccNum = rs.getString("c_cc_number");
-            ccNum = ccNum.substring(ccNum.length() - 4); //only card last 4 digits
-            ccNum = "***********" + ccNum;
             street = rs.getString("c_billing_street");
             city = rs.getString("c_billing_city");
             state = rs.getString("c_billing_state");
@@ -64,7 +62,6 @@ public class EditBilling extends javax.swing.JDialog {
         
         //set the fields with info from DB
         this.custName.setText(name);
-        this.custCCNum.setText(ccNum);
         this.custBStreet.setText(street);
         this.custBCity.setText(city);
         this.custBState.setText(state);
@@ -74,10 +71,6 @@ public class EditBilling extends javax.swing.JDialog {
     private boolean checkNoneNull(){
         if(
             this.custName.getText() == null ||
-            this.custCCNum.getText() == null ||
-            this.custCCExpM.getText() == null ||
-            this.custCCCVV.getText() == null ||
-            this.custCCExpY.getText() == null ||
             this.custBStreet.getText() == null ||
             this.custBCity.getText()== null ||
             this.custBState.getText() == null ||
@@ -86,14 +79,25 @@ public class EditBilling extends javax.swing.JDialog {
             errorMsg.setText("All Fields Required");
             return false;
         } else if(
-            this.custCCNum.getText().indexOf('*') >= 0 ||
-            this.custCCExpM.getText().indexOf('*') >= 0 ||
-            this.custCCCVV.getText().indexOf('*') >= 0 ||
-            this.custCCExpY.getText().indexOf('*') >= 0
+            this.custCCNum.getText() != null ||
+            this.custCCExpM.getText() != null ||
+            this.custCCCVV.getText() != null ||
+            this.custCCExpY.getText() != null
         ){
-            errorMsg.setText("Invalid Card Entry");
-            return false;
-        } else {
+            if(
+                this.custCCNum.getText().length() > 16 ||
+                this.custCCNum.getText().length() < 14 ||
+                this.custCCExpM.getText().length() != 2 ||
+                this.custCCCVV.getText().length() != 3 ||
+                this.custCCCVV.getText().length() != 4 ||
+                this.custCCExpY.getText().length() != 2
+            ){
+                errorMsg.setText("Invalid Card Entry");
+                return false;
+            }else{
+                return true;
+            }
+        }else {
             return true;
         }
     }
@@ -350,7 +354,7 @@ public class EditBilling extends javax.swing.JDialog {
                 stmt.setString(8, state);
                 stmt.setInt(9, zip);
                 stmt.setInt(10, id);
-                stmt.executeQuery();
+                stmt.executeUpdate();
                 dispose();
             } catch(Exception e) {
                throw new IllegalStateException("error",e);

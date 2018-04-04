@@ -255,9 +255,9 @@ END $$
  DELIMITER ;
  
 -- get edit customer appts, if any
-DROP PROCEDURE IF EXISTS  get_cust_apts;
+DROP PROCEDURE IF EXISTS  get_cust_apt;
 DELIMITER $$
-CREATE PROCEDURE get_cust_apts(id INT)
+CREATE PROCEDURE get_cust_apt(id INT)
 BEGIN
  SELECT *
  FROM appointment
@@ -288,4 +288,4 @@ BEGIN
 END $$ 
  DELIMITER ;
  
- CALL get_cust_apts(2);
+ CALL get_c_pwd(1)

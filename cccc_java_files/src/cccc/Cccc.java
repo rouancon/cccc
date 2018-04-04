@@ -42,6 +42,7 @@ public class Cccc {
             conn = this.getConnection();
             System.out.println("Connected to database");
             LoginPage login = new LoginPage(conn);
+            login.setLocationRelativeTo(null);
             login.setVisible(true);
         } 
         catch (SQLException e) 

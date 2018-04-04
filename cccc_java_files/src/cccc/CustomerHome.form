@@ -1147,12 +1147,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator11" min="-2" pref="7" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="cardTitle2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cRegion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cBillStreet2" min="-2" max="-2" attributes="0"/>

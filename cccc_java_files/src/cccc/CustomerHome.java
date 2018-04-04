@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
@@ -65,20 +66,19 @@ public class CustomerHome extends javax.swing.JPanel {
     String aptNotes;
     
     //creates populated CustomerHome view
-    public CustomerHome(Connection connection, int cId) {
+    public CustomerHome(Connection connection, int cId, JFrame parentFrame) {
         initComponents(); //initialize fields
         openConnection = connection; //pass in active connection
         
-        //get the frame the JPanel is contained in
-        Window parentWindow = SwingUtilities.windowForComponent(this);
-        parentFrame = (Frame)parentWindow;
+        //set the frame the JPanel is contained in
+        this.parentFrame = parentFrame;
         
         actNum = cId;
         getCustData(cId); //load/populate values from DB
     }
     
     //takes a customer ID and populates fields with stored values
-    private void getCustData(int cId) {
+    public void getCustData(int cId) {
         //pull customer data using passed in cid
         try{
             //get basic customer info
@@ -87,6 +87,7 @@ public class CustomerHome extends javax.swing.JPanel {
             stmt.setInt(1, cId);
             ResultSet rs = stmt.executeQuery();
             
+            rs.next();
             custName = rs.getString("c_name");
             regionName = rs.getString("r_name");
             billName = rs.getString("c_cc_name");
@@ -976,11 +977,11 @@ public class CustomerHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contactUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
+                .addGroup(contactUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(contactUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cardTitle2)
-                        .addComponent(cRegion)))
+                        .addComponent(cRegion))
+                    .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cBillStreet2)
                 .addContainerGap(259, Short.MAX_VALUE))
@@ -1022,6 +1023,7 @@ public class CustomerHome extends javax.swing.JPanel {
         try{
             openConnection.close();
             Cccc app = new Cccc();
+            parentFrame.dispose();
             app.run();
         }catch(Exception e){
            throw new IllegalStateException("error",e);
@@ -1031,16 +1033,23 @@ public class CustomerHome extends javax.swing.JPanel {
     private void cChangePwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cChangePwdActionPerformed
         // open a new instance of ChangePassword
         ChangePassword newPwd = new ChangePassword(parentFrame, true, openConnection, 'c', actNum);
+        newPwd.setLocationRelativeTo(parentFrame);
+        newPwd.setVisible(true);
     }//GEN-LAST:event_cChangePwdActionPerformed
 
     private void cEditInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEditInfoActionPerformed
         // open a new instance of EditCust
         EditCust editInfo = new EditCust(parentFrame, true, openConnection, actNum);
+        editInfo.setLocationRelativeTo(parentFrame);
+        editInfo.setVisible(true);
+        getCustData(actNum);
     }//GEN-LAST:event_cEditInfoActionPerformed
 
     private void cEditBillingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEditBillingActionPerformed
         // open a new instance of edit billing
         EditBilling editBill = new EditBilling(parentFrame, true, openConnection, actNum);
+        editBill.setLocationRelativeTo(null);
+        editBill.setVisible(true);
     }//GEN-LAST:event_cEditBillingActionPerformed
 
 

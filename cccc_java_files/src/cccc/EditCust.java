@@ -44,11 +44,12 @@ public class EditCust extends javax.swing.JDialog {
         
         //get the current values from the DB
         try{
-            String query = "CALL get_edit_cust(id);";
+            String query = "CALL get_edit_cust(?);";
             CallableStatement stmt = openConnection.prepareCall(query);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             
+            rs.next();
             name = rs.getString("c_name");
             username = rs.getString("c_username");
             phone = rs.getString("c_phone");
@@ -318,7 +319,7 @@ public class EditCust extends javax.swing.JDialog {
                 stmt.setInt(8, zip);
                 stmt.setBoolean(9, newsletter);
                 stmt.setInt(10, id);
-                stmt.executeQuery();
+                stmt.executeUpdate();
                 dispose();
             } catch(Exception e) {
                throw new IllegalStateException("error",e);
