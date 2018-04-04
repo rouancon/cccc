@@ -6,6 +6,7 @@
 package cccc;
 import java.sql.*;
 import java.util.Scanner;
+import java.awt.Frame;
 /**
  *
  * @author connorarnold
@@ -23,8 +24,10 @@ public class EditEmp extends javax.swing.JPanel {
     ResultSet rs;
     String Username, Password, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3, role;
     Integer Eid;
-    public EditEmp(Connection connection, EmployeeHome ehome, ResultSet ers) {
+    Frame parentFrame;
+    public EditEmp(Connection connection, EmployeeHome ehome, ResultSet ers, Frame passedFrame) {
         initComponents();
+        parentFrame = passedFrame;
         OpenConnection = connection;
         home = ehome;
         rs = ers;
@@ -335,7 +338,7 @@ public class EditEmp extends javax.swing.JPanel {
             Ustmt.executeUpdate();
             
             ResultSet employeeInfo = getEmployeeInfo(Eid);
-            EmployeeHome EHome = new EmployeeHome(employeeInfo,OpenConnection);
+            EmployeeHome EHome = new EmployeeHome(employeeInfo,OpenConnection,parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             f.setContentPane(EHome);

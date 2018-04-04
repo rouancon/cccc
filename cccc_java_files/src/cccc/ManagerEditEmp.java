@@ -6,6 +6,7 @@
 package cccc;
 import java.sql.*;
 import java.util.*;
+import java.awt.Frame;
 /**
  *
  * @author connorarnold
@@ -22,9 +23,11 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     EmployeeHome home;
     ResultSet employeeResultSet;
     Integer managerId;
+    Frame parentFrame;
     String username, name, salary, start, position, password, email, streetAddress, city, state, zip, phone1, phone2, phone3,  employeeId;
-    public ManagerEditEmp(Connection passedConnection, EmployeeHome managerHome, ResultSet passedResultSet, int passedManagerId) 
+    public ManagerEditEmp(Connection passedConnection, EmployeeHome managerHome, ResultSet passedResultSet, int passedManagerId, Frame passedFrame) 
     {
+        parentFrame = passedFrame;
         initComponents();
         openConnection = passedConnection;
         home = managerHome;
@@ -364,9 +367,9 @@ public class ManagerEditEmp extends javax.swing.JPanel {
                     .addComponent(jLabel11)
                     .addComponent(e_address))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UpdateEmployeeButton)
-                    .addComponent(cancelButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelButton)
+                    .addComponent(UpdateEmployeeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(updateErrorMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -399,7 +402,7 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         UpdateE.executeUpdate();
         
         ResultSet employeeInfo = getEmployeeInfo(managerId);
-            EmployeeHome EHome = new EmployeeHome(employeeInfo,openConnection);
+            EmployeeHome EHome = new EmployeeHome(employeeInfo,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             f.setContentPane(EHome);
@@ -445,7 +448,7 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             deleteEmployeeStatement.execute();
             
             ResultSet managerResultSet = getEmployeeInfo(managerId);
-            EmployeeHome EHome = new EmployeeHome(managerResultSet,openConnection);
+            EmployeeHome EHome = new EmployeeHome(managerResultSet,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             f.setContentPane(EHome);
