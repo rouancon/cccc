@@ -5,7 +5,6 @@
  */
 package cccc;
 import java.sql.*;
-import java.util.Scanner;
 
 /**
  *
@@ -43,9 +42,14 @@ public class LoginPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        user_username.setText("Username");
+        user_username.setText("glaban0");
 
-        user_password.setText("Password");
+        user_password.setText("JNzTg2Pu");
+        user_password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                user_passwordActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Username: ");
 
@@ -130,6 +134,12 @@ public class LoginPage extends javax.swing.JFrame {
                 // crs = cstmt.executeQuery();
                 cid = crs.getInt("c_id");
                 System.out.println(cid);
+                CustomerHome newLogin = new CustomerHome(openconnection, cid, this);
+                this.add(newLogin);
+                this.setContentPane(newLogin);
+                newLogin.setVisible(true);
+                LoginPage.this.revalidate();
+                LoginPage.this.repaint();
             }
             else if (ers.next() && ers.getInt("e_id")!= 0)
             {
@@ -149,6 +159,10 @@ public class LoginPage extends javax.swing.JFrame {
            throw new IllegalStateException("error",e);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void user_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_user_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_user_passwordActionPerformed
 
     /**
      * @param args the command line arguments

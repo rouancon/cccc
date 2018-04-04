@@ -16,7 +16,7 @@ import java.util.Properties;
 public class Cccc {
 
     private final String userName = "root";
-    private final String password = "kylund";
+    private final String password = "DBSpring2018";
     private final String serverName = "localhost";
     private final int portNumber = 3306;
     private final String dbName = "arnoldrouan";
@@ -42,6 +42,7 @@ public class Cccc {
             conn = this.getConnection();
             System.out.println("Connected to database");
             LoginPage login = new LoginPage(conn);
+            login.setLocationRelativeTo(null);
             login.setVisible(true);
         } 
         catch (SQLException e) 
