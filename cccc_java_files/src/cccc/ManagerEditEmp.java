@@ -18,62 +18,64 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     public ManagerEditEmp() {
         initComponents();
     }
-    Connection OpenConnection;
+    Connection openConnection;
     EmployeeHome home;
-    ResultSet rs;
-    Integer Mid;
-    String Username, Name, Salary, Start, Position, Password, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3,  Eid;
-    public ManagerEditEmp(Connection connection, EmployeeHome ehome, ResultSet ers, int ManagerId) 
+    ResultSet employeeResultSet;
+    Integer managerId;
+    String username, name, salary, start, position, password, email, streetAddress, city, state, zip, phone1, phone2, phone3,  employeeId;
+    public ManagerEditEmp(Connection passedConnection, EmployeeHome managerHome, ResultSet passedResultSet, int passedManagerId) 
     {
         initComponents();
-        OpenConnection = connection;
-        home = ehome;
-        rs = ers;
-        Mid = ManagerId;
+        openConnection = passedConnection;
+        home = managerHome;
+        employeeResultSet = passedResultSet;
+        managerId = passedManagerId;
+        deleteErrorMessage.setVisible(false);
+        updateErrorMessage.setVisible(false);
         try{
-            rs.first();
-            Eid = ers.getString("e_id");
-            Name = ers.getString("e_name");
-            Position = ers.getString("e_role");
-            Start = ers.getString("e_start_date");
-            Salary = ers.getString("e_salary");
-            Username = rs.getString("e_username");
-            Password = rs.getString("e_password");
-            Email = rs.getString("e_email");
-            StreetAddress = rs.getString("e_street_address");
-            City = rs.getString("e_city");
-            State = rs.getString("e_state");
-            Zip = rs.getString("e_zip");
-            if (Zip.length() == 4)
+            employeeResultSet.first();
+            employeeId = passedResultSet.getString("e_id");
+            name = passedResultSet.getString("e_name");
+            position = passedResultSet.getString("e_role");
+            start = passedResultSet.getString("e_start_date");
+            salary = passedResultSet.getString("e_salary");
+            username = employeeResultSet.getString("e_username");
+            password = employeeResultSet.getString("e_password");
+            email = employeeResultSet.getString("e_email");
+            streetAddress = employeeResultSet.getString("e_street_address");
+            city = employeeResultSet.getString("e_city");
+            state = employeeResultSet.getString("e_state");
+            zip = employeeResultSet.getString("e_zip");
+            if (zip.length() == 4)
             {
-                Zip = "0" + Zip;
+                zip = "0" + zip;
             }
-            String Address = rs.getString("e_street_address") + "\n" + 
-                    rs.getString("e_city") + ", " + rs.getString("e_state") + " " +
-                    Zip;
+            String address = employeeResultSet.getString("e_street_address") + "\n" + 
+                    employeeResultSet.getString("e_city") + ", " + employeeResultSet.getString("e_state") + " " +
+                    zip;
 
-            String Phone = rs.getString("e_phone");
+            String phone = employeeResultSet.getString("e_phone");
             
             //Make the dropdowns for regions
-            int rId = rs.getInt("r_id");
+            int rId = employeeResultSet.getInt("r_id");
             System.out.println(rId);
             String eQuery = "Select r_id_to_name(?) as r_name";
-            CallableStatement eStmt = OpenConnection.prepareCall(eQuery);
+            CallableStatement eStmt = openConnection.prepareCall(eQuery);
             eStmt.setInt(1, rId);
             ResultSet eRs = eStmt.executeQuery();
             eRs.first();
-            String RQuery = "Select r_name From region";
-            CallableStatement RStmt = OpenConnection.prepareCall(RQuery);
+            String regionNameQuery = "Select r_name From region";
+            CallableStatement RStmt = openConnection.prepareCall(regionNameQuery);
             ResultSet RRS = RStmt.executeQuery();
             List<String> RegionList = new ArrayList<String>();
-            String RegionName;
+            String regionName;
             Integer ind,index;
             ind = 0;
             index = 0;
             while (RRS.next()){
-                RegionName = RRS.getString("r_name");
-                RegionList.add(RegionName);
-                if (eRs.getString("r_name").equals(RegionName))
+                regionName = RRS.getString("r_name");
+                RegionList.add(regionName);
+                if (eRs.getString("r_name").equals(regionName))
                     ind = index;
                 index = index + 1;
             }
@@ -82,16 +84,16 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             regions.setSelectedIndex(ind);
                     
             //e_branch.setText(eRs.getString("r_name"));
-            e_id.setText(Eid);
-            e_name.setText(Name);
-            e_title.setText(Position);
-            e_salary.setText(Salary);
-            e_start.setText(Start);
-            e_username.setText(Username);
-            e_password.setText(Password);
-            e_email.setText(Email);
-            e_address.setText(Address);
-            e_phone.setText(Phone);
+            e_id.setText(employeeId);
+            e_name.setText(name);
+            e_title.setText(position);
+            e_salary.setText(salary);
+            e_start.setText(start);
+            e_username.setText(username);
+            e_password.setText(password);
+            e_email.setText(email);
+            e_address.setText(address);
+            e_phone.setText(phone);
         }
         catch(Exception e)
         {
@@ -110,7 +112,7 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     {
         try{
             String query = "Call get_e_data(" + eId + ")";
-            CallableStatement estmt = OpenConnection.prepareCall(query);
+            CallableStatement estmt = openConnection.prepareCall(query);
             ResultSet rs2 = estmt.executeQuery();
             ResultSetMetaData metadata = rs2.getMetaData();
             int columnCount = metadata.getColumnCount();    
@@ -148,8 +150,8 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        UpdateEmployeeButton = new javax.swing.JButton();
         e_title = new javax.swing.JTextField();
         e_salary = new javax.swing.JTextField();
         e_username = new javax.swing.JTextField();
@@ -161,6 +163,9 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         e_start = new javax.swing.JLabel();
         e_name = new javax.swing.JLabel();
         regions = new javax.swing.JComboBox<>();
+        updateErrorMessage = new javax.swing.JLabel();
+        deleteEmployeeButton = new javax.swing.JButton();
+        deleteErrorMessage = new javax.swing.JLabel();
 
         jLabel1.setText("Employee ID");
 
@@ -184,17 +189,17 @@ public class ManagerEditEmp extends javax.swing.JPanel {
 
         jLabel11.setText("Employee Address");
 
-        jButton1.setText("Cancel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Update");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        UpdateEmployeeButton.setText("Update");
+        UpdateEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                UpdateEmployeeButtonActionPerformed(evt);
             }
         });
 
@@ -240,19 +245,58 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             }
         });
 
+        updateErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        updateErrorMessage.setText("jLabel12");
+
+        deleteEmployeeButton.setText("Delete Employee");
+        deleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteEmployeeButtonActionPerformed(evt);
+            }
+        });
+
+        deleteErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        deleteErrorMessage.setText("jLabel12");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(e_start)
+                                    .addComponent(e_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(e_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(regions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(e_name)
+                                    .addComponent(e_id)))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(cancelButton)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,27 +306,15 @@ public class ManagerEditEmp extends javax.swing.JPanel {
                                     .addComponent(e_email)
                                     .addComponent(e_phone)
                                     .addComponent(e_address)
-                                    .addComponent(jButton3)))))
+                                    .addComponent(updateErrorMessage)))
+                            .addComponent(UpdateEmployeeButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_start)
-                            .addComponent(e_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(regions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_name)
-                            .addComponent(e_id)))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(90, 90, 90)
+                        .addComponent(deleteEmployeeButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(deleteErrorMessage)))
+                .addGap(95, 103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,28 +363,34 @@ public class ManagerEditEmp extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(e_address))
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(UpdateEmployeeButton)
+                    .addComponent(cancelButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(updateErrorMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteEmployeeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(deleteErrorMessage)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+    private void UpdateEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateEmployeeButtonActionPerformed
+        // TODO Don't let customers get transferred if they have open appointments
         try{
         String SelectedRegionName = regions.getSelectedItem().toString();
         String GetRid= "Select r_id From region where r_name = ?;";
-        CallableStatement RegionId = OpenConnection.prepareCall(GetRid);
+        CallableStatement RegionId = openConnection.prepareCall(GetRid);
         RegionId.setString(1, SelectedRegionName);
         ResultSet RidRs= RegionId.executeQuery();
         RidRs.next();
         Integer e_r_id = RidRs.getInt("r_id");
         
         String UpdateEmployee = "Call update_employee_manager(?,?,?,?,?,?);";
-        CallableStatement UpdateE = OpenConnection.prepareCall(UpdateEmployee);
-        UpdateE.setInt(1, Integer.parseInt(Eid));
+        CallableStatement UpdateE = openConnection.prepareCall(UpdateEmployee);
+        UpdateE.setInt(1, Integer.parseInt(employeeId));
         UpdateE.setInt(2, e_r_id);
         UpdateE.setString(3, e_title.getText());
         UpdateE.setInt(4, Integer.parseInt(e_salary.getText()));
@@ -360,8 +398,8 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         UpdateE.setString(6, e_password.getText());
         UpdateE.executeUpdate();
         
-        ResultSet employeeInfo = getEmployeeInfo(Mid);
-            EmployeeHome EHome = new EmployeeHome(employeeInfo,OpenConnection);
+        ResultSet employeeInfo = getEmployeeInfo(managerId);
+            EmployeeHome EHome = new EmployeeHome(employeeInfo,openConnection);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
             f.setContentPane(EHome);
@@ -371,11 +409,13 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         }
         catch(Exception e)
         {
-           throw new IllegalStateException("error",e); 
+            String errorMessage = e.getMessage();
+            updateErrorMessage.setText(errorMessage);
+            updateErrorMessage.setVisible(true);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_UpdateEmployeeButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
@@ -383,26 +423,51 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         home.setVisible(true);
         f.revalidate();
         f.repaint();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void e_titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_titleActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_e_titleActionPerformed
 
     private void e_salaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_salaryActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_e_salaryActionPerformed
 
     private void e_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_e_passwordActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_e_passwordActionPerformed
 
     private void regionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regionsActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_regionsActionPerformed
+
+    private void deleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeButtonActionPerformed
+        try{
+            String deleteEmployeeQuery  = "Delete FROM employee WHERE e_id = ?";
+            CallableStatement deleteEmployeeStatement = openConnection.prepareCall(deleteEmployeeQuery);
+            deleteEmployeeStatement.setString(1, employeeId);
+            deleteEmployeeStatement.execute();
+            
+            ResultSet managerResultSet = getEmployeeInfo(managerId);
+            EmployeeHome EHome = new EmployeeHome(managerResultSet,openConnection);
+            this.setVisible(false);
+            javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            f.setContentPane(EHome);
+            EHome.setVisible(true);
+            f.revalidate();
+            f.repaint();
+        }
+        catch(Exception e)
+        {
+            String errorMessage = e.getMessage();
+            deleteErrorMessage.setText("Can not Delete Employees with Open Appointments");
+            //deleteErrorMessage.setText(errorMessage);
+            deleteErrorMessage.setVisible(true); 
+        }
+    }//GEN-LAST:event_deleteEmployeeButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton UpdateEmployeeButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton deleteEmployeeButton;
+    private javax.swing.JLabel deleteErrorMessage;
     private javax.swing.JLabel e_address;
     private javax.swing.JLabel e_email;
     private javax.swing.JLabel e_id;
@@ -413,8 +478,6 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     private javax.swing.JLabel e_start;
     private javax.swing.JTextField e_title;
     private javax.swing.JTextField e_username;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -427,5 +490,6 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> regions;
+    private javax.swing.JLabel updateErrorMessage;
     // End of variables declaration//GEN-END:variables
 }

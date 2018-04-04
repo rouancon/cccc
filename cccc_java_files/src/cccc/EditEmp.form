@@ -29,7 +29,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -42,33 +42,34 @@
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="CancelButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="e_phone_1" min="-2" pref="36" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="e_phone_2" min="-2" pref="35" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="e_phone_3" min="-2" pref="43" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="e_password" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_username" min="-2" max="-2" attributes="0"/>
-                          <Component id="ConfirmButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_address" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_city" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_state" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_zip" min="-2" max="-2" attributes="0"/>
-                          <Component id="e_email" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
                       <Component id="ErrorLabel" min="-2" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="errorMessage" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="e_phone_1" min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="e_phone_2" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="e_phone_3" min="-2" pref="43" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="e_password" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_username" min="-2" max="-2" attributes="0"/>
+                  <Component id="ConfirmButton" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_address" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_city" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_state" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_zip" min="-2" max="-2" attributes="0"/>
+                  <Component id="e_email" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="58" max="32767" attributes="0"/>
           </Group>
@@ -128,9 +129,11 @@
                   <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ConfirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Component id="errorMessage" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="ErrorLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="8" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -266,6 +269,14 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="errorMessage">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="jLabel11"/>
       </Properties>
     </Component>
   </SubComponents>

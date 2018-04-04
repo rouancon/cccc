@@ -21,13 +21,15 @@ public class EditEmp extends javax.swing.JPanel {
     Connection OpenConnection;
     EmployeeHome home;
     ResultSet rs;
-    String Username, Password, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3;
+    String Username, Password, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3, role;
     Integer Eid;
     public EditEmp(Connection connection, EmployeeHome ehome, ResultSet ers) {
         initComponents();
         OpenConnection = connection;
         home = ehome;
         rs = ers;
+        errorMessage.setVisible(false);
+        errorMessage.setVisible(false);
         try{
             rs.first();
             Eid = ers.getInt("e_id");
@@ -56,6 +58,7 @@ public class EditEmp extends javax.swing.JPanel {
             e_phone_1.setText(Phone1);
             e_phone_2.setText(Phone2);
             e_phone_3.setText(Phone3);
+            role = rs.getString("e_role");
         }
         catch(Exception e)
         {
@@ -119,6 +122,7 @@ public class EditEmp extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         ErrorLabel = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
 
         jTextField11.setText("jTextField2");
 
@@ -188,6 +192,9 @@ public class EditEmp extends javax.swing.JPanel {
 
         ErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
 
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("jLabel11");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,30 +212,31 @@ public class EditEmp extends javax.swing.JPanel {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(CancelButton))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(e_phone_1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10)
-                                .addGap(2, 2, 2)
-                                .addComponent(e_phone_2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(e_phone_3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ConfirmButton)
-                            .addComponent(e_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CancelButton)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(ErrorLabel)))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(e_phone_1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addGap(2, 2, 2)
+                        .addComponent(e_phone_2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(e_phone_3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ConfirmButton)
+                    .addComponent(e_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -275,9 +283,11 @@ public class EditEmp extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(ConfirmButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(errorMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ErrorLabel)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -335,9 +345,9 @@ public class EditEmp extends javax.swing.JPanel {
         }
         catch(Exception E){
             String Msg = "" + E;
-            //String ErrorMsg = Msg.split(":")[1];
-            ErrorLabel.setText(Msg);
-            ErrorLabel.setVisible(true);
+            String ErrorMsg = Msg.split(":")[1];
+            errorMessage.setText(Msg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed
 
@@ -364,6 +374,7 @@ public class EditEmp extends javax.swing.JPanel {
     private javax.swing.JTextField e_state;
     private javax.swing.JTextField e_username;
     private javax.swing.JTextField e_zip;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
