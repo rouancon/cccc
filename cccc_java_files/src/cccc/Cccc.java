@@ -16,7 +16,7 @@ import java.util.Properties;
 public class Cccc {
 
     private final String userName = "root";
-    private final String password = "kylund";
+    private final String password = "DBSpring2018";
     private final String serverName = "localhost";
     private final int portNumber = 3306;
     private final String dbName = "arnoldrouan";

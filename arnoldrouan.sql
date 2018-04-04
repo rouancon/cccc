@@ -240,6 +240,33 @@ END $$
  
 -- CUSTOMER VIEW FUNCTIONS
 -- get edit customer fields
+DROP PROCEDURE IF EXISTS  get_cust_info;
+DELIMITER $$
+CREATE PROCEDURE get_cust_info(id INT)
+BEGIN
+ SELECT *
+ FROM customer
+ JOIN region ON customer.r_id = region.r_id
+ JOIN package ON customer.p_id = package.p_id
+ JOIN package_service ON customer.p_id = package_service.p_id
+ JOIN service ON package_service.s_id = service.s_id
+ WHERE id=customer.c_id;
+END $$ 
+ DELIMITER ;
+ 
+-- get edit customer appts, if any
+DROP PROCEDURE IF EXISTS  get_cust_apts;
+DELIMITER $$
+CREATE PROCEDURE get_cust_apts(id INT)
+BEGIN
+ SELECT *
+ FROM appointment
+ JOIN employee ON appointment.e_id=employee.e_id
+ WHERE id=c_id;
+END $$ 
+ DELIMITER ;
+
+-- get edit customer fields
 DROP PROCEDURE IF EXISTS  get_edit_cust;
 DELIMITER $$
 CREATE PROCEDURE get_edit_cust(id INT)
@@ -261,4 +288,4 @@ BEGIN
 END $$ 
  DELIMITER ;
  
- 
+ CALL get_cust_apts(2);

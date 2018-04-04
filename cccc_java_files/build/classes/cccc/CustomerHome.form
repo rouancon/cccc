@@ -169,7 +169,7 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="cName" min="-2" max="-2" attributes="0"/>
                                           <Component id="cSinceDate" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cName1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cActNum" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -246,7 +246,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cActNum" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -312,7 +312,7 @@
                 <Property name="text" type="java.lang.String" value="Account Number:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cName1">
+            <Component class="javax.swing.JLabel" name="cActNum">
               <Properties>
                 <Property name="text" type="java.lang.String" value="actNum"/>
               </Properties>
@@ -476,13 +476,13 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cPkgExpDate" min="-2" max="-2" attributes="0"/>
+                                          <Component id="label" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cPkgName2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cPkgExpDate2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cPkgName" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cPkgExpDate" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Component id="cardTitle" min="-2" max="-2" attributes="0"/>
@@ -512,45 +512,38 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jSeparator7" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" attributes="0">
+                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                                                      <Group type="102" alignment="1" attributes="0">
-                                                          <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <Group type="102" alignment="0" attributes="0">
-                                                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                                      </Group>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                                  </Group>
+                                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="cADate" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
-                                                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="cAPrice" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                          <Component id="cATech" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      </Group>
-                                                      <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
-                                                      <Component id="cANotes" min="-2" pref="208" max="-2" attributes="0"/>
-                                                  </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
-                                      <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cADate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cATech" pref="135" max="32767" attributes="0"/>
+                                          <Component id="cAPrice" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                              <Component id="cANotes" min="-2" pref="208" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -576,7 +569,7 @@
                               <Component id="jLabel26" min="-2" pref="288" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="172" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -606,12 +599,12 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cPkgName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cPkgName" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="label" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="cPkgExpDate" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cPkgExpDate2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cardTitle" min="-2" max="-2" attributes="0"/>
@@ -626,34 +619,34 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jSeparator7" min="-2" pref="7" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cADate" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jSeparator7" min="-2" pref="7" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cADate" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cATech" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel16" max="32767" attributes="0"/>
+                                  <Component id="cATech" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cAPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cAPrice" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="41" max="32767" attributes="0"/>
+                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="cANotes" min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
-                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -683,7 +676,7 @@
                 <Property name="text" type="java.lang.String" value="Package Name:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cPkgName2">
+            <Component class="javax.swing.JLabel" name="cPkgName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="PkgName"/>
               </Properties>
@@ -743,7 +736,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="cADate">
               <Properties>
-                <Property name="text" type="java.lang.String" value="AptDate"/>
+                <Property name="text" type="java.lang.String" value="None"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
@@ -753,9 +746,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="cATech">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="TechName"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel17">
               <Properties>
@@ -764,17 +754,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="cAPrice">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="$-"/>
-              </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cPkgExpDate">
+            <Component class="javax.swing.JLabel" name="label">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="Expiration Date:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cPkgExpDate2">
+            <Component class="javax.swing.JLabel" name="cPkgExpDate">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ExpDate"/>
               </Properties>
@@ -787,6 +774,9 @@
             <Component class="javax.swing.JLabel" name="cSvc3">
               <Properties>
                 <Property name="text" type="java.lang.String" value="SVC3"/>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 0]"/>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel25">
@@ -798,7 +788,7 @@
             <Component class="javax.swing.JLabel" name="cANotes">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Insert Notes in this Text box"/>
+                <Property name="text" type="java.lang.String" value="None"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
@@ -850,8 +840,8 @@
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CardName2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CardName3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cCCNum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cardName" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -866,12 +856,12 @@
                                       <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="cBillCity1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cBillCity" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="cBillState1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="cBillState" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="cBillStreet1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cBillZip1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cBillStreet" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cBillZip" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -931,24 +921,24 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cBillStreet1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cBillStreet" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cBillCity1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cBillState1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cBillCity" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cBillState" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cBillZip1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cBillZip" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CardName3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cardName" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="cardTitle1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CardName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cCCNum" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Component id="cEditBilling" min="-2" max="-2" attributes="0"/>
@@ -1022,22 +1012,22 @@
                 <Property name="text" type="java.lang.String" value="Upcoming Billing Status"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cBillZip1">
+            <Component class="javax.swing.JLabel" name="cBillZip">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ZipCode"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cBillState1">
+            <Component class="javax.swing.JLabel" name="cBillState">
               <Properties>
                 <Property name="text" type="java.lang.String" value="State"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cBillCity1">
+            <Component class="javax.swing.JLabel" name="cBillCity">
               <Properties>
                 <Property name="text" type="java.lang.String" value="City,"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="cBillStreet1">
+            <Component class="javax.swing.JLabel" name="cBillStreet">
               <Properties>
                 <Property name="text" type="java.lang.String" value="1234 Some Street"/>
               </Properties>
@@ -1058,7 +1048,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cEditBillingActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="CardName2">
+            <Component class="javax.swing.JLabel" name="cCCNum">
               <Properties>
                 <Property name="text" type="java.lang.String" value="***********2736"/>
               </Properties>
@@ -1069,7 +1059,7 @@
                 <Property name="text" type="java.lang.String" value="Card Number:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CardName3">
+            <Component class="javax.swing.JLabel" name="cardName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="CardName"/>
               </Properties>
@@ -1130,15 +1120,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cardTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cRegion" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RepName" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="cardTitle2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="cRegion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="242" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1163,24 +1147,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator11" min="-2" pref="7" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cBillStreet2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RepName" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cardTitle2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cRegion" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Component id="cardTitle2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cRegion" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cBillStreet2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="259" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -1212,17 +1187,6 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="2"/>
                 <Property name="text" type="java.lang.String" value="Region:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="RepName">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="RepName"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel30">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Sales Rep:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel31">

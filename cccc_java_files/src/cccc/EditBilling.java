@@ -52,6 +52,7 @@ public class EditBilling extends javax.swing.JDialog {
             name = rs.getString("c_cc_name");
             ccNum = rs.getString("c_cc_number");
             ccNum = ccNum.substring(ccNum.length() - 4); //only card last 4 digits
+            ccNum = "***********" + ccNum;
             street = rs.getString("c_billing_street");
             city = rs.getString("c_billing_city");
             state = rs.getString("c_billing_state");

@@ -130,6 +130,8 @@ public class LoginPage extends javax.swing.JFrame {
                 // crs = cstmt.executeQuery();
                 cid = crs.getInt("c_id");
                 System.out.println(cid);
+                CustomerHome newLogin = new CustomerHome(openconnection, cid);
+                newLogin.setVisible(true);
             }
             else if (ers.next() && ers.getInt("e_id")!= 0)
             {
