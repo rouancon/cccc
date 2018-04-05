@@ -6,6 +6,7 @@
 
 package cccc;
 
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
 import java.sql.CallableStatement;
@@ -51,14 +52,11 @@ public class CustomerHome extends javax.swing.JPanel {
     String city;
     String state;
     int zip;
+    int pkgId;
     String pkgName;
     int pkgPrice;
-    String service1type = null;
-    String service2type = null;
-    String service3type = null;
-    String service1 = null;
-    String service2 = null;
-    String service3 = null;
+    String[] serviceType = {"none","none","none"};
+    String[] services = {"none","none","none"};
     boolean isApt = false;
     Date aptTime;
     String aptTechName;
@@ -72,6 +70,9 @@ public class CustomerHome extends javax.swing.JPanel {
         
         //set the frame the JPanel is contained in
         this.parentFrame = parentFrame;
+        Dimension d = new Dimension(650,525);
+        parentFrame.setPreferredSize(d);
+        parentFrame.pack();
         
         actNum = cId;
         getCustData(cId); //load/populate values from DB
@@ -110,16 +111,22 @@ public class CustomerHome extends javax.swing.JPanel {
             city = rs.getString("c_city");
             state = rs.getString("c_state");
             zip = rs.getInt("c_zip");
-            
-            //get package data
+            pkgId = rs.getInt("p_id");
             pkgName = rs.getString("p_name");
             pkgPrice = rs.getInt("p_price");
-            service1type = rs.getString("s_type");
-            service2type = null;
-            service3type = null;
-            service1 = rs.getString("s_name");
-            service2 = null;
-            service3 = null;
+            
+            //get package services data
+            query = "CALL get_cust_pkgs(?);";
+            stmt = openConnection.prepareCall(query);
+            stmt.setInt(1, 10);
+            rs = stmt.executeQuery();
+            
+            int i = 0;
+            while(rs.next()) {
+                serviceType[i] = rs.getString("s_type");
+                services[i] = rs.getString("s_name");
+                i++;
+            }
             
             //get any appointment data
             query = "CALL get_cust_apt(?);";
@@ -149,13 +156,15 @@ public class CustomerHome extends javax.swing.JPanel {
             cPhone.setText(phone);
             if(!newsletter){
                 cEmailSub.setText("Unsubscribed");
+            } else {
+                cEmailSub.setText("Subscribed");
             }
             //myServices tab
             cPkgName.setText(pkgName);
             cPkgExpDate.setText(pkgEnd.toString());
-            cSvc1.setText(service1);
-            cSvc2.setText(service2);
-            cSvc3.setText(service3);
+            cSvc1.setText(services[0]);
+            cSvc2.setText(services[1]);
+            cSvc3.setText(services[2]);
             cSvcStreet2.setText(street);
             cSvcCity2.setText(city);
             cSvcState2.setText(state);
@@ -174,7 +183,7 @@ public class CustomerHome extends javax.swing.JPanel {
             cBillState.setText(billState);
             cBillZip.setText(Integer.toString(billZip));
             cPkgName1.setText(pkgName);
-            cPkgPrice1.setText(Integer.toString(pkgPrice));
+            cPkgPrice1.setText("$" + Integer.toString(pkgPrice) + "/mo");
             cDate1.setText(pkgEnd.toString());
             //contact tab
             cRegion.setText(regionName);
@@ -230,6 +239,7 @@ public class CustomerHome extends javax.swing.JPanel {
         cEmailField3 = new javax.swing.JLabel();
         cPhone = new javax.swing.JLabel();
         cEditInfo = new javax.swing.JButton();
+        jLabel27 = new javax.swing.JLabel();
         myServices = new javax.swing.JPanel();
         cBillingTitle = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -304,6 +314,8 @@ public class CustomerHome extends javax.swing.JPanel {
         cEmail1.setText("email@domain.com");
 
         CardName5.setText("SVC1");
+
+        setMinimumSize(new java.awt.Dimension(650, 450));
 
         cProfile.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         cProfile.setText("Your Profile");
@@ -460,6 +472,8 @@ public class CustomerHome extends javax.swing.JPanel {
                         .addGap(264, 264, 264))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel27)
+                .addGap(35, 35, 35)
                 .addComponent(cEditInfo)
                 .addGap(259, 259, 259))
         );
@@ -515,18 +529,23 @@ public class CustomerHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cEmailField)
-                    .addComponent(cEmail)
-                    .addComponent(cEmailField2)
-                    .addComponent(cEmailSub))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cEmailField3)
-                    .addComponent(cPhone))
-                .addGap(18, 18, 18)
-                .addComponent(cEditInfo)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cHomeLayout.createSequentialGroup()
+                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cEmailField)
+                            .addComponent(cEmail)
+                            .addComponent(cEmailField2)
+                            .addComponent(cEmailSub))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cEmailField3)
+                            .addComponent(cPhone))
+                        .addGap(18, 18, 18)
+                        .addComponent(cEditInfo)
+                        .addContainerGap(22, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel27))))
         );
 
         cMenu.addTab("Home", cHome);
@@ -674,9 +693,9 @@ public class CustomerHome extends javax.swing.JPanel {
                             .addComponent(cSvc3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cSvc2)))
                     .addGroup(myServicesLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(172, Short.MAX_VALUE))
+                        .addGap(98, 98, 98)
+                        .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         myServicesLayout.setVerticalGroup(
             myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -734,7 +753,7 @@ public class CustomerHome extends javax.swing.JPanel {
                         .addGroup(myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(cAPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                         .addComponent(jLabel26)
                         .addGap(23, 23, 23))
                     .addGroup(myServicesLayout.createSequentialGroup()
@@ -914,7 +933,7 @@ public class CustomerHome extends javax.swing.JPanel {
                 .addGroup(cBillingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(cDate1))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         cMenu.addTab("Billing", cBilling);
@@ -984,7 +1003,7 @@ public class CustomerHome extends javax.swing.JPanel {
                     .addComponent(jLabel29))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cBillStreet2)
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         cMenu.addTab("Contact Us", contactUs);
@@ -1008,11 +1027,12 @@ public class CustomerHome extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(Logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(cMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         cMenu.getAccessibleContext().setAccessibleName("Home");
@@ -1035,6 +1055,7 @@ public class CustomerHome extends javax.swing.JPanel {
         ChangePassword newPwd = new ChangePassword(parentFrame, true, openConnection, 'c', actNum);
         newPwd.setLocationRelativeTo(parentFrame);
         newPwd.setVisible(true);
+        getCustData(actNum);
     }//GEN-LAST:event_cChangePwdActionPerformed
 
     private void cEditInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEditInfoActionPerformed
@@ -1050,6 +1071,7 @@ public class CustomerHome extends javax.swing.JPanel {
         EditBilling editBill = new EditBilling(parentFrame, true, openConnection, actNum);
         editBill.setLocationRelativeTo(null);
         editBill.setVisible(true);
+        getCustData(actNum);
     }//GEN-LAST:event_cEditBillingActionPerformed
 
 
@@ -1130,6 +1152,7 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;

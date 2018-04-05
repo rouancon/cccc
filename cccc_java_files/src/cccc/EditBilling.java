@@ -79,10 +79,10 @@ public class EditBilling extends javax.swing.JDialog {
             errorMsg.setText("All Fields Required");
             return false;
         } else if(
-            this.custCCNum.getText() != null ||
-            this.custCCExpM.getText() != null ||
-            this.custCCCVV.getText() != null ||
-            this.custCCExpY.getText() != null
+            this.custCCNum.getText().length() != 0 ||
+            this.custCCExpM.getText().length() != 0 ||
+            this.custCCCVV.getText().length() != 0 ||
+            this.custCCExpY.getText().length() != 0
         ){
             if(
                 this.custCCNum.getText().length() > 16 ||
@@ -173,10 +173,6 @@ public class EditBilling extends javax.swing.JDialog {
 
         custName.setText("ContainsCustName");
 
-        custCCExpM.setText("**");
-
-        custCCCVV.setText("****");
-
         cSave.setText("Save");
         cSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,8 +181,6 @@ public class EditBilling extends javax.swing.JDialog {
         });
 
         errorMsg.setForeground(new java.awt.Color(255, 0, 0));
-
-        custCCExpY.setText("**");
 
         jLabel1.setText("/");
 
@@ -305,10 +299,11 @@ public class EditBilling extends javax.swing.JDialog {
                             .addComponent(cBillZip1)
                             .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cCancel)
-                            .addComponent(cSave)
-                            .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cCancel)
+                                .addComponent(cSave)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
@@ -333,28 +328,45 @@ public class EditBilling extends javax.swing.JDialog {
         if(checkNoneNull()) {
             try {
                 name = this.custName.getText();
-                ccNum = this.custCCNum.getText();
-                expM = Integer.parseInt(this.custCCExpM.getText());
-                expY = Integer.parseInt(this.custCCExpY.getText());
-                cvv = Integer.parseInt(this.custCCCVV.getText());
                 street = this.custBStreet.getText();
                 city = this.custBCity.getText();
                 state = this.custBState.getText();
                 zip = Integer.parseInt(this.custBZip.getText());
-                
-                String query = "UPDATE customer SET c_cc_name=?, c_cc_number=?, c_cc_expiration_month=?, c_cc_expiration_year=?, c_cc_cvv=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=? WHERE c_id=?;";
-                CallableStatement stmt = openConnection.prepareCall(query);
-                stmt.setString(1, name);
-                stmt.setString(2, ccNum);
-                stmt.setInt(3, expM);
-                stmt.setInt(4, expY);
-                stmt.setInt(5, cvv);
-                stmt.setString(6, street);
-                stmt.setString(7, city);
-                stmt.setString(8, state);
-                stmt.setInt(9, zip);
-                stmt.setInt(10, id);
-                stmt.executeUpdate();
+                if(
+                    this.custCCNum.getText().length() != 0 ||
+                    this.custCCExpM.getText().length() != 0 ||
+                    this.custCCCVV.getText().length() != 0 ||
+                    this.custCCExpY.getText().length() != 0
+                ){
+                    ccNum = this.custCCNum.getText();
+                    expM = Integer.parseInt(this.custCCExpM.getText());
+                    expY = Integer.parseInt(this.custCCExpY.getText());
+                    cvv = Integer.parseInt(this.custCCCVV.getText());
+                    
+                    String query = "UPDATE customer SET c_cc_name=?, c_cc_number=?, c_cc_expiration_month=?, c_cc_expiration_year=?, c_cc_cvv=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=? WHERE c_id=?;";
+                    CallableStatement stmt = openConnection.prepareCall(query);
+                    stmt.setString(1, name);
+                    stmt.setString(2, ccNum);
+                    stmt.setInt(3, expM);
+                    stmt.setInt(4, expY);
+                    stmt.setInt(5, cvv);
+                    stmt.setString(6, street);
+                    stmt.setString(7, city);
+                    stmt.setString(8, state);
+                    stmt.setInt(9, zip);
+                    stmt.setInt(10, id);
+                    stmt.executeUpdate();
+                }else{
+                    String query = "UPDATE customer SET c_cc_name=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=? WHERE c_id=?;";
+                    CallableStatement stmt = openConnection.prepareCall(query);
+                    stmt.setString(1, name);
+                    stmt.setString(2, street);
+                    stmt.setString(3, city);
+                    stmt.setString(4, state);
+                    stmt.setInt(5, zip);
+                    stmt.setInt(6, id);
+                    stmt.executeUpdate();
+                }
                 dispose();
             } catch(Exception e) {
                throw new IllegalStateException("error",e);
