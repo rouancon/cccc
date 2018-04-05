@@ -163,10 +163,12 @@
                           <Component id="custBZip" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="errorMsg" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -263,14 +265,8 @@
     <Component class="javax.swing.JTextField" name="custCCNum">
     </Component>
     <Component class="javax.swing.JTextField" name="custCCExpM">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="**"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custCCCVV">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="****"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="cSave">
       <Properties>
@@ -296,9 +292,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custCCExpY">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="**"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>

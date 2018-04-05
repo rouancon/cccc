@@ -138,8 +138,6 @@ public class LoginPage extends javax.swing.JFrame {
                 this.add(newLogin);
                 this.setContentPane(newLogin);
                 newLogin.setVisible(true);
-                LoginPage.this.revalidate();
-                LoginPage.this.repaint();
             }
             else if (ers.next() && ers.getInt("e_id")!= 0)
             {
