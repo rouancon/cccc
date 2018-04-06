@@ -236,7 +236,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        addPackageButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         packageVisibleList = new javax.swing.JList<>();
@@ -463,10 +463,10 @@ public class EmployeeHome extends javax.swing.JPanel {
             .addGap(0, 41, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Add Package");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addPackageButton.setText("Add Package");
+        addPackageButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addPackageButtonActionPerformed(evt);
             }
         });
 
@@ -476,13 +476,13 @@ public class EmployeeHome extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(addPackageButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(addPackageButton)
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
@@ -743,10 +743,16 @@ public class EmployeeHome extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_UpdateInfoButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addPackageButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPackageButtonActionPerformed
         // TODO add your handling code here:
+        AddPackage addPackageObject = new AddPackage(openConnection,this,parentFrame, userRId, Integer.parseInt(userId));
+        javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+        frame.setContentPane(addPackageObject);
+        addPackageObject.setVisible(true);
+        frame.repaint();
+        frame.revalidate();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addPackageButtonActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         // return back to a new instance of login screen
@@ -766,12 +772,15 @@ public class EmployeeHome extends javax.swing.JPanel {
             javax.swing.JList list = (javax.swing.JList)evt.getSource();
             if (evt.getClickCount() == 2)
             {
-                String findPackageQuery = "Select * from employee where e_name = ?";
+                String findPackageQuery = "Select package_id_from_name(?) p_id;";
                 CallableStatement findPackageStmt = openConnection.prepareCall(findPackageQuery);
-                String selectedPackage = employeeVisibleList.getSelectedValuesList().get(0);
+                String selectedPackage = packageVisibleList.getSelectedValuesList().get(0);
                 findPackageStmt.setString(1,selectedPackage);
                 ResultSet foundPackage = findPackageStmt.executeQuery();
-                EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(userId),parentFrame);
+                foundPackage.first();
+                String packageId = foundPackage.getString("p_id");
+                System.out.println(packageId);
+                EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(packageId),parentFrame,userRId, Integer.parseInt(userId));
                 javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
                 frame.setContentPane(editPackageObject);
                 editPackageObject.setVisible(true);
@@ -791,6 +800,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private static transient javax.swing.JButton UpdateInfoButton;
     private javax.swing.JLabel UserAddress;
     private javax.swing.JLabel UserRole;
+    private javax.swing.JButton addPackageButton;
     private javax.swing.JPanel appointmentTab;
     private javax.swing.JList<String> appointmentVisibleList;
     private javax.swing.JPanel customerTab;
@@ -805,7 +815,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JPanel employeesTab;
     private javax.swing.JPanel homeTab;
     private javax.swing.JLabel icon;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
