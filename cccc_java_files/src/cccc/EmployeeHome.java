@@ -417,16 +417,14 @@ public class EmployeeHome extends javax.swing.JPanel {
         employeesTabLayout.setHorizontalGroup(
             employeesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(employeesTabLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
                 .addGroup(employeesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(employeesTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jLabel9)
                         .addGroup(employeesTabLayout.createSequentialGroup()
-                            .addGap(258, 258, 258)
                             .addComponent(AddEmployeeButton)
                             .addGap(22, 22, 22)))
-                    .addGroup(employeesTabLayout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(262, Short.MAX_VALUE))
         );
         employeesTabLayout.setVerticalGroup(
@@ -494,6 +492,11 @@ public class EmployeeHome extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        packageVisibleList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                packageVisibleListMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(packageVisibleList);
 
@@ -742,6 +745,7 @@ public class EmployeeHome extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
@@ -755,6 +759,30 @@ public class EmployeeHome extends javax.swing.JPanel {
             throw new IllegalStateException("error",e);
         }
     }//GEN-LAST:event_LogoutActionPerformed
+
+    private void packageVisibleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_packageVisibleListMouseClicked
+        // TODO add your handling code here:
+        try{
+            javax.swing.JList list = (javax.swing.JList)evt.getSource();
+            if (evt.getClickCount() == 2)
+            {
+                String findPackageQuery = "Select * from employee where e_name = ?";
+                CallableStatement findPackageStmt = openConnection.prepareCall(findPackageQuery);
+                String selectedPackage = employeeVisibleList.getSelectedValuesList().get(0);
+                findPackageStmt.setString(1,selectedPackage);
+                ResultSet foundPackage = findPackageStmt.executeQuery();
+                EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(userId),parentFrame);
+                javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                frame.setContentPane(editPackageObject);
+                editPackageObject.setVisible(true);
+                frame.repaint();
+                frame.revalidate();
+            }
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_packageVisibleListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
