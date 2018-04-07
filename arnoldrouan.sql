@@ -394,7 +394,7 @@ DELIMITER ;
  DELIMITER $$
  CREATE PROCEDURE regional_appointments(IN id int)
  BEGIN
- SELECT a_time, c_name, c_street_address, c_city, c_state, c_zip, e_name 
+ SELECT a_id, a_time, c_name, c_street_address, c_city, c_state, c_zip, e_name 
 FROM appointment 
  NATURAL JOIN customer c 
  NATURAL JOIN employee e 
@@ -504,3 +504,45 @@ ORDER BY a_time ASC;
     WHERE p_id = id;
  END$$
  DELIMITER ;
+ 
+  DROP PROCEDURE IF EXISTS  get_appointment_info;
+ DELIMITER $$
+ CREATE PROCEDURE get_appointment_info(IN appointment_id int)
+ BEGIN
+ SELECT a_id, a_notes, a_time, a_price, e_name, c.*
+ FROM appointment a
+ NATURAL JOIN employee e
+ NATURAL JOIN customer c
+ WHERE a_id = appointment_id;
+ END $$ 
+ DELIMITER ;
+
+  DROP PROCEDURE IF EXISTS  get_region_techs;
+ DELIMITER $$
+ CREATE PROCEDURE get_region_techs(IN region_id int)
+ BEGIN
+ SELECT e_name, e_id
+ FROM employee
+ WHERE r_id = region_id AND e_role = 'Tech';
+ END $$ 
+ DELIMITER ;
+ 
+  DROP PROCEDURE IF EXISTS  update_appointment;
+ DELIMITER $$
+ CREATE PROCEDURE update_appointment
+ (IN appointment_id int, 
+ IN new_tech_id int,
+ IN new_date DATE,
+ IN new_price int,
+ IN new_notes int)
+BEGIN 
+    UPDATE appointment
+    SET a_price = new_price,
+    e_id = new_tech_id,
+    a_time = new_date,
+    a_price = new_price,
+    a_notes = new_notes
+    WHERE a_id = appointment_id;
+ END$$
+ DELIMITER ;
+

@@ -134,7 +134,6 @@ public class LoginPage extends javax.swing.JFrame {
             {
                 // crs = cstmt.executeQuery();
                 cid = crs.getInt("c_id");
-                System.out.println(cid);
                 CustomerHome newLogin = new CustomerHome(openconnection, cid, this);
                 this.add(newLogin);
                 this.setContentPane(newLogin);
@@ -210,17 +209,11 @@ public class LoginPage extends javax.swing.JFrame {
             ResultSet rs = estmt.executeQuery();
             ResultSetMetaData metadata = rs.getMetaData();
             int columnCount = metadata.getColumnCount();    
-            for (int i = 1; i <= columnCount; i++) {
-                System.out.println(metadata.getColumnName(i) + ", ");      
-            }
-            System.out.println();
             while (rs.next()) {
                 String row = "";
                 for (int i = 1; i <= columnCount; i++) {
                     row += rs.getString(i) + ", ";          
                 }
-                System.out.println();
-                System.out.println(row);
 
             }
             rs.first();

@@ -29,6 +29,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     Integer userRId;
     String employeeName;
     Frame parentFrame;
+    ResultSet appointmentResultSet;
     public EmployeeHome(ResultSet passedResultSet, Connection passedConnection, Frame passedFrame) {
         initComponents();
         parentFrame = passedFrame;
@@ -36,7 +37,6 @@ public class EmployeeHome extends javax.swing.JPanel {
         Dimension d = new Dimension(650,490);
         parentFrame.setPreferredSize(d);
         parentFrame.pack();
-        System.out.println(pictureLocation);
         icon.setIcon(new ImageIcon(pictureLocation));
         icon.updateUI();
         try
@@ -131,6 +131,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                     regionListStatement.setInt(1, userRId);
                 }
                 ResultSet regionAppointmentResultSet = regionListStatement.executeQuery();
+                appointmentResultSet = regionAppointmentResultSet;
                 String regionAppointmentTime, 
                         regionAppointmentCustomer, 
                         regionAppointmentEmployee,
@@ -244,7 +245,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         appointmentVisibleList = new javax.swing.JList<>();
-        jButton3 = new javax.swing.JButton();
+        addAppointmentButton = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -547,9 +548,19 @@ public class EmployeeHome extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        appointmentVisibleList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointmentVisibleListMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(appointmentVisibleList);
 
-        jButton3.setText("Add Appointment");
+        addAppointmentButton.setText("Add Appointment");
+        addAppointmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAppointmentButtonActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Date");
 
@@ -583,7 +594,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                                 .addGap(28, 28, 28))
                             .addGroup(appointmentTabLayout.createSequentialGroup()
                                 .addGap(110, 110, 110)
-                                .addComponent(jButton3)))))
+                                .addComponent(addAppointmentButton)))))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         appointmentTabLayout.setVerticalGroup(
@@ -600,7 +611,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(addAppointmentButton)
                 .addGap(22, 22, 22))
         );
 
@@ -779,7 +790,6 @@ public class EmployeeHome extends javax.swing.JPanel {
                 ResultSet foundPackage = findPackageStmt.executeQuery();
                 foundPackage.first();
                 String packageId = foundPackage.getString("p_id");
-                System.out.println(packageId);
                 EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(packageId),parentFrame,userRId, Integer.parseInt(userId));
                 javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
                 frame.setContentPane(editPackageObject);
@@ -793,6 +803,49 @@ public class EmployeeHome extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_packageVisibleListMouseClicked
 
+    private void addAppointmentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAppointmentButtonActionPerformed
+        try{
+            AddAppointment addAppointmentObj = new AddAppointment(openConnection,this,Integer.parseInt(userId),userRId,parentFrame);
+            javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(addAppointmentObj);
+            addAppointmentObj.setVisible(true);
+            frame.repaint();
+            frame.revalidate();
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_addAppointmentButtonActionPerformed
+
+    private void appointmentVisibleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentVisibleListMouseClicked
+        // TODO add your handling code here:
+        try{
+            javax.swing.JList list = (javax.swing.JList)evt.getSource();
+            if (evt.getClickCount() == 2)
+            {
+                Integer index  = appointmentVisibleList.getSelectedIndex();
+                appointmentResultSet.first();
+                appointmentResultSet.getInt("a_id");
+                for (Integer i = 0; i < index; i++)
+                    appointmentResultSet.next();
+                Integer appointmentId = appointmentResultSet.getInt("a_id");
+                String appointmentQuery = "Call get_appointment_info(?)";
+                CallableStatement appointmentStmt = openConnection.prepareCall(appointmentQuery);
+                appointmentStmt.setInt(1,appointmentId);
+                ResultSet appointmentRs = appointmentStmt.executeQuery();
+                EditAppointment editAppointmentObject = new EditAppointment(openConnection,this,appointmentRs,Integer.parseInt(userId),parentFrame, userRId);
+                javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                frame.setContentPane(editAppointmentObject);
+                editAppointmentObject.setVisible(true);
+                frame.repaint();
+                frame.revalidate();
+            }
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_appointmentVisibleListMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
@@ -800,6 +853,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private static transient javax.swing.JButton UpdateInfoButton;
     private javax.swing.JLabel UserAddress;
     private javax.swing.JLabel UserRole;
+    private javax.swing.JButton addAppointmentButton;
     private javax.swing.JButton addPackageButton;
     private javax.swing.JPanel appointmentTab;
     private javax.swing.JList<String> appointmentVisibleList;
@@ -816,7 +870,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JPanel homeTab;
     private javax.swing.JLabel icon;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
