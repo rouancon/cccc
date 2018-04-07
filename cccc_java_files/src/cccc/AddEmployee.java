@@ -31,7 +31,7 @@ public class AddEmployee extends javax.swing.JPanel {
         openConnection = connection;
         regionId = rId;
         userId = passedUserId;
-        errorWarning.setVisible(false);
+        errorMessage.setVisible(false);
     }
     
     public ResultSet getEmployeeInfo(int eId)
@@ -55,7 +55,13 @@ public class AddEmployee extends javax.swing.JPanel {
            throw new IllegalStateException("error",e);
         }
     }
-    
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,7 +100,7 @@ public class AddEmployee extends javax.swing.JPanel {
         phone3 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        errorWarning = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -202,8 +208,8 @@ public class AddEmployee extends javax.swing.JPanel {
 
         jLabel13.setText("-");
 
-        errorWarning.setForeground(new java.awt.Color(255, 0, 0));
-        errorWarning.setText("Error: Improper Input");
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("Error: Improper Input");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -250,7 +256,7 @@ public class AddEmployee extends javax.swing.JPanel {
                 .addGap(170, 170, 170))
             .addGroup(layout.createSequentialGroup()
                 .addGap(237, 237, 237)
-                .addComponent(errorWarning)
+                .addComponent(errorMessage)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -309,7 +315,7 @@ public class AddEmployee extends javax.swing.JPanel {
                     .addComponent(CreateEmployee)
                     .addComponent(CancelButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(errorWarning)
+                .addComponent(errorMessage)
                 .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -333,9 +339,38 @@ public class AddEmployee extends javax.swing.JPanel {
     }//GEN-LAST:event_roleActionPerformed
 
     private void CreateEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEmployeeActionPerformed
-        // TODO add your handling code here:
         try{
-            //Add Validation
+            if (!isNumber(phone1.getText()) || phone1.getText().length() != 3)
+                throw new IllegalStateException("Phone Number Invalid");
+            if (!isNumber(phone2.getText()) || phone2.getText().length() != 3)
+                throw new IllegalStateException("Phone Number Invalid");
+            if (!isNumber(phone3.getText()) || phone3.getText().length() != 4)
+                throw new IllegalStateException("Phone Number Invalid");
+            if (!isNumber(salary.getText()))
+                throw new IllegalStateException("Salary Invalid");
+            if (!isNumber(zip.getText()) || zip.getText().length() != 5)
+                throw new IllegalStateException("Zip Invalid");
+            if (isNumber(state.getText()) || state.getText().length() != 2)
+                throw new IllegalStateException("State Invalid");
+            if (username.getText().equals("Username"))
+                throw new IllegalStateException("Please Enter Valid Username");
+            if (password.getText().equals("Password"))
+                throw new IllegalStateException("Please Enter Valid Password");
+            if (address.getText().equals("Address"))
+                throw new IllegalStateException("Please Enter Valid Address");
+            if (email.getText().equals("Email"))
+                throw new IllegalStateException("Please Enter Valid Email");
+            if (state.getText().equals("State"))
+                throw new IllegalStateException("Please Enter Valid State");
+            if (phone1.getText().equals("000"))
+                throw new IllegalStateException("Please Enter Valid Phone Number");
+            if (phone2.getText().equals("000"))
+                throw new IllegalStateException("Please Enter Valid Phone Number");
+            if (phone3.getText().equals("0000"))
+                throw new IllegalStateException("Please Enter Valid Phone Number");
+            if (name.getText().equals("Name"))
+                throw new IllegalStateException("Please Enter Valid Phone Name");
+            
             String selectedRole = role.getSelectedItem().toString();
             String phone = phone1.getText()+ " " + phone2.getText() + " " + phone3.getText();
             String createEmployeeQuery = "INSERT INTO employee(e_name, r_id, e_salary, e_role, e_username,e_password,e_phone,e_email,e_street_address,e_city,e_state,e_zip) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -363,10 +398,12 @@ public class AddEmployee extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e)
-        {
-            errorWarning.setVisible(true);
-           throw new IllegalStateException("error",e); 
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            System.out.println(Msg);
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_CreateEmployeeActionPerformed
 
@@ -401,7 +438,7 @@ public class AddEmployee extends javax.swing.JPanel {
     private javax.swing.JTextField address;
     private javax.swing.JTextField city;
     private javax.swing.JTextField email;
-    private javax.swing.JLabel errorWarning;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
