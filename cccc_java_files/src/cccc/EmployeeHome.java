@@ -163,11 +163,11 @@ public class EmployeeHome extends javax.swing.JPanel {
             }
             else
             {
-                personalAppointmentTab.remove(personalAppointmentTab);
+                personalAppointmentTab.remove(appointmentTab);
             }
             
             //Set up the Customers list
-            if (UserRole.getText().equals("Manager") || UserRole.getText().equals("Sales"))
+            if (UserRole.getText().equals("Manager") || UserRole.getText().equals("Sales")|| UserRole.getText().equals("Accounting"))
             {
                 List<String> customerRegionList = new ArrayList<String>();
                 String customerRegionQuery = "CALL regional_customers(?)";
@@ -192,6 +192,14 @@ public class EmployeeHome extends javax.swing.JPanel {
         {
            throw new IllegalStateException("error",e); 
         }
+    }
+    
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
     }
 
     /**

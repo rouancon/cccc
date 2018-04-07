@@ -61,7 +61,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
-              <Component id="errorWarning" min="-2" max="-2" attributes="0"/>
+              <Component id="errorMessage" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -134,7 +134,7 @@
                   <Component id="CancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="errorWarning" min="-2" max="-2" attributes="0"/>
+              <Component id="errorMessage" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -316,7 +316,7 @@
         <Property name="text" type="java.lang.String" value="-"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="errorWarning">
+    <Component class="javax.swing.JLabel" name="errorMessage">
       <Properties>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>

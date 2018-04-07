@@ -39,6 +39,7 @@ public class EditPackage extends javax.swing.JPanel {
         Integer mid;
         userRId = passedRId;
         userId = passedId;
+        errorMessage.setVisible(false);
         try{       
             String packageQuery = "Select p_name, p_price from package where p_id = ?;";
             CallableStatement packageStmt = openConnection.prepareCall(packageQuery);
@@ -136,6 +137,13 @@ public class EditPackage extends javax.swing.JPanel {
            throw new IllegalStateException("error",e); 
         }
     }
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
     
     public ResultSet getEmployeeInfo(int eId)
     {
@@ -190,6 +198,7 @@ public class EditPackage extends javax.swing.JPanel {
         internetDescription1 = new javax.swing.JLabel();
         cableDescription1 = new javax.swing.JLabel();
         phoneDescription1 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
 
         updateButton.setText("Update");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -260,6 +269,9 @@ public class EditPackage extends javax.swing.JPanel {
 
         phoneDescription1.setText("jLabel11");
 
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -313,7 +325,10 @@ public class EditPackage extends javax.swing.JPanel {
                                 .addGap(36, 36, 36))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
-                        .addComponent(deleteButton)))
+                        .addComponent(deleteButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(errorMessage)))
                 .addContainerGap(194, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -360,7 +375,9 @@ public class EditPackage extends javax.swing.JPanel {
                     .addComponent(cancelButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteButton)
-                .addGap(80, 80, 80))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessage)
+                .addGap(58, 58, 58))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -385,6 +402,8 @@ public class EditPackage extends javax.swing.JPanel {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         try{
+            if (!isNumber(packagePrice.getText()))
+                throw new IllegalStateException("Price Invalid");
             String name = packageName.getText().toString();
             Integer cost = Integer.parseInt(packagePrice.getText().toString());
             String updatePackage = "Call update_package(?,?,?);";
@@ -405,9 +424,12 @@ public class EditPackage extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e)
-        {
-            String errorMessage = e.getMessage();
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            System.out.println(Msg);
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
@@ -443,6 +465,7 @@ public class EditPackage extends javax.swing.JPanel {
     private javax.swing.JLabel cableName;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel internetCost;
     private javax.swing.JLabel internetDescription;
     private javax.swing.JLabel internetDescription1;

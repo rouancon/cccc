@@ -26,7 +26,7 @@ CREATE TABLE service
 CREATE TABLE package
 (
 	p_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
-    p_name VARCHAR(255) NOT NULL,
+    p_name VARCHAR(255) NOT NULL UNIQUE,
     p_price INT NOT NULL
 );
 
@@ -67,7 +67,7 @@ CREATE TABLE package_available
 CREATE TABLE customer
 (
 	c_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
-    c_name VARCHAR(255) NOT NULL,
+    c_name VARCHAR(255) NOT NULL UNIQUE,
     r_id INT NOT NULL,
     p_id INT NOT NULL,
     c_cc_name VARCHAR(255) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE customer
 CREATE TABLE employee
 (
 	e_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL UNIQUE,
-    e_name VARCHAR(255) NOT NULL,
+    e_name VARCHAR(255) NOT NULL UNIQUE,
     r_id INT NOT NULL,
     e_salary INT NOT NULL,
     e_role VARCHAR(255) NOT NULL,
@@ -407,7 +407,7 @@ ORDER BY a_time ASC;
  DELIMITER $$
  CREATE PROCEDURE regional_appointments_name(IN id int, IN employee_name varchar(255))
  BEGIN
- SELECT a_time, c_name, c_street_address, c_city, c_state, c_zip, e_name 
+ SELECT a_id, a_time, c_name, c_street_address, c_city, c_state, c_zip, e_name 
  FROM appointment 
  NATURAL JOIN customer c 
  NATURAL JOIN employee e 
@@ -534,7 +534,7 @@ ORDER BY a_time ASC;
  IN new_tech_id int,
  IN new_date DATE,
  IN new_price int,
- IN new_notes int)
+ IN new_notes varchar(255))
 BEGIN 
     UPDATE appointment
     SET a_price = new_price,

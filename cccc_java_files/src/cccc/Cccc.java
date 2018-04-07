@@ -26,30 +26,38 @@ public class Cccc {
     {
         Connection conn = null;
         Properties connectionProps = new Properties();
-        connectionProps.put("user", "root");
-        connectionProps.put("password", "kylund");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/arnoldrouan?characterEncoding=UTF-8&useSSL=false",
+        String username = "root";
+        String Password = "kylund";
+        String connection = "jdbc:mysql://localhost:3306/";
+        String database = "arnoldrouan";
+        String encoding = "?characterEncoding=UTF-8&useSSL=false";
+        connectionProps.put("user", username);
+        connectionProps.put("password", password);
+        conn = DriverManager.getConnection(connection+database+encoding,
                         connectionProps);
         return conn;
     }
     
     public void run() 
     {
-        Connection conn = null;
-        try 
-        {
-            conn = this.getConnection();
-            System.out.println("Connected to database");
-            LoginPage login = new LoginPage(conn);
-            //login.setLocationRelativeTo(null);
-            login.setVisible(true);
-        } 
-        catch (SQLException e) 
-        {
-            System.out.println("ERROR: Could not connect to the database");
-            e.printStackTrace();
-            return;
-        }
+        DatabaseConnect db = new DatabaseConnect();
+        db.setVisible(true);
+
+        // If login doesn't work try using the commented code below instead of the 2 lines above
+//        Connection conn = null;
+//        try 
+//        {
+//            conn = this.getConnection();
+//            System.out.println("Connected to database");
+//            LoginPage lp = new LoginPage(conn);
+//            lp.setVisible(true);
+//        } 
+//        catch (SQLException e) 
+//        {
+//            System.out.println("ERROR: Could not connect to the database");
+//            e.printStackTrace();
+//            return;
+//        }
     }
     
     public static void main(String[] args) 
