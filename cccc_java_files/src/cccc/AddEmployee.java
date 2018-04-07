@@ -22,15 +22,15 @@ public class AddEmployee extends javax.swing.JPanel {
     Connection openConnection;
     EmployeeHome home;
     Integer regionId;
-    Integer uId;
+    Integer userId;
     Frame parentFrame;
-    public AddEmployee(Connection connection, EmployeeHome eHome, Integer userId, Integer rId, Frame passedFrame) {
+    public AddEmployee(Connection connection, EmployeeHome eHome, Integer passedUserId, Integer rId, Frame passedFrame) {
         initComponents();
         parentFrame = passedFrame;
         home = eHome;
         openConnection = connection;
         regionId = rId;
-        uId = userId;
+        userId = passedUserId;
         errorWarning.setVisible(false);
     }
     
@@ -209,8 +209,8 @@ public class AddEmployee extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(202, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
@@ -247,11 +247,11 @@ public class AddEmployee extends javax.swing.JPanel {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(phone3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(170, 170, 170))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(237, 237, 237)
                 .addComponent(errorWarning)
-                .addGap(136, 136, 136))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,9 +308,9 @@ public class AddEmployee extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CreateEmployee)
                     .addComponent(CancelButton))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(errorWarning)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -354,7 +354,7 @@ public class AddEmployee extends javax.swing.JPanel {
             createEmployeeStatement.setInt(12,Integer.parseInt(zip.getText()));
             createEmployeeStatement.execute();
             
-            ResultSet employeeInfo = getEmployeeInfo(uId);
+            ResultSet employeeInfo = getEmployeeInfo(userId);
             EmployeeHome userHome = new EmployeeHome(employeeInfo,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);

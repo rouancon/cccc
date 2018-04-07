@@ -419,7 +419,6 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     }//GEN-LAST:event_UpdateEmployeeButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
         f.setContentPane(home);
