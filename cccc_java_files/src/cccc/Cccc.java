@@ -49,8 +49,8 @@ public class Cccc {
             e.printStackTrace();
             return;
         }
-        DatabaseConnect db = new DatabaseConnect();
-        db.setVisible(true);
+        //DatabaseConnect db = new DatabaseConnect();
+        //db.setVisible(true);
 
         // If login doesn't work try using the commented code below instead of the 2 lines above
 //        Connection conn = null;
