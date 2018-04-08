@@ -22,7 +22,7 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     Connection openConnection;
     EmployeeHome home;
     ResultSet employeeResultSet;
-    Integer managerId;
+    Integer userId;
     Frame parentFrame;
     String username, name, salary, start, position, password, email, streetAddress, city, state, zip, phone1, phone2, phone3,  employeeId;
     public ManagerEditEmp(Connection passedConnection, EmployeeHome managerHome, ResultSet passedResultSet, int passedManagerId, Frame passedFrame) 
@@ -32,9 +32,8 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         openConnection = passedConnection;
         home = managerHome;
         employeeResultSet = passedResultSet;
-        managerId = passedManagerId;
-        deleteErrorMessage.setVisible(false);
-        updateErrorMessage.setVisible(false);
+        userId = passedManagerId;
+        errorMessage.setVisible(false);
         try{
             employeeResultSet.first();
             employeeId = passedResultSet.getString("e_id");
@@ -61,7 +60,6 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             
             //Make the dropdowns for regions
             int rId = employeeResultSet.getInt("r_id");
-            System.out.println(rId);
             String eQuery = "Select r_id_to_name(?) as r_name";
             CallableStatement eStmt = openConnection.prepareCall(eQuery);
             eStmt.setInt(1, rId);
@@ -102,6 +100,13 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         {
            throw new IllegalStateException("error",e); 
         }
+    }
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
     }
 
     /**
@@ -166,9 +171,8 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         e_start = new javax.swing.JLabel();
         e_name = new javax.swing.JLabel();
         regions = new javax.swing.JComboBox<>();
-        updateErrorMessage = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
         deleteEmployeeButton = new javax.swing.JButton();
-        deleteErrorMessage = new javax.swing.JLabel();
 
         jLabel1.setText("Employee ID");
 
@@ -248,8 +252,8 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             }
         });
 
-        updateErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
-        updateErrorMessage.setText("jLabel12");
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("jLabel12");
 
         deleteEmployeeButton.setText("Delete Employee");
         deleteEmployeeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -258,64 +262,59 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             }
         });
 
-        deleteErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
-        deleteErrorMessage.setText("jLabel12");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(182, 182, 182)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(e_start)
-                                    .addComponent(e_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(e_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(regions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(e_name)
-                                    .addComponent(e_id)))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)))
-                            .addComponent(cancelButton))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(regions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(e_name)
+                                            .addComponent(e_id)))
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(e_email)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel9)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel11)))
+                                    .addComponent(cancelButton))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(UpdateEmployeeButton)
                                     .addComponent(e_phone)
+                                    .addComponent(e_email)
                                     .addComponent(e_address)
-                                    .addComponent(updateErrorMessage)))
-                            .addComponent(UpdateEmployeeButton)))
+                                    .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(e_start)
+                                    .addComponent(e_salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(e_title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(deleteErrorMessage))
+                                .addComponent(errorMessage))
                             .addComponent(deleteEmployeeButton))))
                 .addContainerGap(211, Short.MAX_VALUE))
         );
@@ -371,12 +370,10 @@ public class ManagerEditEmp extends javax.swing.JPanel {
                     .addComponent(cancelButton)
                     .addComponent(UpdateEmployeeButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(updateErrorMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteEmployeeButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteErrorMessage)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(errorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -396,12 +393,14 @@ public class ManagerEditEmp extends javax.swing.JPanel {
         UpdateE.setInt(1, Integer.parseInt(employeeId));
         UpdateE.setInt(2, e_r_id);
         UpdateE.setString(3, e_title.getText());
+        if (!isNumber(e_salary.getText()))
+                throw new IllegalStateException("Salary Invalid");
         UpdateE.setInt(4, Integer.parseInt(e_salary.getText()));
         UpdateE.setString(5, e_username.getText());
         UpdateE.setString(6, e_password.getText());
         UpdateE.executeUpdate();
         
-        ResultSet employeeInfo = getEmployeeInfo(managerId);
+        ResultSet employeeInfo = getEmployeeInfo(userId);
             EmployeeHome EHome = new EmployeeHome(employeeInfo,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
@@ -410,11 +409,11 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e)
-        {
-            String errorMessage = e.getMessage();
-            updateErrorMessage.setText(errorMessage);
-            updateErrorMessage.setVisible(true);
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_UpdateEmployeeButtonActionPerformed
 
@@ -441,12 +440,14 @@ public class ManagerEditEmp extends javax.swing.JPanel {
 
     private void deleteEmployeeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteEmployeeButtonActionPerformed
         try{
+            if (Integer.parseInt(employeeId) == userId)
+                throw new IllegalStateException("Cannot Delete Yourself");
             String deleteEmployeeQuery  = "Delete FROM employee WHERE e_id = ?";
             CallableStatement deleteEmployeeStatement = openConnection.prepareCall(deleteEmployeeQuery);
             deleteEmployeeStatement.setString(1, employeeId);
             deleteEmployeeStatement.execute();
             
-            ResultSet managerResultSet = getEmployeeInfo(managerId);
+            ResultSet managerResultSet = getEmployeeInfo(userId);
             EmployeeHome EHome = new EmployeeHome(managerResultSet,openConnection, parentFrame);
             this.setVisible(false);
             javax.swing.JFrame f = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
@@ -455,12 +456,17 @@ public class ManagerEditEmp extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e)
-        {
-            String errorMessage = e.getMessage();
-            deleteErrorMessage.setText("Can not Delete Employees with Open Appointments");
-            //deleteErrorMessage.setText(errorMessage);
-            deleteErrorMessage.setVisible(true); 
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            System.out.println(ErrorMsg);
+            if (ErrorMsg.equals(" Cannot delete or update a parent row"))
+            {
+                ErrorMsg = "Employee has open Appointments. Cannot Delete Them";
+                System.out.println(ErrorMsg);
+            }
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_deleteEmployeeButtonActionPerformed
 
@@ -469,7 +475,6 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     private javax.swing.JButton UpdateEmployeeButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteEmployeeButton;
-    private javax.swing.JLabel deleteErrorMessage;
     private javax.swing.JLabel e_address;
     private javax.swing.JLabel e_email;
     private javax.swing.JLabel e_id;
@@ -480,6 +485,7 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     private javax.swing.JLabel e_start;
     private javax.swing.JTextField e_title;
     private javax.swing.JTextField e_username;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -492,6 +498,5 @@ public class ManagerEditEmp extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> regions;
-    private javax.swing.JLabel updateErrorMessage;
     // End of variables declaration//GEN-END:variables
 }

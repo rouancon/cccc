@@ -97,6 +97,14 @@ public class EditEmp extends javax.swing.JPanel {
            throw new IllegalStateException("error",e);
         }
     }
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -203,11 +211,11 @@ public class EditEmp extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(ErrorLabel)
-                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(ErrorLabel)
+                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -239,7 +247,7 @@ public class EditEmp extends javax.swing.JPanel {
                             .addComponent(e_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(e_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
+                        .addGap(259, 259, 259)
                         .addComponent(errorMessage)))
                 .addContainerGap(184, Short.MAX_VALUE))
         );
@@ -320,10 +328,18 @@ public class EditEmp extends javax.swing.JPanel {
                throw new RuntimeException("State must be 2 characters"); 
             }
             Zip = e_zip.getText();
+            if (!isNumber(Zip) || Zip.length() != 5)
+                throw new IllegalStateException("Postal Code Invalid");
             int ZipInt = Integer.parseInt(Zip);
             Phone1 = e_phone_1.getText();
             Phone2 = e_phone_2.getText();
             Phone3 = e_phone_3.getText();
+            if (!isNumber(Phone1) || Phone1.length() != 3)
+                throw new IllegalStateException("Phone Number 1 Invalid");
+            if (!isNumber(Phone2) || Phone2.length() != 3)
+                throw new IllegalStateException("Phone Number 2 Invalid");
+            if (!isNumber(Phone3) || Phone3.length() != 4)
+                throw new IllegalStateException("Phone Number 3 Invalid");
             String Phone = Phone1 + " " + Phone2 + " " + Phone3;
             CallableStatement Ustmt = OpenConnection.prepareCall(UpdateQuery);
             Ustmt.setInt(1, Eid);
@@ -349,7 +365,7 @@ public class EditEmp extends javax.swing.JPanel {
         catch(Exception E){
             String Msg = "" + E;
             String ErrorMsg = Msg.split(":")[1];
-            errorMessage.setText(Msg);
+            errorMessage.setText(ErrorMsg);
             errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_ConfirmButtonActionPerformed

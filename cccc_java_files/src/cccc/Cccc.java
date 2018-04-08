@@ -18,9 +18,9 @@ public class Cccc {
     private final String userName = "root";
     private final String password = "DBSpring2018";
     private final String serverName = "localhost";
-    private final int portNumber = 3306;
+    private final String connection = "jdbc:mysql://localhost:3306/";
+    private final String encoding = "?characterEncoding=UTF-8&useSSL=false";
     private final String dbName = "arnoldrouan";
-    private final boolean useSSL = false;
     
     public Connection getConnection() throws SQLException 
     {
@@ -28,8 +28,7 @@ public class Cccc {
         Properties connectionProps = new Properties();
         connectionProps.put("user", userName);
         connectionProps.put("password", password);
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/arnoldrouan?characterEncoding=UTF-8&useSSL=false",
-                        connectionProps);
+        conn = DriverManager.getConnection(connection+dbName+encoding,connectionProps);
         return conn;
     }
     
@@ -50,6 +49,24 @@ public class Cccc {
             e.printStackTrace();
             return;
         }
+        DatabaseConnect db = new DatabaseConnect();
+        db.setVisible(true);
+
+        // If login doesn't work try using the commented code below instead of the 2 lines above
+//        Connection conn = null;
+//        try 
+//        {
+//            conn = this.getConnection();
+//            System.out.println("Connected to database");
+//            LoginPage lp = new LoginPage(conn);
+//            lp.setVisible(true);
+//        } 
+//        catch (SQLException e) 
+//        {
+//            System.out.println("ERROR: Could not connect to the database");
+//            e.printStackTrace();
+//            return;
+//        }
     }
     
     public static void main(String[] args) 

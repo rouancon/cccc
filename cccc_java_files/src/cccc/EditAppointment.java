@@ -41,6 +41,7 @@ public class EditAppointment extends javax.swing.JPanel {
         appointmentResultSet = passedResultSet;
         userId = passedUserId;
         userRId = passedUserRId;
+        errorMessage.setVisible(false);
         try{
             passedResultSet.first();
             appointmentId = passedResultSet.getInt("a_id");
@@ -109,6 +110,14 @@ public class EditAppointment extends javax.swing.JPanel {
            throw new IllegalStateException("error",e);
         }
     }
+    
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,6 +147,7 @@ public class EditAppointment extends javax.swing.JPanel {
         day = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
 
         updateButton.setText("Update");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +214,9 @@ public class EditAppointment extends javax.swing.JPanel {
 
         jLabel10.setText("/");
 
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("jLabel5");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,16 +257,18 @@ public class EditAppointment extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 129, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
                 .addComponent(cancelButton)
-                .addGap(140, 140, 140)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(updateButton)
                 .addGap(227, 227, 227))
             .addGroup(layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(deleteButton)
+                .addGap(224, 224, 224)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage)
+                    .addComponent(deleteButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -285,16 +300,18 @@ public class EditAppointment extends javax.swing.JPanel {
                     .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
+                        .addComponent(jLabel1)
+                        .addGap(95, 95, 95)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cancelButton)
-                            .addComponent(updateButton)))
-                    .addComponent(jLabel1))
+                            .addComponent(updateButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deleteButton)
-                .addGap(38, 38, 38))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(errorMessage)
+                .addGap(28, 28, 28))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -341,6 +358,14 @@ public class EditAppointment extends javax.swing.JPanel {
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         try{
+            if (!isNumber(year.getText()) || year.getText().length() != 4)
+                throw new IllegalStateException("Invalid Year");
+            if (!isNumber(month.getText()) || month.getText().length() != 2)
+                throw new IllegalStateException("Invalid Month");
+            if (!isNumber(day.getText()) || day.getText().length() != 2)
+                throw new IllegalStateException("Invalid Day");
+            if (!isNumber(price.getText()))
+                throw new IllegalStateException("Invalid Price");
             String selectedTech = visibleTechList.getSelectedItem().toString();
             String getTechId= "Select e_id From employee where e_name = ?;";
             CallableStatement techIdStmt = openConnection.prepareCall(getTechId);
@@ -368,8 +393,11 @@ public class EditAppointment extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e){
-           throw new IllegalStateException("error",e);
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
         
     }//GEN-LAST:event_updateButtonActionPerformed
@@ -381,6 +409,7 @@ public class EditAppointment extends javax.swing.JPanel {
     private javax.swing.JLabel customerName;
     private javax.swing.JTextField day;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

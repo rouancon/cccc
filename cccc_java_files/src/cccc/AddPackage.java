@@ -25,6 +25,7 @@ public class AddPackage extends javax.swing.JPanel {
     Frame parentFrame;
     Integer userRId;
     Integer userId;
+   
     public AddPackage(Connection passedConnection, EmployeeHome managerHome, Frame passedFrame, Integer passedRId, Integer passedId) 
     {
         parentFrame = passedFrame;
@@ -33,6 +34,7 @@ public class AddPackage extends javax.swing.JPanel {
         home = managerHome;
         userRId = passedRId;
         userId = passedId;
+        errorMessage.setVisible(false);
         try{    
             //set Phone list
             String phoneListQuery = "Select s_name from service where s_type = 'Phone'";
@@ -40,7 +42,7 @@ public class AddPackage extends javax.swing.JPanel {
             ResultSet phoneListRs = phoneListStmt.executeQuery();
             List<String> phoneList = new ArrayList<String>();
             String phoneName;
-            phoneList.add("None");
+            phoneList.add("--None--");
             while (phoneListRs.next()){
                 phoneName = phoneListRs.getString("s_name");
                 phoneList.add(phoneName);
@@ -54,7 +56,7 @@ public class AddPackage extends javax.swing.JPanel {
             ResultSet internetListRs = internetListStmt.executeQuery();
             List<String> internetList = new ArrayList<String>();
             String internetName;
-            internetList.add("None");
+            internetList.add("--None--");
             while (internetListRs.next()){
                 internetName = internetListRs.getString("s_name");
                 internetList.add(internetName);
@@ -68,7 +70,7 @@ public class AddPackage extends javax.swing.JPanel {
             ResultSet cableListRs = cableListStmt.executeQuery();
             List<String> cableList = new ArrayList<String>();
             String cableName;
-            cableList.add("None");
+            cableList.add("--None--");
             while (cableListRs.next()){
                 cableName = cableListRs.getString("s_name");
                 cableList.add(cableName);
@@ -83,6 +85,14 @@ public class AddPackage extends javax.swing.JPanel {
            throw new IllegalStateException("error",e); 
         }
     }
+    public boolean isNumber(String s)
+    {
+        for (Integer i = 0; i < s.length(); i++)
+            if (!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
+    
     
     public ResultSet getEmployeeInfo(int eId)
     {
@@ -126,6 +136,7 @@ public class AddPackage extends javax.swing.JPanel {
         packageCost = new javax.swing.JTextField();
         cancelButton = new javax.swing.JButton();
         updateButton = new javax.swing.JButton();
+        errorMessage = new javax.swing.JLabel();
 
         jLabel1.setText("Package Name:");
 
@@ -171,27 +182,35 @@ public class AddPackage extends javax.swing.JPanel {
             }
         });
 
+        errorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        errorMessage.setText("jLabel6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancelButton)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(updateButton)
-                    .addComponent(packageCable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(packagePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(packageName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(packageInternet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(packageCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cancelButton)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(updateButton)
+                            .addComponent(packageCable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(packagePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(packageName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(packageInternet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(packageCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(errorMessage)))
                 .addContainerGap(223, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -221,7 +240,9 @@ public class AddPackage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateButton)
                     .addComponent(cancelButton))
-                .addGap(127, 127, 127))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessage)
+                .addGap(105, 105, 105))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -247,11 +268,20 @@ public class AddPackage extends javax.swing.JPanel {
         // TODO add your handling code here:
         try{
             //Add Validation
+            if (!isNumber(packageCost.getText()))
+                throw new IllegalStateException("Price Invalid");
             String phone = packagePhone.getSelectedItem().toString();
             String cable = packageCable.getSelectedItem().toString();
             String internet = packageInternet.getSelectedItem().toString();
             String name = packageName.getText().toString();
+            if (name.equals("Name"))
+                throw new IllegalStateException("Please Enter Name");
             Integer cost = Integer.parseInt(packageCost.getText().toString());
+            System.out.println(phone + "\n"+cable+"\n"+internet);
+            if (phone.equals("--None--") && internet.equals("--None--") && cable.equals("--None--"))
+            {
+                throw new IllegalStateException("Must Enter One Service");
+            }
             
             //Create the package
             String createPackage = "Insert Into package (p_name,p_price) Values (?,?)";
@@ -259,15 +289,17 @@ public class AddPackage extends javax.swing.JPanel {
             createPackageStmt.setString(1,name);
             createPackageStmt.setInt(2,cost);
             createPackageStmt.execute();
+            System.out.println("here");
                         
             //Get the packages id
             String findPackageQuery = "Select package_id_from_name(?) p_id;";
             CallableStatement findPackageStmt = openConnection.prepareCall(findPackageQuery);
             findPackageStmt.setString(1,name);
+            System.out.println("here");
             ResultSet foundPackage = findPackageStmt.executeQuery();
             foundPackage.first();
             Integer packageId = Integer.parseInt(foundPackage.getString("p_id"));
-            
+            System.out.println("here");
             //Create package_available
             String createPackageAvailable = "Insert Into package_available (r_id,p_id) Values (?,?)";
             CallableStatement createPackageAvailableStmt = openConnection.prepareCall(createPackageAvailable);
@@ -276,7 +308,7 @@ public class AddPackage extends javax.swing.JPanel {
             createPackageAvailableStmt.execute();
             
             //Add the services
-            if (phone != "None")
+            if (phone != "--None--")
             {
                
                 String findPhoneQuery = "Select service_id_from_name(?) s_id;";
@@ -293,7 +325,7 @@ public class AddPackage extends javax.swing.JPanel {
                 addPhoneStmt.execute();
             }
             
-            if (cable != "None")
+            if (cable != "--None--")
             {
                
                 String findCableQuery = "Select service_id_from_name(?) s_id;";
@@ -310,7 +342,7 @@ public class AddPackage extends javax.swing.JPanel {
                 addCableStmt.execute();
             }
             
-            if (internet != "None")
+            if (internet != "--None--")
             {
                
                 String findInternetQuery = "Select service_id_from_name(?) s_id;";
@@ -336,15 +368,21 @@ public class AddPackage extends javax.swing.JPanel {
             f.revalidate();
             f.repaint();
         }
-        catch(Exception e)
-        {
-           throw new IllegalStateException("error",e); 
+        catch(Exception E){
+            String Msg = "" + E;
+            String ErrorMsg = Msg.split(":")[1];
+            if (ErrorMsg.equals(" Result consisted of more than one row"))
+                ErrorMsg = "Package with Specified Name Already Exists";
+            System.out.println(Msg);
+            errorMessage.setText(ErrorMsg);
+            errorMessage.setVisible(true);
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
