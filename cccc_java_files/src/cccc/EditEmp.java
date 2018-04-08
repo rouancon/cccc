@@ -22,7 +22,7 @@ public class EditEmp extends javax.swing.JPanel {
     Connection OpenConnection;
     EmployeeHome home;
     ResultSet rs;
-    String Username, Password, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3, role;
+    String Username, Email, StreetAddress, City, State, Zip, Phone1, Phone2, Phone3, role;
     Integer Eid;
     Frame parentFrame;
     public EditEmp(Connection connection, EmployeeHome ehome, ResultSet ers, Frame passedFrame) {
@@ -37,7 +37,6 @@ public class EditEmp extends javax.swing.JPanel {
             rs.first();
             Eid = ers.getInt("e_id");
             Username = rs.getString("e_username");
-            Password = rs.getString("e_password");
             Email = rs.getString("e_email");
             StreetAddress = rs.getString("e_street_address");
             City = rs.getString("e_city");
@@ -52,7 +51,6 @@ public class EditEmp extends javax.swing.JPanel {
             Phone2 = Phone[1];
             Phone3 = Phone[2];
             e_username.setText(Username);
-            e_password.setText(Password);
             e_email.setText(Email);
             e_address.setText(StreetAddress);
             e_city.setText(City);
@@ -113,7 +111,6 @@ public class EditEmp extends javax.swing.JPanel {
         CancelButton = new javax.swing.JButton();
         ConfirmButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -121,7 +118,6 @@ public class EditEmp extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         e_username = new javax.swing.JTextField();
-        e_password = new javax.swing.JTextField();
         e_phone_1 = new javax.swing.JTextField();
         e_email = new javax.swing.JTextField();
         e_address = new javax.swing.JTextField();
@@ -134,6 +130,7 @@ public class EditEmp extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         ErrorLabel = new javax.swing.JLabel();
         errorMessage = new javax.swing.JLabel();
+        chngPwd = new javax.swing.JButton();
 
         jTextField11.setText("jTextField2");
 
@@ -153,8 +150,6 @@ public class EditEmp extends javax.swing.JPanel {
 
         jLabel2.setText("Username");
 
-        jLabel3.setText("Password");
-
         jLabel4.setText("Phone");
 
         jLabel5.setText("Email");
@@ -173,8 +168,6 @@ public class EditEmp extends javax.swing.JPanel {
                 e_usernameActionPerformed(evt);
             }
         });
-
-        e_password.setText("jTextField2");
 
         e_phone_1.setText("jTextField2");
         e_phone_1.addActionListener(new java.awt.event.ActionListener() {
@@ -206,19 +199,24 @@ public class EditEmp extends javax.swing.JPanel {
         errorMessage.setForeground(new java.awt.Color(255, 0, 0));
         errorMessage.setText("jLabel11");
 
+        chngPwd.setText("Change Password");
+        chngPwd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chngPwdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(159, 159, 159)
+                .addComponent(ErrorLabel)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(ErrorLabel)
-                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
@@ -238,8 +236,6 @@ public class EditEmp extends javax.swing.JPanel {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(e_phone_3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ConfirmButton)
                             .addComponent(e_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(e_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,8 +243,15 @@ public class EditEmp extends javax.swing.JPanel {
                             .addComponent(e_zip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(e_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(259, 259, 259)
-                        .addComponent(errorMessage)))
+                        .addGap(68, 68, 68)
+                        .addComponent(errorMessage))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(chngPwd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(56, 56, 56)
+                        .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(184, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -258,10 +261,6 @@ public class EditEmp extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(e_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(e_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -295,9 +294,11 @@ public class EditEmp extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CancelButton)
                     .addComponent(ConfirmButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(chngPwd)
                 .addGap(18, 18, 18)
                 .addComponent(errorMessage)
-                .addGap(61, 61, 61)
+                .addGap(53, 53, 53)
                 .addComponent(ErrorLabel))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -316,9 +317,8 @@ public class EditEmp extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Send the update to mysql
         try{
-            String UpdateQuery = "Call update_employee_basic(?,?,?,?,?,?,?,?,?)";
+            String UpdateQuery = "Call update_employee_basic(?,?,?,?,?,?,?,?)";
             Username = e_username.getText();
-            Password = e_password.getText();
             Email = e_email.getText();
             StreetAddress = e_address.getText();
             City = e_city.getText();
@@ -344,13 +344,12 @@ public class EditEmp extends javax.swing.JPanel {
             CallableStatement Ustmt = OpenConnection.prepareCall(UpdateQuery);
             Ustmt.setInt(1, Eid);
             Ustmt.setString(2, Username);
-            Ustmt.setString(3, Password);
-            Ustmt.setString(4, Email);
-            Ustmt.setString(5, StreetAddress);
-            Ustmt.setString(6, City);
-            Ustmt.setString(7, State);
-            Ustmt.setInt(8, ZipInt);
-            Ustmt.setString(9, Phone);
+            Ustmt.setString(3, Email);
+            Ustmt.setString(4, StreetAddress);
+            Ustmt.setString(5, City);
+            Ustmt.setString(6, State);
+            Ustmt.setInt(7, ZipInt);
+            Ustmt.setString(8, Phone);
             Ustmt.executeUpdate();
             
             ResultSet employeeInfo = getEmployeeInfo(Eid);
@@ -378,15 +377,22 @@ public class EditEmp extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_e_phone_1ActionPerformed
 
+    private void chngPwdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chngPwdActionPerformed
+        //change password dialog
+        ChangePassword newPwd = new ChangePassword(parentFrame, true, OpenConnection, 'e', Eid);
+        newPwd.setLocationRelativeTo(parentFrame);
+        newPwd.setVisible(true);
+    }//GEN-LAST:event_chngPwdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CancelButton;
     private javax.swing.JButton ConfirmButton;
     private javax.swing.JLabel ErrorLabel;
+    private javax.swing.JButton chngPwd;
     private javax.swing.JTextField e_address;
     private javax.swing.JTextField e_city;
     private javax.swing.JTextField e_email;
-    private javax.swing.JTextField e_password;
     private javax.swing.JTextField e_phone_1;
     private javax.swing.JTextField e_phone_2;
     private javax.swing.JTextField e_phone_3;
@@ -397,7 +403,6 @@ public class EditEmp extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

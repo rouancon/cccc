@@ -329,7 +329,6 @@ END $$
  CREATE PROCEDURE update_employee_basic
  (IN id int,
  IN new_username varchar(255), 
- IN new_password varchar(255), 
  IN new_email varchar(255),
  IN new_street_address varchar(255),
  IN new_city varchar(255),
@@ -339,7 +338,6 @@ END $$
  BEGIN 
     UPDATE employee
     SET e_username = new_username,
-	e_password = new_password,
     e_phone = new_phone,
     e_email = new_email,
     e_street_address = new_street_address,
@@ -545,4 +543,3 @@ BEGIN
     WHERE a_id = appointment_id;
  END$$
  DELIMITER ;
-

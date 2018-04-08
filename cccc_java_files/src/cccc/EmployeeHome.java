@@ -34,7 +34,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         initComponents();
         parentFrame = passedFrame;
         String pictureLocation = System.getProperty("user.dir") + "/logo.png";
-        Dimension d = new Dimension(650,490);
+        Dimension d = new Dimension(650,525);
         parentFrame.setPreferredSize(d);
         parentFrame.pack();
         icon.setIcon(new ImageIcon(pictureLocation));
@@ -234,7 +234,6 @@ public class EmployeeHome extends javax.swing.JPanel {
         eEmail = new javax.swing.JLabel();
         UserAddress = new javax.swing.JLabel();
         UpdateInfoButton = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jLabel17 = new javax.swing.JLabel();
         employeesTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -324,9 +323,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(227, 227, 227)
-                        .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel17))
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,14 +349,12 @@ public class EmployeeHome extends javax.swing.JPanel {
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addComponent(UpdateInfoButton)))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         homeTabLayout.setVerticalGroup(
             homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homeTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,7 +390,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                     .addComponent(UserAddress))
                 .addGap(18, 18, 18)
                 .addComponent(UpdateInfoButton)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         personalAppointmentTab.addTab("Home", homeTab);
@@ -906,7 +901,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel packageTab;
     private javax.swing.JList<String> packageVisibleList;
     private javax.swing.JTabbedPane personalAppointmentTab;
