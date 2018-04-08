@@ -70,7 +70,7 @@ public class CustomerHome extends javax.swing.JPanel {
         
         //set the frame the JPanel is contained in
         this.parentFrame = parentFrame;
-        Dimension d = new Dimension(650,525);
+        Dimension d = new Dimension(650,575);
         parentFrame.setPreferredSize(d);
         parentFrame.pack();
         
@@ -299,6 +299,7 @@ public class CustomerHome extends javax.swing.JPanel {
         jLabel31 = new javax.swing.JLabel();
         cBillingTitle2 = new javax.swing.JLabel();
         Logout = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Account Information");
@@ -398,13 +399,6 @@ public class CustomerHome extends javax.swing.JPanel {
                 .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cHomeLayout.createSequentialGroup()
                         .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator3)
-                            .addGroup(cHomeLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(cHomeLayout.createSequentialGroup()
-                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addGroup(cHomeLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -415,34 +409,8 @@ public class CustomerHome extends javax.swing.JPanel {
                         .addComponent(cChangePwd)
                         .addGap(108, 108, 108))
                     .addGroup(cHomeLayout.createSequentialGroup()
-                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
-                            .addGroup(cHomeLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(486, 486, 486)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
-                        .addComponent(jSeparator5)
-                        .addContainerGap())
-                    .addGroup(cHomeLayout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(cHomeLayout.createSequentialGroup()
-                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cEmailField3)
-                                    .addComponent(cEmailField))
-                                .addGap(18, 18, 18)
-                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(cHomeLayout.createSequentialGroup()
-                                        .addComponent(cEmail)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(cEmailField2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cEmailSub)
-                                        .addGap(175, 175, 175))
-                                    .addGroup(cHomeLayout.createSequentialGroup()
-                                        .addComponent(cPhone)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(cHomeLayout.createSequentialGroup()
                                 .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -465,17 +433,41 @@ public class CustomerHome extends javax.swing.JPanel {
                                                 .addComponent(cSvcState))
                                             .addComponent(cSvcStreet)
                                             .addComponent(cSvcZip))))
-                                .addGap(202, 202, 202))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cProfile)
-                        .addGap(264, 264, 264))))
+                                .addGap(202, 202, 202))
+                            .addGroup(cHomeLayout.createSequentialGroup()
+                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cEmailField3)
+                                    .addComponent(cEmailField))
+                                .addGap(18, 18, 18)
+                                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(cHomeLayout.createSequentialGroup()
+                                        .addComponent(cEmail)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cEmailField2)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cEmailSub)
+                                        .addGap(175, 175, 175))
+                                    .addGroup(cHomeLayout.createSequentialGroup()
+                                        .addComponent(cPhone)
+                                        .addGap(513, 513, 513))))))
+                    .addGroup(cHomeLayout.createSequentialGroup()
+                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(cHomeLayout.createSequentialGroup()
+                .addGap(256, 256, 256)
+                .addComponent(cProfile)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel27)
-                .addGap(35, 35, 35)
-                .addComponent(cEditInfo)
-                .addGap(259, 259, 259))
+                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cEditInfo)
+                    .addComponent(jLabel27))
+                .addGap(294, 294, 294))
         );
         cHomeLayout.setVerticalGroup(
             cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,7 +496,7 @@ public class CustomerHome extends javax.swing.JPanel {
                                 .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cSvcCity)
                                     .addComponent(cSvcState))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                                 .addComponent(cSvcZip))
                             .addGroup(cHomeLayout.createSequentialGroup()
                                 .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -524,28 +516,23 @@ public class CustomerHome extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(cUsername)
                     .addComponent(cChangePwd))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cEmailField)
+                    .addComponent(cEmail)
+                    .addComponent(cEmailField2)
+                    .addComponent(cEmailSub))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(cHomeLayout.createSequentialGroup()
-                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cEmailField)
-                            .addComponent(cEmail)
-                            .addComponent(cEmailField2)
-                            .addComponent(cEmailSub))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cEmailField3)
-                            .addComponent(cPhone))
-                        .addGap(18, 18, 18)
-                        .addComponent(cEditInfo)
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cHomeLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel27))))
+                .addGroup(cHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cEmailField3)
+                    .addComponent(cPhone))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(cEditInfo)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel27))
         );
 
         cMenu.addTab("Home", cHome);
@@ -695,7 +682,7 @@ public class CustomerHome extends javax.swing.JPanel {
                     .addGroup(myServicesLayout.createSequentialGroup()
                         .addGap(98, 98, 98)
                         .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         myServicesLayout.setVerticalGroup(
             myServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -847,7 +834,7 @@ public class CustomerHome extends javax.swing.JPanel {
                             .addGroup(cBillingLayout.createSequentialGroup()
                                 .addGap(55, 55, 55)
                                 .addComponent(cEditBilling)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                         .addGroup(cBillingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
                             .addGroup(cBillingLayout.createSequentialGroup()
@@ -978,7 +965,7 @@ public class CustomerHome extends javax.swing.JPanel {
                         .addComponent(cardTitle2)
                         .addGap(32, 32, 32)
                         .addComponent(cRegion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
                         .addGroup(contactUsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
                             .addGroup(contactUsLayout.createSequentialGroup()
@@ -1015,24 +1002,36 @@ public class CustomerHome extends javax.swing.JPanel {
             }
         });
 
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cccc/logo.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cMenu)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(234, Short.MAX_VALUE)
+                .addComponent(jLabel28)
+                .addGap(119, 119, 119)
                 .addComponent(Logout)
-                .addGap(30, 30, 30))
+                .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Logout)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel28))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(Logout)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         cMenu.getAccessibleContext().setAccessibleName("Home");
@@ -1153,6 +1152,7 @@ public class CustomerHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;

@@ -76,7 +76,19 @@ public class EditBilling extends javax.swing.JDialog {
             this.custBState.getText() == null ||
             this.custBZip.getText() == null
         ){
-            errorMsg.setText("All Fields Required");
+            errorMsg.setText("Billing Name & Address Required");
+            return false;
+        } else if(
+            (!this.custBZip.getText().matches("[0-9]+")) ||
+            this.custBZip.getText().length() != 5
+        ){
+            errorMsg.setText("Zip Code must have 5 digits");
+            return false;
+        } else if(
+            (!this.custBState.getText().matches("[a-zA-Z]+")) ||
+            this.custBState.getText().length() != 2
+        ){
+            errorMsg.setText("State may only have 2 Letters");
             return false;
         } else if(
             this.custCCNum.getText().length() != 0 ||
@@ -88,7 +100,6 @@ public class EditBilling extends javax.swing.JDialog {
                 this.custCCNum.getText().length() > 16 ||
                 this.custCCNum.getText().length() < 14 ||
                 this.custCCExpM.getText().length() != 2 ||
-                this.custCCCVV.getText().length() != 3 ||
                 this.custCCCVV.getText().length() != 4 ||
                 this.custCCExpY.getText().length() != 2
             ){
@@ -181,6 +192,7 @@ public class EditBilling extends javax.swing.JDialog {
         });
 
         errorMsg.setForeground(new java.awt.Color(255, 0, 0));
+        errorMsg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         jLabel1.setText("/");
 
@@ -249,8 +261,8 @@ public class EditBilling extends javax.swing.JDialog {
                                                 .addGap(0, 0, Short.MAX_VALUE)))))))
                         .addGap(234, 234, 234))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(errorMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
+                        .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(cSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -297,22 +309,20 @@ public class EditBilling extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cBillZip1)
-                            .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cCancel)
-                                .addComponent(cSave)))
-                        .addContainerGap())
+                            .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(custCCExpM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel2))))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cCancel)
+                    .addComponent(cSave)
+                    .addComponent(errorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();

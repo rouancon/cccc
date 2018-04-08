@@ -87,6 +87,25 @@ public class EditCust extends javax.swing.JDialog {
             this.custBState.getText() == null ||
             this.custBZip.getText() == null
         ){
+            errorMsg.setText("All Fields Required");
+            return false;
+        }else if(
+            (!this.custPhone.getText().matches("[0-9]+")) ||
+            this.custPhone.getText().length() != 10
+        ){
+            errorMsg.setText("Phone number must have 10 digits");
+            return false;
+        }else if(
+            (!this.custBZip.getText().matches("[0-9]+")) ||
+            this.custBZip.getText().length() != 5
+        ){
+            errorMsg.setText("Zip Code must have 5 digits");
+            return false;
+        }else if(
+            (!this.custBState.getText().matches("[a-zA-Z]+")) ||
+            this.custBState.getText().length() != 2
+        ){
+            errorMsg.setText("State may only have 2 Letters");
             return false;
         }else{
             return true;
@@ -228,7 +247,7 @@ public class EditCust extends javax.swing.JDialog {
                         .addComponent(jSeparator9))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(errorMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(errorMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -325,8 +344,6 @@ public class EditCust extends javax.swing.JDialog {
             } catch(Exception e) {
                throw new IllegalStateException("error",e);
             }
-        }else{
-            errorMsg.setText("All Fields Required");
         }
     }//GEN-LAST:event_cSaveActionPerformed
 
