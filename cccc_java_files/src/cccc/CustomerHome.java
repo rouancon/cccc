@@ -39,7 +39,7 @@ public class CustomerHome extends javax.swing.JPanel {
     String billStreet;
     String billCity;
     String billState;
-    int billZip;
+    String billZip;
     String username;
     String password;
     Date customerSince;
@@ -51,7 +51,7 @@ public class CustomerHome extends javax.swing.JPanel {
     String street;
     String city;
     String state;
-    int zip;
+    String zip;
     int pkgId;
     String pkgName;
     int pkgPrice;
@@ -98,7 +98,10 @@ public class CustomerHome extends javax.swing.JPanel {
             billStreet = rs.getString("c_billing_street");
             billCity = rs.getString("c_billing_city");
             billState = rs.getString("c_billing_state");
-            billZip = rs.getInt("c_billing_zip");
+            billZip = Integer.toString(rs.getInt("c_billing_zip"));
+            if(billZip.length() == 4){
+                billZip = "0"+billZip;
+            }
             username = rs.getString("c_username");
             password = rs.getString("c_password");
             customerSince = rs.getDate("c_customer_since");
@@ -110,7 +113,10 @@ public class CustomerHome extends javax.swing.JPanel {
             street = rs.getString("c_street_address");
             city = rs.getString("c_city");
             state = rs.getString("c_state");
-            zip = rs.getInt("c_zip");
+            zip = Integer.toString(rs.getInt("c_zip"));
+            if(zip.length() == 4){
+                zip = "0"+zip;
+            }
             pkgId = rs.getInt("p_id");
             pkgName = rs.getString("p_name");
             pkgPrice = rs.getInt("p_price");
@@ -150,7 +156,7 @@ public class CustomerHome extends javax.swing.JPanel {
             cSvcStreet.setText(street);
             cSvcCity.setText(city);
             cSvcState.setText(state);
-            cSvcZip.setText(Integer.toString(zip));
+            cSvcZip.setText(zip);
             cUsername.setText(username);
             cEmail.setText(email);
             cPhone.setText(phone);
@@ -168,7 +174,7 @@ public class CustomerHome extends javax.swing.JPanel {
             cSvcStreet2.setText(street);
             cSvcCity2.setText(city);
             cSvcState2.setText(state);
-            cSvcZip2.setText(Integer.toString(zip));
+            cSvcZip2.setText(zip);
             if(isApt){
                 cADate.setText(aptTime.toString());
                 cATech.setText(aptTechName);
@@ -181,7 +187,7 @@ public class CustomerHome extends javax.swing.JPanel {
             cBillStreet.setText(billStreet);
             cBillCity.setText(billCity);
             cBillState.setText(billState);
-            cBillZip.setText(Integer.toString(billZip));
+            cBillZip.setText(billZip);
             cPkgName1.setText(pkgName);
             cPkgPrice1.setText("$" + Integer.toString(pkgPrice) + "/mo");
             cDate1.setText(pkgEnd.toString());

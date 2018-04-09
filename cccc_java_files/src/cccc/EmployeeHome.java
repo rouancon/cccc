@@ -627,6 +627,11 @@ public class EmployeeHome extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        customerVisibleList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerVisibleListMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(customerVisibleList);
 
         jButton2.setText("Add Customer");
@@ -793,6 +798,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 ResultSet foundPackage = findPackageStmt.executeQuery();
                 foundPackage.first();
                 String packageId = foundPackage.getString("p_id");
+                
                 EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(packageId),parentFrame,userRId, Integer.parseInt(userId));
                 javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
                 frame.setContentPane(editPackageObject);
@@ -848,6 +854,32 @@ public class EmployeeHome extends javax.swing.JPanel {
             throw new IllegalStateException("error",e);
         }
     }//GEN-LAST:event_appointmentVisibleListMouseClicked
+
+    private void customerVisibleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerVisibleListMouseClicked
+        try{
+            javax.swing.JList list = (javax.swing.JList)evt.getSource();
+            if (evt.getClickCount() == 2)
+            {
+                String findCustQuery = "Select customer_id_from_name(?) c_id;";
+                CallableStatement findCustStmt = openConnection.prepareCall(findCustQuery);
+                String selectedCust = customerVisibleList.getSelectedValuesList().get(0);
+                findCustStmt.setString(1,selectedCust);
+                ResultSet foundCust = findCustStmt.executeQuery();
+                foundCust.first();
+                int cId = foundCust.getInt("c_id");
+                
+                EmployeeEditCust editCustObject = new EmployeeEditCust(parentFrame,openConnection,cId,Integer.parseInt(userId));
+                javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                frame.setContentPane(editCustObject);
+                editCustObject.setVisible(true);
+                frame.repaint();
+                frame.revalidate();
+            }
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_customerVisibleListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

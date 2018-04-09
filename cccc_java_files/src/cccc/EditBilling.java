@@ -34,7 +34,7 @@ public class EditBilling extends javax.swing.JDialog {
     String street;
     String city;
     String state;
-    int zip;
+    String zip;
     
     public EditBilling(java.awt.Frame parent, boolean modal, Connection connection, int id) {
         super(parent, modal);
@@ -54,7 +54,10 @@ public class EditBilling extends javax.swing.JDialog {
             street = rs.getString("c_billing_street");
             city = rs.getString("c_billing_city");
             state = rs.getString("c_billing_state");
-            zip = rs.getInt("c_billing_zip");
+            zip = Integer.toString(rs.getInt("c_billing_zip"));
+            if(zip.length() == 4) {
+                zip = "0"+zip;
+            }
             
         }catch(Exception e){
             throw new IllegalStateException("error",e);
@@ -65,7 +68,7 @@ public class EditBilling extends javax.swing.JDialog {
         this.custBStreet.setText(street);
         this.custBCity.setText(city);
         this.custBState.setText(state);
-        this.custBZip.setText(Integer.toString(zip));
+        this.custBZip.setText(zip);
     }
     
     private boolean checkNoneNull(){
@@ -341,7 +344,7 @@ public class EditBilling extends javax.swing.JDialog {
                 street = this.custBStreet.getText();
                 city = this.custBCity.getText();
                 state = this.custBState.getText();
-                zip = Integer.parseInt(this.custBZip.getText());
+                zip = this.custBZip.getText();
                 if(
                     this.custCCNum.getText().length() != 0 ||
                     this.custCCExpM.getText().length() != 0 ||
@@ -363,7 +366,7 @@ public class EditBilling extends javax.swing.JDialog {
                     stmt.setString(6, street);
                     stmt.setString(7, city);
                     stmt.setString(8, state);
-                    stmt.setInt(9, zip);
+                    stmt.setInt(9, Integer.parseInt(zip));
                     stmt.setInt(10, id);
                     stmt.executeUpdate();
                 }else{
@@ -373,7 +376,7 @@ public class EditBilling extends javax.swing.JDialog {
                     stmt.setString(2, street);
                     stmt.setString(3, city);
                     stmt.setString(4, state);
-                    stmt.setInt(5, zip);
+                    stmt.setInt(5, Integer.parseInt(zip));
                     stmt.setInt(6, id);
                     stmt.executeUpdate();
                 }

@@ -438,6 +438,20 @@ ORDER BY a_time ASC;
  RETURN (package_id);
  END $$ 
  DELIMITER ;
+ 
+  DROP FUNCTION IF EXISTS customer_id_from_name;
+ DELIMITER $$
+ CREATE FUNCTION customer_id_from_name(customer_name varchar(255))
+	RETURNS int
+ BEGIN
+ DECLARE customer_id varchar(255);
+ SELECT c_id
+ INTO customer_id
+ FROM customer
+ WHERE customer_name = c_name;
+ RETURN (customer_id);
+ END $$ 
+ DELIMITER ;
 
  DROP PROCEDURE IF EXISTS  get_package_cable;
  DELIMITER $$
@@ -543,3 +557,5 @@ BEGIN
     WHERE a_id = appointment_id;
  END$$
  DELIMITER ;
+ 
+ CALL get_cust_info(15);
