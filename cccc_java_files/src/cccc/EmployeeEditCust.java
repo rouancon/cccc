@@ -189,15 +189,15 @@ public class EmployeeEditCust extends javax.swing.JPanel {
             this.custCCExpY.getText().length() != 0
         ){
             if(
-                this.custCCNum.getText().length() != 15
+                this.custCCNum.getText().length() != 16
             ){
-                err_msg.setText("CC num must be 15 digits");
+                err_msg.setText("CC num must be 16 digits");
                 return false;
             }else if(
                 this.custCCExpM.getText().length() != 2 ||
                 Integer.parseInt(this.custCCExpM.getText()) > 12 ||
                 Integer.parseInt(this.custCCExpM.getText()) < 1 ||
-                this.custCCExpY.getText().length() != 2
+                this.custCCExpY.getText(). length() != 2
             ){
                 err_msg.setText("Enter valid 2 digit dates");
                 return false;
@@ -387,7 +387,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
 
         custDate.setText("01/01/2019");
 
-        deleteCustBtn.setText("Delete Employee");
+        deleteCustBtn.setText("Delete Customer");
         deleteCustBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteCustBtnActionPerformed(evt);
@@ -429,7 +429,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
                                     .addComponent(custBState, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(custBStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel24)
                             .addGroup(layout.createSequentialGroup()
@@ -468,7 +468,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(cardTitle1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(custPhone, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(custUsername, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -490,7 +490,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
                                     .addComponent(CardName5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(custName1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                    .addComponent(custName1)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(custCCCVV, javax.swing.GroupLayout.Alignment.LEADING)
@@ -517,7 +517,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cBillingTitle1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -618,8 +618,7 @@ public class EmployeeEditCust extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(cCancel)
                                 .addComponent(cSave))))
-                    .addComponent(deleteCustBtn, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(deleteCustBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

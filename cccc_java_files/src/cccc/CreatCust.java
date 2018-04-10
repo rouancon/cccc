@@ -171,9 +171,9 @@ public class CreatCust extends javax.swing.JPanel {
             err_msg.setText("State may only have 2 Letters");
             return false;
         }else if(
-            this.custCCNum.getText().length() != 15
+            this.custCCNum.getText().length() != 16
         ){
-            err_msg.setText("CC num must be 15 digits");
+            err_msg.setText("CC num must be 16 digits");
             return false;
         }else if(
             this.custCCExpM.getText().length() != 2 ||

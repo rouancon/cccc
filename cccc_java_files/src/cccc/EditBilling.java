@@ -100,9 +100,9 @@ public class EditBilling extends javax.swing.JDialog {
             this.custCCExpY.getText().length() != 0
         ){
             if(
-                this.custCCNum.getText().length() != 15
+                this.custCCNum.getText().length() != 16
             ){
-                errorMsg.setText("CC num must be 15 digits");
+                errorMsg.setText("CC num must be 16 digits");
                 return false;
             }else if(
                 this.custCCExpM.getText().length() != 2 ||
