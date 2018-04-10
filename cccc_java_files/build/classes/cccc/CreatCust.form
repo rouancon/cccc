@@ -41,14 +41,6 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="custUsername" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="custName" alignment="0" pref="193" max="32767" attributes="0"/>
-                                      <Component id="custPhone" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="custEmail" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="custName1" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="custCCNum" alignment="1" max="32767" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="custCCCVV" alignment="0" max="32767" attributes="0"/>
@@ -60,65 +52,33 @@
                                               <Component id="custCCExpY" min="-2" pref="27" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="213" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="cNewsletter" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="custPW" min="-2" pref="159" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <Component id="cNewsletter" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="custUsername" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="custName" alignment="0" pref="193" max="32767" attributes="0"/>
+                                      <Component id="custPhone" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="custEmail" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="custName1" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="custCCNum" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="265" max="-2" attributes="0"/>
+                              <EmptySpace pref="29" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cBillStreet1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cBillCity1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cBillState1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cBillZip1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="custBCity" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <Component id="custBState" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="custBZip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="custBStreet" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cBillStreet2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cBillCity2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cBillState2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cBillZip2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="custSvcCity" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                                          <Component id="custSvcState" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                                          <Component id="custSvcZip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <Component id="custSvcStreet" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" pref="107" max="-2" attributes="0"/>
-                                      <Component id="jScrollPane1" min="-2" pref="190" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
@@ -128,6 +88,67 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="packages" min="-2" pref="180" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel22" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="cBillStreet1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cBillCity1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cBillState1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cBillZip1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="custBCity" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                          <Component id="custBState" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <Component id="custBZip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <Component id="custBStreet" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="28" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="cBillStreet2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="cBillCity2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="cBillState2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="cBillZip2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="custSvcCity" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                                                  <Component id="custSvcState" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                                                  <Component id="custSvcZip" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                                  <Component id="custSvcStreet" alignment="0" min="-2" pref="213" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabel1" min="-2" pref="107" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="cardTitle3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -144,59 +165,60 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cBillingTitle1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jSeparator9" min="-2" pref="7" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="custName" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <Component id="jSeparator9" min="-2" pref="7" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="custName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cardTitle1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="custUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="packages" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CardName3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="custPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CardName2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custName1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cardTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="custCCNum" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CardName4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custCCExpM" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custCCExpY" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="CardName5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="custCCCVV" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="170" max="-2" attributes="0"/>
+                  <Component id="cNewsletter" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="cNewsletter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="5" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="CardName2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custName1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="cardTitle2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="custCCNum" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="CardName4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custCCExpM" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custCCExpY" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="CardName5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custCCCVV" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cardTitle3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="custPW" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
@@ -246,10 +268,12 @@
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cSave" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="err_msg" alignment="1" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="cCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -342,9 +366,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custName1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ContainsCustName"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custSvcZip">
     </Component>
@@ -436,9 +457,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="custName">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ContainsCustName"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="cardTitle1">
       <Properties>
@@ -448,37 +466,35 @@
     </Component>
     <Component class="javax.swing.JTextField" name="custUsername">
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JList" name="packageVisibleList">
-          <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-                <StringItem index="4" value="Item 5"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="packageVisibleListMouseClicked"/>
-          </Events>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Select A Package:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="packages">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="packagesActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="custPW">
+    </Component>
+    <Component class="javax.swing.JLabel" name="cardTitle3">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+        <Property name="text" type="java.lang.String" value="Temp Password:"/>
       </Properties>
     </Component>
   </SubComponents>

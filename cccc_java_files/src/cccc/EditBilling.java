@@ -100,13 +100,22 @@ public class EditBilling extends javax.swing.JDialog {
             this.custCCExpY.getText().length() != 0
         ){
             if(
-                this.custCCNum.getText().length() > 16 ||
-                this.custCCNum.getText().length() < 14 ||
+                this.custCCNum.getText().length() != 15
+            ){
+                errorMsg.setText("CC num must be 15 digits");
+                return false;
+            }else if(
                 this.custCCExpM.getText().length() != 2 ||
-                this.custCCCVV.getText().length() != 4 ||
+                Integer.parseInt(this.custCCExpM.getText()) > 12 ||
+                Integer.parseInt(this.custCCExpM.getText()) < 1 ||
                 this.custCCExpY.getText().length() != 2
             ){
-                errorMsg.setText("Invalid Card Entry");
+                errorMsg.setText("Enter valid 2 digit dates");
+                return false;
+            }else if(
+                this.custCCCVV.getText().length() != 4
+            ){
+                errorMsg.setText("CVV must be 4 digits");
                 return false;
             }else{
                 return true;

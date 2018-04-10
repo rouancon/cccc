@@ -13,7 +13,9 @@ import java.sql.ResultSetMetaData;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -32,10 +34,12 @@ public class CreatCust extends javax.swing.JPanel {
     java.awt.Frame frame;
     Connection openConnection;
     int eId;
-    int pId = -1;
+    int rId;
+    int pId = 0;
     Date custSince;
     String name;
     String username;
+    String password;
     String phone;
     String email;
     String street;
@@ -53,12 +57,45 @@ public class CreatCust extends javax.swing.JPanel {
     String bState;
     String bZip;
     java.sql.Date currDate = java.sql.Date.valueOf(LocalDate.now());
+    java.sql.Date pStart = java.sql.Date.valueOf(LocalDate.now());
+    Calendar c = Calendar.getInstance();
+    Date pEnd;
+    List<String> packageList = new ArrayList<String>();
     
-    public CreatCust(java.awt.Frame parent, Connection connection, int eId) {
+    public CreatCust(java.awt.Frame parent, Connection connection, int eId, int rId) {
         initComponents();
         frame = parent;
         openConnection = connection;
         this.eId = eId;
+        this.rId = rId;
+        
+        //set pkg end date (1 year from now)
+        c.setTime(java.sql.Date.valueOf(LocalDate.now()));
+        c.add(Calendar.YEAR, 1);
+        Date endDate = new Date(c.getTimeInMillis());
+        pEnd = endDate;
+        
+        try{
+            //Pull the dropdown for packages
+            String query = "CALL regional_packages(?);";
+            CallableStatement stmt = openConnection.prepareCall(query);
+            stmt.setInt(1, rId);
+            ResultSet rs = stmt.executeQuery();
+            rs.first();
+            String pkgName;
+            packageList.add("<Select>");
+            while (rs.next()){
+                pkgName = rs.getString("p_name");
+                packageList.add(pkgName);
+            }
+        }catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+        
+        //Set up the package list
+        String[] packageNames = packageList.toArray(new String[packageList.size()]);
+        packages.setModel(new javax.swing.DefaultComboBoxModel(packageNames));
+        packages.setSelectedIndex(0);
     }
     
     public ResultSet getEmployeeInfo(int eId)
@@ -85,26 +122,31 @@ public class CreatCust extends javax.swing.JPanel {
     
     private boolean checkNoneNull(){
         if(
-            this.custName.getText() == null ||
-            this.custUsername.getText() == null ||
-            this.custName1.getText() == null ||
-            this.custPhone.getText() == null ||
-            this.custEmail.getText() == null ||
-            this.custBStreet.getText() == null ||
-            this.custBCity.getText()== null ||
-            this.custBState.getText() == null ||
-            this.custBZip.getText() == null ||
-            this.custSvcStreet.getText() == null ||
-            this.custSvcCity.getText()== null ||
-            this.custSvcState.getText() == null ||
-            this.custSvcZip.getText() == null ||
-            this.custCCNum.getText() == null ||
-            this.custCCExpM.getText() == null ||
-            this.custCCCVV.getText() == null ||
-            this.custCCExpY.getText() == null ||
-            pId == -1
+            this.custName.getText().length() == 0 ||
+            this.custUsername.getText().length() == 0 ||
+            this.custPW.getText().length() == 0 ||
+            this.custName1.getText().length() == 0 ||
+            this.custPhone.getText().length() == 0 ||
+            this.custEmail.getText().length() == 0 ||
+            this.custBStreet.getText().length() == 0 ||
+            this.custBCity.getText().length() == 0 ||
+            this.custBState.getText().length() == 0 ||
+            this.custBZip.getText().length() == 0 ||
+            this.custSvcStreet.getText().length() == 0 ||
+            this.custSvcCity.getText().length() == 0 ||
+            this.custSvcState.getText().length() == 0 ||
+            this.custSvcZip.getText().length() == 0 ||
+            this.custCCNum.getText().length() == 0 ||
+            this.custCCExpM.getText().length() == 0 ||
+            this.custCCCVV.getText().length() == 0 ||
+            this.custCCExpY.getText().length() == 0
         ){
             err_msg.setText("All Fields Required.");
+            return false;
+        }else if(
+            (packages.getSelectedIndex() == 0)
+        ){
+            err_msg.setText("Package Selection Required");
             return false;
         }else if(
             (!this.custPhone.getText().matches("[0-9]+")) ||
@@ -129,13 +171,22 @@ public class CreatCust extends javax.swing.JPanel {
             err_msg.setText("State may only have 2 Letters");
             return false;
         }else if(
-            this.custCCNum.getText().length() > 16 ||
-            this.custCCNum.getText().length() < 14 ||
+            this.custCCNum.getText().length() != 15
+        ){
+            err_msg.setText("CC num must be 15 digits");
+            return false;
+        }else if(
             this.custCCExpM.getText().length() != 2 ||
-            this.custCCCVV.getText().length() != 4 ||
+            Integer.parseInt(this.custCCExpM.getText()) > 12 ||
+            Integer.parseInt(this.custCCExpM.getText()) < 1 ||
             this.custCCExpY.getText().length() != 2
         ){
-            err_msg.setText("Invalid Card Entry");
+            err_msg.setText("Enter valid 2 digit dates");
+            return false;
+        }else if(
+            this.custCCCVV.getText().length() != 4
+        ){
+            err_msg.setText("CVV must be 4 digits");
             return false;
         }else{
             return true;
@@ -194,9 +245,10 @@ public class CreatCust extends javax.swing.JPanel {
         custName = new javax.swing.JTextField();
         cardTitle1 = new javax.swing.JLabel();
         custUsername = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        packageVisibleList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        packages = new javax.swing.JComboBox<>();
+        custPW = new javax.swing.JTextField();
+        cardTitle3 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(595, 452));
 
@@ -236,8 +288,6 @@ public class CreatCust extends javax.swing.JPanel {
 
         cBillZip2.setText("Zip:");
 
-        custName1.setText("ContainsCustName");
-
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("Service Address");
@@ -269,24 +319,20 @@ public class CreatCust extends javax.swing.JPanel {
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel23.setText("Account Owner Name:");
 
-        custName.setText("ContainsCustName");
-
         cardTitle1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         cardTitle1.setText("Username:");
 
-        packageVisibleList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        packageVisibleList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                packageVisibleListMouseClicked(evt);
+        jLabel1.setText("Select A Package:");
+
+        packages.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        packages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                packagesActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(packageVisibleList);
 
-        jLabel1.setText("Select A Package:");
+        cardTitle3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        cardTitle3.setText("Temp Password:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -311,13 +357,6 @@ public class CreatCust extends javax.swing.JPanel {
                                     .addComponent(CardName5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(custUsername, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(custName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                                        .addComponent(custPhone)
-                                        .addComponent(custEmail)
-                                        .addComponent(custName1)
-                                        .addComponent(custCCNum))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(custCCCVV, javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,49 +366,24 @@ public class CreatCust extends javax.swing.JPanel {
                                                 .addComponent(jLabel2)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel3))
-                                    .addComponent(cNewsletter))
-                                .addGap(265, 265, 265)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel3))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(213, 213, 213)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cNewsletter)
+                                                    .addComponent(custPW, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(custUsername, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(custName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                                        .addComponent(custPhone)
+                                        .addComponent(custEmail)
+                                        .addComponent(custName1)
+                                        .addComponent(custCCNum)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)))
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel22)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cBillStreet1)
-                                    .addComponent(cBillCity1)
-                                    .addComponent(cBillState1)
-                                    .addComponent(cBillZip1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(custBCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(custBState, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(custBStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cBillStreet2)
-                                            .addComponent(cBillCity2)
-                                            .addComponent(cBillState2)
-                                            .addComponent(cBillZip2))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(custSvcCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(custSvcState, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(custSvcZip, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(custSvcStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(28, 28, 28))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(123, 123, 123)
                         .addComponent(err_msg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,7 +391,52 @@ public class CreatCust extends javax.swing.JPanel {
                         .addComponent(cSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cCancel)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(packages, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cBillStreet1)
+                                            .addComponent(cBillCity1)
+                                            .addComponent(cBillState1)
+                                            .addComponent(cBillZip1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(custBCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(custBState, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(custBZip, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(custBStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cBillStreet2)
+                                                    .addComponent(cBillCity2)
+                                                    .addComponent(cBillState2)
+                                                    .addComponent(cBillZip2))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(custSvcCity, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(custSvcState, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(custSvcZip, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(custSvcStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(83, 83, 83))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(cardTitle3)
+                                        .addComponent(jLabel24)))))
+                        .addGap(28, 28, 28))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(229, 229, 229)
                 .addComponent(cBillingTitle1)
@@ -389,49 +448,50 @@ public class CreatCust extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(cBillingTitle1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(custName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(custName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cardTitle1)
-                            .addComponent(custUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(custUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(packages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CardName3)
-                            .addComponent(custPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CardName2)
-                            .addComponent(custEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(custName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cardTitle2)
-                            .addComponent(custCCNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CardName4)
-                            .addComponent(custCCExpM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CardName5)
-                            .addComponent(custCCCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cNewsletter)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                            .addComponent(custPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cNewsletter, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CardName2)
+                    .addComponent(custEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(custName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cardTitle2)
+                    .addComponent(custCCNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CardName4)
+                    .addComponent(custCCExpM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(custCCExpY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CardName5)
+                    .addComponent(custCCCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardTitle3)
+                    .addComponent(custPW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel22)
@@ -470,10 +530,11 @@ public class CreatCust extends javax.swing.JPanel {
                             .addComponent(cBillZip2)
                             .addComponent(custSvcZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cCancel)
-                    .addComponent(cSave)
-                    .addComponent(err_msg, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(err_msg, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cCancel)
+                        .addComponent(cSave)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -482,9 +543,19 @@ public class CreatCust extends javax.swing.JPanel {
         // Save pressed
         if(checkNoneNull()) {
             try {
+                //Get pId from drop-down and DB
+                String selectedPkgName = packages.getSelectedItem().toString();
+                String getPid= "SELECT package_id_from_name(?) AS p_id;";
+                CallableStatement stmt = openConnection.prepareCall(getPid);
+                stmt.setString(1, selectedPkgName);
+                ResultSet rs = stmt.executeQuery();
+                rs.next();
+                pId = rs.getInt("p_id");
+                
                 name = this.custName.getText();
                 bName = this.custName1.getText();
                 username = custUsername.getText();
+                password = custPW.getText();
                 phone = this.custPhone.getText();
                 email = this.custEmail.getText();
                 street = this.custSvcStreet.getText();
@@ -501,8 +572,8 @@ public class CreatCust extends javax.swing.JPanel {
                 expY = Integer.parseInt(this.custCCExpY.getText());
                 cvv = Integer.parseInt(this.custCCCVV.getText());
 
-                String query = "INSERT INTO customer SET c_cc_name=?, c_cc_number=?, c_cc_expiration_month=?, c_cc_expiration_year=?, c_cc_cvv=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=?, c_street_address=?, c_city=?, c_state=?, c_zip=?, c_name=?, c_username=?, c_phone=?, c_email=?, c_newsletter=?, p_id=?, c_customer_since=?;";
-                CallableStatement stmt = openConnection.prepareCall(query);
+                String query = "INSERT INTO customer SET c_cc_name=?, c_cc_number=?, c_cc_expiration_month=?, c_cc_expiration_year=?, c_cc_cvv=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=?, c_street_address=?, c_city=?, c_state=?, c_zip=?, c_name=?, c_username=?, c_phone=?, c_email=?, c_newsletter=?, p_id=?, c_customer_since=?, r_id=?, c_package_start=?, c_package_end=?, c_password=?;";
+                stmt = openConnection.prepareCall(query);
                 stmt.setString(1, bName);
                 stmt.setString(2, ccNum);
                 stmt.setInt(3, expM);
@@ -523,7 +594,11 @@ public class CreatCust extends javax.swing.JPanel {
                 stmt.setBoolean(18, newsletter);
                 stmt.setInt(19,pId);
                 stmt.setDate(20,currDate);
-                stmt.executeUpdate();
+                stmt.setInt(21, rId);
+                stmt.setDate(22,pStart);
+                stmt.setDate(23,pEnd);
+                stmt.setString(24, password);
+                stmt.execute();
 
                 ResultSet employeeInfo = getEmployeeInfo(eId);
                 EmployeeHome EHome = new EmployeeHome(employeeInfo,openConnection,frame);
@@ -553,25 +628,9 @@ public class CreatCust extends javax.swing.JPanel {
         f.repaint();
     }//GEN-LAST:event_cCancelActionPerformed
 
-    private void packageVisibleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_packageVisibleListMouseClicked
-        // TODO add your handling code here:
-        try{
-            javax.swing.JList list = (javax.swing.JList)evt.getSource();
-            if (evt.getClickCount() == 1)
-            {
-                String findPackageQuery = "Select package_id_from_name(?) p_id;";
-                CallableStatement findPackageStmt = openConnection.prepareCall(findPackageQuery);
-                String selectedPackage = packageVisibleList.getSelectedValuesList().get(0);
-                findPackageStmt.setString(1,selectedPackage);
-                ResultSet foundPackage = findPackageStmt.executeQuery();
-                foundPackage.first();
-                pId = Integer.parseInt(foundPackage.getString("p_id"));
-            }
-        }
-        catch(Exception e){
-            throw new IllegalStateException("error",e);
-        }
-    }//GEN-LAST:event_packageVisibleListMouseClicked
+    private void packagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_packagesActionPerformed
+
+    }//GEN-LAST:event_packagesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -593,6 +652,7 @@ public class CreatCust extends javax.swing.JPanel {
     private javax.swing.JButton cSave;
     private javax.swing.JLabel cardTitle1;
     private javax.swing.JLabel cardTitle2;
+    private javax.swing.JLabel cardTitle3;
     private javax.swing.JTextField custBCity;
     private javax.swing.JTextField custBState;
     private javax.swing.JTextField custBStreet;
@@ -604,6 +664,7 @@ public class CreatCust extends javax.swing.JPanel {
     private javax.swing.JTextField custEmail;
     private javax.swing.JTextField custName;
     private javax.swing.JTextField custName1;
+    private javax.swing.JTextField custPW;
     private javax.swing.JTextField custPhone;
     private javax.swing.JTextField custSvcCity;
     private javax.swing.JTextField custSvcState;
@@ -618,8 +679,7 @@ public class CreatCust extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JList<String> packageVisibleList;
+    private javax.swing.JComboBox<String> packages;
     // End of variables declaration//GEN-END:variables
 }

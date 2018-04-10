@@ -261,7 +261,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         customerVisibleList = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        addCust = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
         icon = new javax.swing.JLabel();
 
@@ -634,7 +634,12 @@ public class EmployeeHome extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(customerVisibleList);
 
-        jButton2.setText("Add Customer");
+        addCust.setText("Add Customer");
+        addCust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCustActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
         customerTab.setLayout(customerTabLayout);
@@ -644,7 +649,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGap(231, 231, 231)
-                        .addComponent(jButton2))
+                        .addComponent(addCust))
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -661,7 +666,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(addCust)
                 .addGap(23, 23, 23))
         );
 
@@ -881,6 +886,20 @@ public class EmployeeHome extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_customerVisibleListMouseClicked
 
+    private void addCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustActionPerformed
+        try{
+            CreatCust addCustObj = new CreatCust(parentFrame,openConnection,Integer.parseInt(userId),userRId);
+            javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(addCustObj);
+            addCustObj.setVisible(true);
+            frame.repaint();
+            frame.revalidate();
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_addCustActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
@@ -889,6 +908,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel UserAddress;
     private javax.swing.JLabel UserRole;
     private javax.swing.JButton addAppointmentButton;
+    private javax.swing.JButton addCust;
     private javax.swing.JButton addPackageButton;
     private javax.swing.JPanel appointmentTab;
     private javax.swing.JList<String> appointmentVisibleList;
@@ -904,7 +924,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JPanel employeesTab;
     private javax.swing.JPanel homeTab;
     private javax.swing.JLabel icon;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

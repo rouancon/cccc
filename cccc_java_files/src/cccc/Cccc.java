@@ -34,32 +34,21 @@ public class Cccc {
     
     public void run() 
     {
-        Connection conn = null;
-        try 
-        {
-            conn = this.getConnection();
-            System.out.println("Connected to database");
-            LoginPage login = new LoginPage(conn);
-            login.setLocationRelativeTo(null);
-            login.setVisible(true);
-        } 
-        catch (SQLException e) 
-        {
-            System.out.println("ERROR: Could not connect to the database");
-            e.printStackTrace();
-            return;
-        }
-        //DatabaseConnect db = new DatabaseConnect();
-        //db.setVisible(true);
+        DatabaseConnect db = new DatabaseConnect();
+        db.setVisible(true);
+        db.setLocationRelativeTo(null);
 
-        // If login doesn't work try using the commented code below instead of the 2 lines above
+//        If login doesn't work try using the commented code below instead of the 3 lines above
+//        Enter your DB username and password in the final fields above if you use the code below!
+//
 //        Connection conn = null;
 //        try 
 //        {
 //            conn = this.getConnection();
 //            System.out.println("Connected to database");
-//            LoginPage lp = new LoginPage(conn);
-//            lp.setVisible(true);
+//            LoginPage login = new LoginPage(conn);
+//            login.setLocationRelativeTo(null);
+//            login.setVisible(true);
 //        } 
 //        catch (SQLException e) 
 //        {

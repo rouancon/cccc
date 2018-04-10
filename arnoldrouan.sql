@@ -381,7 +381,7 @@ DELIMITER ;
  DELIMITER $$
  CREATE PROCEDURE regional_packages(IN id int)
  BEGIN
- SELECT p_name
+ SELECT p_name, p_id
  FROM package
  NATURAL JOIN package_available 
  WHERE r_id = id;
@@ -557,5 +557,3 @@ BEGIN
     WHERE a_id = appointment_id;
  END$$
  DELIMITER ;
- 
- CALL get_cust_info(15);
