@@ -34,7 +34,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         initComponents();
         parentFrame = passedFrame;
         String pictureLocation = System.getProperty("user.dir") + "/logo.png";
-        Dimension d = new Dimension(650,490);
+        Dimension d = new Dimension(650,525);
         parentFrame.setPreferredSize(d);
         parentFrame.pack();
         icon.setIcon(new ImageIcon(pictureLocation));
@@ -234,7 +234,6 @@ public class EmployeeHome extends javax.swing.JPanel {
         eEmail = new javax.swing.JLabel();
         UserAddress = new javax.swing.JLabel();
         UpdateInfoButton = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jLabel17 = new javax.swing.JLabel();
         employeesTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -262,7 +261,7 @@ public class EmployeeHome extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         customerVisibleList = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        addCust = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
         icon = new javax.swing.JLabel();
 
@@ -324,9 +323,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(227, 227, 227)
-                        .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel17))
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(217, 217, 217)
                         .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,14 +349,12 @@ public class EmployeeHome extends javax.swing.JPanel {
                     .addGroup(homeTabLayout.createSequentialGroup()
                         .addGap(237, 237, 237)
                         .addComponent(UpdateInfoButton)))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
         homeTabLayout.setVerticalGroup(
             homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homeTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(homeTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -395,7 +390,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                     .addComponent(UserAddress))
                 .addGap(18, 18, 18)
                 .addComponent(UpdateInfoButton)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
 
         personalAppointmentTab.addTab("Home", homeTab);
@@ -632,9 +627,19 @@ public class EmployeeHome extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        customerVisibleList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerVisibleListMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(customerVisibleList);
 
-        jButton2.setText("Add Customer");
+        addCust.setText("Add Customer");
+        addCust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCustActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout customerTabLayout = new javax.swing.GroupLayout(customerTab);
         customerTab.setLayout(customerTabLayout);
@@ -644,7 +649,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGroup(customerTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGap(231, 231, 231)
-                        .addComponent(jButton2))
+                        .addComponent(addCust))
                     .addGroup(customerTabLayout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -661,7 +666,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(addCust)
                 .addGap(23, 23, 23))
         );
 
@@ -798,6 +803,7 @@ public class EmployeeHome extends javax.swing.JPanel {
                 ResultSet foundPackage = findPackageStmt.executeQuery();
                 foundPackage.first();
                 String packageId = foundPackage.getString("p_id");
+                
                 EditPackage editPackageObject = new EditPackage(openConnection,this,foundPackage,Integer.parseInt(packageId),parentFrame,userRId, Integer.parseInt(userId));
                 javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
                 frame.setContentPane(editPackageObject);
@@ -854,6 +860,46 @@ public class EmployeeHome extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_appointmentVisibleListMouseClicked
 
+    private void customerVisibleListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerVisibleListMouseClicked
+        try{
+            javax.swing.JList list = (javax.swing.JList)evt.getSource();
+            if (evt.getClickCount() == 2)
+            {
+                String findCustQuery = "Select customer_id_from_name(?) c_id;";
+                CallableStatement findCustStmt = openConnection.prepareCall(findCustQuery);
+                String selectedCust = customerVisibleList.getSelectedValuesList().get(0);
+                findCustStmt.setString(1,selectedCust);
+                ResultSet foundCust = findCustStmt.executeQuery();
+                foundCust.first();
+                int cId = foundCust.getInt("c_id");
+                
+                EmployeeEditCust editCustObject = new EmployeeEditCust(parentFrame,openConnection,cId,Integer.parseInt(userId));
+                javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+                frame.setContentPane(editCustObject);
+                editCustObject.setVisible(true);
+                frame.repaint();
+                frame.revalidate();
+            }
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_customerVisibleListMouseClicked
+
+    private void addCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustActionPerformed
+        try{
+            CreatCust addCustObj = new CreatCust(parentFrame,openConnection,Integer.parseInt(userId),userRId);
+            javax.swing.JFrame frame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+            frame.setContentPane(addCustObj);
+            addCustObj.setVisible(true);
+            frame.repaint();
+            frame.revalidate();
+        }
+        catch(Exception e){
+            throw new IllegalStateException("error",e);
+        }
+    }//GEN-LAST:event_addCustActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddEmployeeButton;
@@ -862,6 +908,7 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JLabel UserAddress;
     private javax.swing.JLabel UserRole;
     private javax.swing.JButton addAppointmentButton;
+    private javax.swing.JButton addCust;
     private javax.swing.JButton addPackageButton;
     private javax.swing.JPanel appointmentTab;
     private javax.swing.JList<String> appointmentVisibleList;
@@ -877,7 +924,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JPanel employeesTab;
     private javax.swing.JPanel homeTab;
     private javax.swing.JLabel icon;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -906,7 +952,6 @@ public class EmployeeHome extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JPanel packageTab;
     private javax.swing.JList<String> packageVisibleList;
     private javax.swing.JTabbedPane personalAppointmentTab;

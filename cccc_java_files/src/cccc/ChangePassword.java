@@ -202,14 +202,15 @@ public class ChangePassword extends javax.swing.JDialog {
                 stmt.setInt(1, id);
                 ResultSet rs = stmt.executeQuery();
 
-                String oldPass = rs.getString("password");
-                if (oldPass == userOldPass) {
-                    if (userNewPass == userNewCnfPass) {
-                        query = "UPDATE employee SET e_password=? WHERE c_id=?;";
+                rs.next();
+                String oldPass = rs.getString("e_password");
+                if (oldPass.equals(userOldPass)) {
+                    if (userNewPass.equals(userNewCnfPass) && userNewPass != null) {
+                        query = "UPDATE employee SET e_password=? WHERE e_id=?;";
                         stmt = openConnection.prepareCall(query);
                         stmt.setString(1, userNewPass);
                         stmt.setInt(2, id);
-                        stmt.executeQuery();
+                        stmt.executeUpdate();
                         dispose();
                     } else {
                         errorMessage.setText("New Passwords Don't Match");

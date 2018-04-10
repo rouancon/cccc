@@ -329,7 +329,6 @@ END $$
  CREATE PROCEDURE update_employee_basic
  (IN id int,
  IN new_username varchar(255), 
- IN new_password varchar(255), 
  IN new_email varchar(255),
  IN new_street_address varchar(255),
  IN new_city varchar(255),
@@ -339,7 +338,6 @@ END $$
  BEGIN 
     UPDATE employee
     SET e_username = new_username,
-	e_password = new_password,
     e_phone = new_phone,
     e_email = new_email,
     e_street_address = new_street_address,
@@ -383,7 +381,7 @@ DELIMITER ;
  DELIMITER $$
  CREATE PROCEDURE regional_packages(IN id int)
  BEGIN
- SELECT p_name
+ SELECT p_name, p_id
  FROM package
  NATURAL JOIN package_available 
  WHERE r_id = id;
@@ -438,6 +436,20 @@ ORDER BY a_time ASC;
  FROM package
  WHERE package_name = p_name;
  RETURN (package_id);
+ END $$ 
+ DELIMITER ;
+ 
+  DROP FUNCTION IF EXISTS customer_id_from_name;
+ DELIMITER $$
+ CREATE FUNCTION customer_id_from_name(customer_name varchar(255))
+	RETURNS int
+ BEGIN
+ DECLARE customer_id varchar(255);
+ SELECT c_id
+ INTO customer_id
+ FROM customer
+ WHERE customer_name = c_name;
+ RETURN (customer_id);
  END $$ 
  DELIMITER ;
 
@@ -545,4 +557,3 @@ BEGIN
     WHERE a_id = appointment_id;
  END$$
  DELIMITER ;
-

@@ -33,7 +33,7 @@ public class EditCust extends javax.swing.JDialog {
     String street;
     String city;
     String state;
-    int zip;
+    String zip;
     boolean newsletter;
     
     public EditCust(java.awt.Frame parent, boolean modal, Connection connection, int id) {
@@ -57,7 +57,10 @@ public class EditCust extends javax.swing.JDialog {
             street = rs.getString("c_billing_street");
             city = rs.getString("c_billing_city");
             state = rs.getString("c_billing_state");
-            zip = rs.getInt("c_billing_zip");
+            zip = Integer.toString(rs.getInt("c_billing_zip"));
+            if (zip.length() == 4) {
+                zip="0"+zip;
+            }
             newsletter = rs.getBoolean("c_newsletter");
             
         }catch(Exception e){
@@ -72,7 +75,7 @@ public class EditCust extends javax.swing.JDialog {
         this.custBStreet.setText(street);
         this.custBCity.setText(city);
         this.custBState.setText(state);
-        this.custBZip.setText(Integer.toString(zip));
+        this.custBZip.setText(zip);
         this.cNewsletter.setSelected(newsletter);
     }
     
@@ -324,7 +327,7 @@ public class EditCust extends javax.swing.JDialog {
                 street = this.custBStreet.getText();
                 city = this.custBCity.getText();
                 state = this.custBState.getText();
-                zip = Integer.parseInt(this.custBZip.getText());
+                zip = this.custBZip.getText();
                 newsletter = this.cNewsletter.isSelected();
                 
                 String query = "UPDATE customer SET c_name=?, c_username=?, c_phone=?, c_email=?, c_billing_street=?, c_billing_city=?, c_billing_state=?, c_billing_zip=?, c_newsletter=? WHERE c_id=?;";
@@ -336,7 +339,7 @@ public class EditCust extends javax.swing.JDialog {
                 stmt.setString(5, street);
                 stmt.setString(6, city);
                 stmt.setString(7, state);
-                stmt.setInt(8, zip);
+                stmt.setInt(8, Integer.parseInt(zip));
                 stmt.setBoolean(9, newsletter);
                 stmt.setInt(10, id);
                 stmt.executeUpdate();
